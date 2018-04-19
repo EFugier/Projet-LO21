@@ -1,0 +1,72 @@
+Vue :
+
+	User interface (via XML ou via code à voir)
+	
+	Doit avoir :
+		- L’interface de la matrice
+		- L’interface de création des règles
+		- L’interface de création de l’état initial
+
+Contrôleur :
+
+	MainControler : classe principale de contrôle, celle en lien avec le modèle. Contrôle de plus les boutons principaux de l’interface (ex : « nouvel automate »…)
+	
+	RulesControler : contrôle l’interface de création des règles (la position ou le nb de voisins). Devra pouvoir importer des règles.
+
+	StateControler : contrôle l’interface de création d’un état. Pourra également importer un état initial (une bitmap ?)
+
+	MatrixControler : contrôle l’interface de l’automate cellulaire, devra afficher les différentes générations (selon un mode continu ou en pas à pas)
+
+Modèle :
+
+	AutomateManager : classe principale du modèle, en lien avec le contrôleur. Il a un tableau d’automates et un tableau d’états initiaux, il pourra créer un simulateur à partir d’un des automates et un des états.
+
+	Simulateur : lien entre 1 automate et 1 état initial. Simulera l’automate, aura une méthode next mettant à jour l’état courant.
+
+	Etat : classe représentant un état (tableau 2D de booléens : si automate 1D, alors le tableau sera de la forme tab[1][largeur], pas besoin de créer une spécificité pour 1D/2D ici. Cette méthode contiendra les dimensions (largeur x hauteur) de l’automate qui sera en mode « pacman » (qd on arrive à la dernière ligne, le voisin du bas se trouve à la première ligne). Ndlr : on a décidé de faire comme ça car :
+	- Si on ne mettait pas en mode pacman (càd si il n’y avait tout simplement pas de voisin du bas dans la dernière ligne), l’automate serait faux mathématiquement puisque ça doit être une matrice infinie
+	- Il faut forcément avoir une taille maximale, on peut pas stocker l’infini dans l’ordi 
+	- On pourra quand même zoomer dans l’interface mais ça sera purement graphique, l’ordi calculera toujours le même nombre de cases (longueur*largeur)
+	- Les dimensions sont fixés par l’utilisateur lors de la création de l’état initial. Les générations suivantes auront les mêmes dimensions
+	- Ça semblait plus logique d’attribuer ces dimensions à la classe état et non à la classe automate, un automate étant simplement un ensemble de règles
+
+	Automate : l’ensemble des règles de transition, avec en plus un attribut énuméré 1D ou 2D. Il a 2 classes filles :
+
+		- Automate par voisins  : 2 tableaux à 2 dimensions, un « naissance » et un « décès ». Si on prend l’exemple du jeu de la vie : « une cellule née si elle a 3 voisins, une cellule meurt si elle en a 1 ou moins ou 4 ou plus, il ne se passe rien sinon », il serait stocké comme ceci :
+			- naissance = [[3,3]] // il y a une naissance entre 3 et 3 voisins (et c’est tout)
+			- décès = [[0,1],[4,-1]] // il y a un décès dans l’intervalle [0,1] et dans l’intervalle [4,-1] où -1 représente +inf
+
+		- Automate par position : un pointeur vers un arbre binaire de recherche
+			Avec un exemple : l'utilisateur s'intéresse aux voisins de 2nd degrés, l'interface de programmation des règles ressemblera alors à une matrice carrée 5x5 avec la case du milieu étant la case considérée.
+			L'utilisateur devra choisir si il crée une règle de naissance ou de mort (2 types de règles : naissance ou mort, une cellule peut également rester dans son état mais pas besoin de règles pour ça)
+			L'utilisateur va ensuite dire l'état des cellules qui donne une naissance ou une mort. Si par exemple il crée ces 2 règles de naissance :
+				 -----------    		 -----------
+				| 0 1 1 0 0 |			| 0 1 0 0 1 |
+				| 0 1 0 1 1 |			| 1 1 0 0 1 |
+				| 0 0 0 0 1 |	et 		| 0 1 0 0 1 |
+				| 1 1 0 0 0 |			| 0 1 0 0 1 |
+				| 0 0 0 1 0 |			| 0 0 1 0 0 |
+				 ----------- 			 -----------
+			ainsi que 1 règle de décès :
+				 -----------
+				| 1 0 1 0 0 |
+				| 0 0 0 1 1 |
+				| 0 0 1 1 1 |
+				| 1 0 0 0 0 |
+				| 0 1 0 1 1 |
+				 -----------
+		
+			Alors dans l'ABR sera stocké :
+				- 0110001011000011100000010$
+				- 0100111001010010100100100$
+				- 1010000011001111000001011*
+				
+				càd la liste (en ligne et pas en matrice) des états qui conduisent à une naissance ou un décès à la génération suivante, avec $ en fin de chaine pour une naissance et * pour un décès.
+				
+				ps : théoriquement, le $/* n'est pas nécessaire, dans le cas d'une naissance, le booléen en milieu de chaine est forcément un 0 (si 1, il serait déjà né) et 1 pour un décès, donc il suffirait d'inverser le booléen du milieu. De même l'utilisateur ne serait pas obligé de choisir si il ajoute une règle de naissance ou de décès (via un radiobutton) puisque il suffira qu'il mette 0 (respectivement 1) dans la case du milieu pour une naissance (respectivement un décès).
+				
+				ps2 : c'est une ligne qui est stockée et pas une matrice donc il n'y a pas de distinction 1D/2D ici
+				
+				ps3 : il y aurait théoriquement moyen d'améliorer la complexité en ne rangeant par l'arbre dans l'ordre [0,0] , [0,1] , [0,2] , ... , [4,3] , [4,4] mais dans un ordre calculé au préalable de sorte que l'arbre binaire des règles soit complet. Il y aurait alors dans la classe un autre tableau faisant la correspondance entre la position [i,j] de la case et la profondeur dans l'arbre binaire. Ça doit être assez compliqué à faire cependant.
+				
+			Dans cette représentation UML, il y aurait un héritage exclusif entre automate par position et automate par nombre de voisins. Ça semble théoriquement le plus logique mais on peut imaginer un héritage non-exclusif.
