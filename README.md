@@ -12,20 +12,29 @@ Projet-LO21
 ## Automata
 ``` json
 {
-   'nbNeighboor': 5,
-   'default': -1,  // -1: last satate, 1: 0: dead, 1: alive
-   'softPositions': [
-       [[0, 1], [1, 0], [5, 1]],
-       [[0, 0]]
-   ],
-   'absolutePositions': [
-       [0, 1, 1, 0, 0],
+   "nbNeighboor": 5,
+   "default": 2,
+   "absolutePositions": [
+       "1:0,1,1,0,0",
        [0, 1, 0, 0, 0],
-       [0, 0, 0, 1],
-       [1, 1, 1, 1]
+       [1, 0, 0, 1, 0],
+       [1, 1, 1, 1, 0]
    ],
-   'positionTree': [...]  // To be calculated
-   'death': [[0,2],[5,6]],
-   'birth': [[3,4]]
+   "softPositions": [
+       "1:0,1,5-1,0,1",
+       [0, 1, 5], [1, 0, 1]],
+       [0, [0], [0]]
+   ],
+   "positionTree": ['r', -1, 0, 1, -1, 0, 0, 0, -2, 1, 0, 0, -2, 1, -1, 0, 0, 1, 0, -2, 1, 1, 1, 0, -2],
+   "death": [[0,2],[5,6]],
+   "birth": [[3,4]]
 }
 ```
+### Parameters
+* *nbNeighboor*: number of neighboors considering for state transitionning.
+* *default*: default value to transition to when the current state is not handled by the other porperties.
+   * 0: dead
+   * 1: alive
+   * 2: same
+* *absolutePositions*: particular cases.
+* *softPositions*: association list `[s, [i1, i2], [v1, v2]]`, transition the cell value to `s` when slot `i` has value `v`. (soft beacause constraints are softs)
