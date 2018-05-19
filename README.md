@@ -22,7 +22,7 @@ Projet-LO21
    ],
    "softPositions": [
        "1:0,1,5-1,0,1",
-       [0, 1, 5], [1, 0, 1]],
+       [1, [0, 1, 5], [1, 0, 1]],
        [0, [0], [0]]
    ],
    "positionTree": ['r', -1, 0, 1, -1, 0, 0, 0, -2, 1, 0, 0, -2, 1, -1, 0, 0, 1, 0, -2, 1, 1, 1, 0, -2],
@@ -37,4 +37,25 @@ Projet-LO21
    * 1: alive
    * 2: same
 * *absolutePositions*: particular cases.
-* *softPositions*: association list `[s, [i1, i2], [v1, v2]]`, transition the cell value to `s` when slot `i` has value `v`. (soft beacause constraints are softs)
+* *softPositions*: association list `[s, [i1, i2], [v1, v2]]`, transition the cell value to `s` when slot `i` has value `v**. (soft beacause constraints are softs**
+
+## Conventions for serialization
+Encoded in char
+
+### Global
+**Celle state**
+* `'1'`: 1
+* `'0'`: 0
+
+**For next state***
+* `'a'`: alive
+* `'d'`: dead
+* `'l'`: last
+
+### BST
+* `'r'`: root
+* `'f'`: fork point
+* `'e'`: end of the branch (go to last fork point)
+
+### Vectors
+* `','`: next value
