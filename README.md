@@ -54,6 +54,8 @@ Encoded in char
 
 ### BST
 * `'r'`: root
+
+**Serialization**
 * `'f'`: fork point
 * `'e'`: end of the branch (go to last fork point)
 
