@@ -47,17 +47,20 @@ Encoded in char
 * `'1'`: 1
 * `'0'`: 0
 
-**For next state***
+**For next state**
 * `'a'`: alive
 * `'d'`: dead
 * `'l'`: last
 
 ### BST
+
+The cell state are implicitly encoded in the edges (left is `'0'` and right is `'1'`) but the n-1 one are explicitly encoded as node value while the nth node value (`'a'` or `'d'` or `'l'`) marks the next state for the current cell if such pattern is matched.
+
 * `'r'`: root
 
 **Serialization**
 * `'f'`: fork point
-* `'e'`: end of the branch (go to last fork point)
+* `'a'`, `'d'`, `'l'`: leaf
 
 ### Vectors
 * `','`: next value

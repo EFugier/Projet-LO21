@@ -1,7 +1,7 @@
 #ifndef BST_H
 #define BST_H
 
-#include <ostream>
+#include <iostream>
 
 class Node {
  public:
@@ -34,6 +34,9 @@ class Bst
   void insert(char * s);
 
   inline reset() { ite = root }
+
+  std::string serialize();
+  void deserialize(std::string& s);
 };
 
 
