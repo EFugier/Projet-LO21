@@ -17,11 +17,6 @@ class Node {
 class Bst
 {
  private:
-  /* struct Node { */
-  /*   char value; */
-  /*   Node left; */
-  /*   Node right; */
-  /* }; */
   unsigned int depth;  // number of neighbor + 1
 
  public:
@@ -31,7 +26,7 @@ class Bst
   ~Bst();
 
   char next(char c);
-  void insert(char * s);
+  void insert(std::string& s);
 
   inline reset() { ite = root }
 

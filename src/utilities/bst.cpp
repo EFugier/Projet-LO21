@@ -25,18 +25,18 @@ char Bst::next(char c) {
   return 'n'; // path do not exist in the tree
 }
 
-void Bst::insert(char * s) {
+void Bst::insert(std::string& s) {
   Node * node = root;
-  for (unsigned int i=0; i<depth; i++) {
-    if (s[i] == '0') {  // go left
+  for(char& c : s) {
+    if (c == '0') {  // go left
       if (!node->left) node->left = new Node('0');
       node = node->left;
     }
-    else if (s[i] == '1') {  // go right
+    else if (c == '1') {  // go right
       if (!node->right) node->right = new Node('1');
       node = node->right;
     }
-    else node->value = s[i];  // end of the branch
+    else node->value = c;  // end of the branch
   }
 }
 
@@ -59,7 +59,7 @@ std::string Bst::serialize() {
       toProcess.push(node->right);
       seq.append(1, '1');
     }
-    if (node->left){
+    if (node->left) {
       toProcess.push(node->left);
       seq.append(1, '0');
     }
