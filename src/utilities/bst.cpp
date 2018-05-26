@@ -2,14 +2,13 @@
 #include <stack>
 #include "bst.h"
 
-Node::Node(char c) {
-  value = c;
-  left = nullptr;
-  right = nullptr;
+Bst::Bst() {
+  root = new Node('r');
+  ite = root;
 }
 
-Bst::Bst() {
-  root = new Node();
+Bst::Bst(std::string s) {
+  deserialize(s);
   ite = root;
 }
 
@@ -48,26 +47,34 @@ std::string Bst::serialize() {
   std::string seq = "";
 
   std::stack<Node *> toProcess;
-  toProcess.push(root);
 
-  Node * node;
-  while(!toProcess.empty()) {
-    node = toProcess.top();
-    toProcess.pop();
-    // order is important to keep bst property (convention)
-    if (node->right) {
+  Node * node = root;
+  while(1) {
+    // fork node
+    if (node->left && node->right) {
+      seq.append(1, 'f');
       toProcess.push(node->right);
-      seq.append(1, '1');
     }
+    // start with the left child
     if (node->left) {
-      toProcess.push(node->left);
+      node = node->left;
       seq.append(1, '0');
     }
+    else if (node->right) {
+      node = node->right;
+      seq.append(1, '1');
+    }
+    // leaf
+    else {
+      seq.append(1, node->value);
 
-    if (node->right && node->left) seq.append(1, 'f');  // fork node
-    else if (!node->right && !node->left) seq.append(1, node->value);  // leaf
+      if (toProcess.empty()) break;  // last leaf
+
+      node = toProcess.top();
+      toProcess.pop();
+      seq.append(1, '1');
+    }
   }
-
   return seq;
 }
 
@@ -93,7 +100,7 @@ void Bst::deserialize(std::string& s) {
     else {  // leaf
       last->value = c;  // overwrite the leaf value
 
-      if (forkNodes.empty()) break;  // this is the last leaf
+      if (forkNodes.empty()) break;  // last leaf
 
       // go to last fork node
       last = forkNodes.top();
