@@ -8,18 +8,18 @@ void testBst() {
   Bst bst;
   bst.insert(s1);
   bst.insert(s2);
-
-  std::cout<<bst.serialize()<<std::endl;
+  std::cout<<bst.serialize()<<std::endl<<std::flush;
+  bst.printTree();
+  std::cout<<"#1 ok"<<std::endl<<std::flush;
 
   Bst bst2(bst.serialize());
-  std::cout<<bst2.serialize()<<std::endl;
-
-  std::cout<<bst2.next('0')<<std::endl;
-  std::cout<<bst2.next('0')<<std::endl;
-  std::cout<<bst2.next('1')<<std::endl;
+  bst2.printTree();
+  std::cout<<bst2.next('0')<<std::endl<<std::flush;
+  std::cout<<bst2.next('0')<<std::endl<<std::flush;
+  std::cout<<bst2.next('1')<<std::endl<<std::flush;
 }
 
-int main(){
+int main() {
   testBst();
 //  std::string pause;
 //  std::cin >> pause;

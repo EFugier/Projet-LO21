@@ -14,25 +14,35 @@ class Node {
     left = nullptr;
     right = nullptr;
   }
-  ~Node();
 };
 
 
 class Bst
 {
  private:
-  unsigned int depth;  // number of neighbor + 1
-
- public:
   Node * root;
   Node * ite;
+
+ public:
   Bst();
   Bst(std::string s);
+  ~Bst() { deleteTree(); }
 
   char next(char c);
   void insert(std::string& s);
+  void printTree(Node* init, int indent=0);
+  void printTree(int indent=0) {
+    printTree(root, indent);
+  }
 
   inline void reset() { ite = root; }
+  void deleteNodes();
+  void deleteTree() {
+    deleteTree(root);
+    root = nullptr;
+    ite = nullptr;
+  }
+  void deleteTree(Node* node);
 
   std::string serialize();
   void deserialize(std::string& s);

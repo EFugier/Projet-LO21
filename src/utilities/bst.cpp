@@ -1,18 +1,58 @@
 #include <iostream>
+#include <iomanip>
 #include <stack>
 #include "bst.h"
+
+
+void Bst::printTree(Node* node, int indent) {
+  if(node) {
+    if (indent) {
+      std::cout<<std::setw(indent)<<' '<<std::flush;
+    }
+    std::cout<<"-"<<node->value<<"\n "<<std::flush;
+    if (node->left || node->right) {
+      printTree(node->right, indent+2);
+      printTree(node->left, indent+2);
+    }
+  }
+  else {std::cout<<std::setw(indent)<<' '<<"-"<<"\n "<<std::flush;};
+}
 
 Bst::Bst() {
   root = new Node('r');
   ite = root;
 }
 
+
 Bst::Bst(std::string s) {
   deserialize(s);
-  ite = root;
 }
 
+
+void Bst::deleteTree(Node* init) {
+  std::stack<Node *> toProcess;
+  if (!init) return;
+  toProcess.push(init);
+  Node* node;
+  while(!toProcess.empty()) {
+    node = toProcess.top();
+    toProcess.pop();
+    if (node->left) toProcess.push(node->left);
+    if (node->right) toProcess.push(node->right);
+
+    delete node;
+  }
+}
+
+// void Bst::deleteTree(Node* node) {
+//     if (!node) return;
+//     deleteTree(node->left);
+//     deleteTree(node->right);
+//     delete node;
+// }
+
 char Bst::next(char c) {
+  if (!ite) return 'n';
   if (c == '0' and ite->left ) {
     ite = ite->left;
     return ite->value;
@@ -23,6 +63,7 @@ char Bst::next(char c) {
   }
   return 'n'; // path do not exist in the tree
 }
+
 
 void Bst::insert(std::string& s) {
   Node * node = root;
@@ -80,10 +121,12 @@ std::string Bst::serialize() {
 
 
 void Bst::deserialize(std::string& s) {
-  std::stack<Node *> forkNodes;
-  Node * last = nullptr;
+  // deleteTree(root);
   root = new Node('r');
+
+  Node * last = nullptr;
   last = root;
+  std::stack<Node *> forkNodes;
 
   for(char& c : s) {
     if (c == '0') {
@@ -107,4 +150,5 @@ void Bst::deserialize(std::string& s) {
       forkNodes.pop();
     }
   }
+  ite = root;
 }
