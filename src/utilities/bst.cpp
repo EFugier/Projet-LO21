@@ -4,20 +4,6 @@
 #include "bst.h"
 
 
-void Bst::printTree(Node* node, int indent) {
-  if(node) {
-    if (indent) {
-      std::cout<<std::setw(indent)<<' '<<std::flush;
-    }
-    std::cout<<"-"<<node->value<<"\n "<<std::flush;
-    if (node->left || node->right) {
-      printTree(node->right, indent+2);
-      printTree(node->left, indent+2);
-    }
-  }
-  else {std::cout<<std::setw(indent)<<' '<<"-"<<"\n "<<std::flush;};
-}
-
 Bst::Bst() {
   root = new Node('r');
   ite = root;
@@ -44,12 +30,21 @@ void Bst::deleteTree(Node* init) {
   }
 }
 
-// void Bst::deleteTree(Node* node) {
-//     if (!node) return;
-//     deleteTree(node->left);
-//     deleteTree(node->right);
-//     delete node;
-// }
+
+void Bst::printTree(Node* node, int indent) {
+  if(node) {
+    if (indent) {
+      std::cout<<std::setw(indent)<<' '<<std::flush;
+    }
+    std::cout<<"-"<<node->value<<"\n "<<std::flush;
+    if (node->left || node->right) {
+      printTree(node->right, indent+2);
+      printTree(node->left, indent+2);
+    }
+  }
+  else {std::cout<<std::setw(indent)<<' '<<"-"<<"\n "<<std::flush;};
+}
+
 
 char Bst::next(char c) {
   if (!ite) return 'n';

@@ -36,7 +36,6 @@ class Bst
   }
 
   inline void reset() { ite = root; }
-  void deleteNodes();
   void deleteTree() {
     deleteTree(root);
     root = nullptr;
