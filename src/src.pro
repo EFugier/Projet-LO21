@@ -1,6 +1,6 @@
 HEADERS += \
-    utilities/bst.h
+    utilities/rulebst.h
 
 SOURCES += \
-    utilities/bst.cpp \
-    main.cpp
+    main.cpp \
+    utilities/rulebst.cpp \

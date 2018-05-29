@@ -1,21 +1,21 @@
 #include <iostream>
 #include <iomanip>
 #include <stack>
-#include "bst.h"
+#include "rulebst.h"
 
 
-Bst::Bst() {
+RuleBst::RuleBst() {
   root = new Node('r');
   ite = root;
 }
 
 
-Bst::Bst(std::string s) {
+RuleBst::RuleBst(std::string s) {
   deserialize(s);
 }
 
 
-void Bst::deleteTree(Node* init) {
+void RuleBst::deleteTree(Node* init) {
   std::stack<Node *> toProcess;
   if (!init) return;
   toProcess.push(init);
@@ -31,7 +31,7 @@ void Bst::deleteTree(Node* init) {
 }
 
 
-void Bst::printTree(Node* node, int indent) {
+void RuleBst::printTree(Node* node, int indent) {
   if(node) {
     if (indent) {
       std::cout<<std::setw(indent)<<' '<<std::flush;
@@ -46,7 +46,7 @@ void Bst::printTree(Node* node, int indent) {
 }
 
 
-char Bst::next(char c) {
+char RuleBst::next(char c) {
   if (!ite) return 'n';
   if (c == '0' and ite->left ) {
     ite = ite->left;
@@ -60,7 +60,7 @@ char Bst::next(char c) {
 }
 
 
-void Bst::insert(std::string& s) {
+void RuleBst::insert(std::string& s) {
   Node * node = root;
   for(char& c : s) {
     if (c == '0') {  // go left
@@ -76,7 +76,7 @@ void Bst::insert(std::string& s) {
 }
 
 
-std::string Bst::serialize() {
+std::string RuleBst::serialize() {
 
   if (!root) return "";
 
@@ -115,7 +115,7 @@ std::string Bst::serialize() {
 }
 
 
-void Bst::deserialize(std::string& s) {
+void RuleBst::deserialize(std::string& s) {
   // deleteTree(root);
   root = new Node('r');
 

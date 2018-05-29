@@ -17,16 +17,16 @@ class Node {
 };
 
 
-class Bst
+class RuleBst
 {
  private:
   Node * root;
   Node * ite;
 
  public:
-  Bst();
-  Bst(std::string s);
-  ~Bst() { deleteTree(); }
+  RuleBst();
+  RuleBst(std::string s);
+  ~RuleBst() { deleteTree(); }
 
   char next(char c);
   void insert(std::string& s);
