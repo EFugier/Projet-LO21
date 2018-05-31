@@ -816,7 +816,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+ruleBst: RuleBst*",
+											"text": "+specialRules: unordered_map<string char>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -845,7 +845,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+ruleNbNeighbLife[ ]: unsigned int[2]",
+											"text": "+ruleNbNeighbLife[][2]: unsigned int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -874,7 +874,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+ruleNbNeighbDeath[ ]: unsigned int[2]",
+											"text": "+ruleNbNeighbDeath[][2]: unsigned int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -958,7 +958,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+insertBstRule(string s): void",
+											"text": "+insertSpecialRule(string s, char c): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5399,11 +5399,11 @@
 							"_parent": {
 								"$ref": "AAAAAAFjjhrZr3cclqw="
 							},
-							"name": "ruleBst",
+							"name": "specialRules",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "RuleBst*",
+							"type": "unordered_map<string char>",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -5417,12 +5417,11 @@
 							"_parent": {
 								"$ref": "AAAAAAFjjhrZr3cclqw="
 							},
-							"name": "ruleNbNeighbLife[ ]",
+							"name": "ruleNbNeighbLife[][2]",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
 							"type": "unsigned int",
-							"multiplicity": "2",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -5436,12 +5435,11 @@
 							"_parent": {
 								"$ref": "AAAAAAFjjhrZr3cclqw="
 							},
-							"name": "ruleNbNeighbDeath[ ]",
+							"name": "ruleNbNeighbDeath[][2]",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
 							"type": "unsigned int",
-							"multiplicity": "2",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -5504,7 +5502,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFjjhrZr3cclqw="
 							},
-							"name": "insertBstRule",
+							"name": "insertSpecialRule",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -5531,6 +5529,21 @@
 										"$ref": "AAAAAAFjq1SZg10s1KM="
 									},
 									"name": "string s",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFjsm1tFYBXnzY=",
+									"_parent": {
+										"$ref": "AAAAAAFjq1SZg10s1KM="
+									},
+									"name": "char c",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
