@@ -19,7 +19,7 @@ void testRuleBst() {
     bst2.printTree();
     std::cout<<bst2.next('0')<<std::endl<<std::flush;
     std::cout<<bst2.next('0')<<std::endl<<std::flush;
-    std::cout<<bst2.next('1')<<std::endl<<std::flush;
+    std::cout<<bst2.next('0')<<std::endl<<std::flush;
 }
 
 int main() {
