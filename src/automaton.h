@@ -23,7 +23,6 @@ class Automaton {
     private:
         Automaton() = delete;
         struct Range {
-
             unsigned int a;
             unsigned int b;
         };
@@ -34,8 +33,11 @@ class Automaton {
 
         unsigned int n;
         unsigned int dim;
-        char defaultNext;
         std::unordered_map<std::string, char> specialRules;
+
+    public:
+        char defaultNext;
+
         RuleBst* ruleBst;
         std::vector<Range> ruleNbNeighbLife;
         std::vector<Range> ruleNbNeighbDeath;
@@ -62,6 +64,10 @@ class Automaton {
         unsigned int save(const std::string& name, sqlite3 * db); // save to DB
 
         void exportToFile(QFile * file);
+
+        // getters & setters
+        inline unsigned int getN() { return n;}
+        inline unsigned int getDim() { return dim;}
 
 };
 
