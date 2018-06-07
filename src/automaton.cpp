@@ -27,6 +27,8 @@ char Automaton::next(std::string s) {
     for(const Range& r : ruleNbNeighbDeath) { // Death number rules
         if (r.a <= nb_neigh && nb_neigh <= r.b) return '0'; 
     }
+
+    return defaultNext;
 }
 
 
@@ -105,7 +107,5 @@ void Automaton::deserializeNbRules(const std::string& s) {
         if (isb) b.push_back(c);
     }
 }
-
-
 
 
