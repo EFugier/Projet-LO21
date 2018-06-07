@@ -15,16 +15,16 @@ class Automaton {
     private:
         Automaton() = delete;
         struct Range {
-
             unsigned int a;
             unsigned int b;
         };
-    public:
-
         unsigned int n;
         unsigned int dim;
-        char defaultNext;
         std::unordered_map<std::string, char> specialRules;
+
+    public:
+        char defaultNext;
+
         RuleBst* ruleBst;
         std::vector<Range> ruleNbNeighbLife;
         std::vector<Range> ruleNbNeighbDeath;
@@ -40,6 +40,11 @@ class Automaton {
         void insertRangeInto(std::vector<Range>& coll, unsigned int a, unsigned int b);
         std::string serializeNbRules();
         void deserializeNbRules(const std::string& s);
+
+        // getters & setters
+        inline unsigned int getN() { return n;}
+        inline unsigned int getDim() { return dim;}
+
 
 };
 
