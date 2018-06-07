@@ -4,12 +4,20 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <sstream>
+#include "./utilities/sqlite3.h"
 #include <unordered_map>
 #include "./utilities/rulebst.h"
-
+#include <QFile>
+#include <QTextStream>
+#include <QIODevice>
 
 // TODO
 // Improve the insertRangeInto function
+
+static int callback_load_automata(void *ptr, int count, char **data, char **columns);
+static int callback_get_id_automata(void *ptr, int count, char **data, char **columns);
+const std::vector<std::string> explode(const std::string& s, const char& c);
 
 class Automaton {
     private:
@@ -19,6 +27,9 @@ class Automaton {
             unsigned int a;
             unsigned int b;
         };
+
+       std::string serialize();
+
     public:
 
         unsigned int n;
@@ -31,6 +42,11 @@ class Automaton {
 
         Automaton(unsigned int n, unsigned int dim, char dn) :
             n(n), dim(dim), defaultNext(dn), ruleBst() {}
+
+        Automaton(const unsigned int id, sqlite3 * db); // Constructor from SQL database
+        Automaton::Automaton(QString const& fileName);
+
+
         char next(std::string s);
 
         void insertSpecialRule(std::string s, char c);
@@ -40,6 +56,12 @@ class Automaton {
         void insertRangeInto(std::vector<Range>& coll, unsigned int a, unsigned int b);
         std::string serializeNbRules();
         void deserializeNbRules(const std::string& s);
+
+        void deserialize(const std::string& s);
+
+        unsigned int save(const std::string& name, sqlite3 * db); // save to DB
+
+        void exportToFile(QFile * file);
 
 };
 
