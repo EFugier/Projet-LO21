@@ -2,25 +2,25 @@
 
 AutomataManager* AutomataManager::instance = nullptr;
 
-// Constructor and getters for the inner class AutomataDescription :
+// Constructor and getters for the inner class AutomatonDescription :
 
-AutomataManager::AutomataDescription::AutomataDescription(unsigned int i, std::string n, dim d) : id(i), name(n), dimension(d) {}
+AutomataManager::AutomatonDescription::AutomatonDescription(unsigned int i, std::string n, dim d) : id(i), name(n), dimension(d) {}
 
-unsigned int AutomataManager::AutomataDescription::getId() const {
+unsigned int AutomataManager::AutomatonDescription::getId() const {
     return id;
 }
 
-const std::string& AutomataManager::AutomataDescription::getName() const {
+const std::string& AutomataManager::AutomatonDescription::getName() const {
     return name;
 }
 
-dim AutomataManager::AutomataDescription::getDimension() const {
+dim AutomataManager::AutomatonDescription::getDimension() const {
     return dimension;
 }
 
 // Constructor, destructor and getIstance (because of the singleton pattern) :
 
-AutomataManager::AutomataManager() : runningAutomata(0), currentState(0), initialState(0), db(0)
+AutomataManager::AutomataManager() : runningAutomaton(0), currentState(0), initialState(0), db(0)
 {
     connectToDb();
 }
@@ -28,7 +28,7 @@ AutomataManager::AutomataManager() : runningAutomata(0), currentState(0), initia
 AutomataManager::~AutomataManager() {
     delete initialState;
     delete currentState;
-    delete runningAutomata;
+    delete runningAutomaton;
     sqlite3_close(db);
 }
 
@@ -57,22 +57,22 @@ void AutomataManager::createDb() const {
 
 // SELECT from the database :
 
-std::vector<const AutomataManager::AutomataDescription> AutomataManager::getArrayOfAutomata() const {
-    std::vector<const AutomataManager::AutomataDescription> v;
-    sqlite3_exec(db, "SELECT id, name, is2d FROM automata ORDER BY lastUse DESC",select_callback_automata,&v,nullptr);
+std::vector<const AutomataManager::AutomatonDescription> * AutomataManager::getArrayOfAutomata() const {
+    std::vector<const AutomataManager::AutomatonDescription> * v = new std::vector<const AutomataManager::AutomatonDescription>();
+    sqlite3_exec(db, "SELECT id, name, is2d FROM automata ORDER BY lastUse DESC",select_callback_automata,v,nullptr);
     return v;
 }
 
 static int select_callback_automata(void *ptr, int count, char **data, char **columns) {
-    std::vector<const AutomataManager::AutomataDescription> * vecPtr = static_cast<std::vector<const AutomataManager::AutomataDescription>*>(ptr);
-    AutomataManager::AutomataDescription a(atoi(data[0]),std::string(data[1]),((data[2]) ? d2 : d1));
+    std::vector<const AutomataManager::AutomatonDescription> * vecPtr = static_cast<std::vector<const AutomataManager::AutomatonDescription>*>(ptr);
+    AutomataManager::AutomatonDescription a(atoi(data[0]),std::string(data[1]),((data[2]) ? d2 : d1));
     vecPtr->push_back(a);
     return 0;
 }
 
-Map AutomataManager::getArrayOfStates() const {
-    Map v;
-    sqlite3_exec(db, "SELECT id, name FROM states ORDER BY lastUse DESC",select_callback_states,&v,nullptr);
+Map * AutomataManager::getArrayOfStates() const {
+    Map * v = new Map();
+    sqlite3_exec(db, "SELECT id, name FROM states ORDER BY lastUse DESC",select_callback_states,v,nullptr);
     return v;
 }
 
@@ -90,6 +90,22 @@ unsigned int AutomataManager::saveInitialState(std::string const& name) const {
 
 unsigned int AutomataManager::saveCurrentState(std::string const& name) const {
     return currentState->save(name, db);
+}
+
+unsigned int AutomataManager::saveAutomaton(std::string const& name) const {
+    std::ostringstream flux;
+    flux << "INSERT INTO automata(name, is2d, value, lastUse) VALUES('";
+    flux << name << "', " << ((currentState->getNrow() == 1) ? "true" : "false") << runningAutomaton->serialize() << "', date('now'))";
+    sqlite3_exec(db, flux.str().c_str(), nullptr,nullptr,nullptr);
+    Uint * ptr = new Uint;
+    sqlite3_exec(db, "SELECT id FROM automata WHERE id=@@Identity", callback_get_id_automaton, ptr, nullptr);
+    return *ptr;
+}
+
+static int callback_get_id_automaton(void *ptr, int count, char **data, char **columns) {
+    Uint * intPtr = static_cast<Uint *>(ptr);
+    *intPtr = atoi(data[0]);
+    return 0;
 }
 
 // Delete from database
@@ -123,26 +139,27 @@ void AutomataManager::selectedState(QString& nameFile) {
     currentState = new State(*initialState);
 }
 
-// Load an automata
+// Load an automaton
 
-Automaton * AutomataManager::selectedAutomata(unsigned int const i) {
+Automaton * AutomataManager::selectedAutomaton(unsigned int const i) {
     std::ostringstream req1, req2;
     req1 << "SELECT value FROM automata WHERE id = " << i;
     sqlite3_exec(db, req1.str().c_str(), callback_load_automata, this, nullptr);
-    req2 << "UPDATE automata SET lastUse = now() WHERE id = " << i;
+    req2 << "UPDATE automata SET lastUse = date('now') WHERE id = " << i;
     sqlite3_exec(db, req2.str().c_str(), nullptr, nullptr, nullptr);
-    return runningAutomata;
+    return runningAutomaton;
 }
 
 static int callback_load_automata(void *ptr, int count, char **data, char **columns) {
     AutomataManager * amPtr = static_cast<AutomataManager*>(ptr);
-    amPtr->runningAutomata = new Automaton(std::string(data[0]));
+    amPtr->runningAutomaton = new Automaton(std::string(data[0]));
     return 0;
 }
 
-Automaton * AutomataManager::createAutomaton() {
-    runningAutomata = new Automaton();
-    return runningAutomata;
+Automaton * AutomataManager::createAutomaton(unsigned int deg, dim d, char def = 's') {
+    unsigned int n = 2*deg+1;
+    runningAutomaton = new Automaton((d == d1 ? n : n*n), (d == d1 ? 1 : 2), def);
+    return runningAutomaton;
 }
 
 // Save state to file
@@ -158,15 +175,24 @@ void AutomataManager::exportCurrentState(QFile *file) const {
 // Run the automaton
 
 void AutomataManager::next() {
-//    std::vector<std::string> s = currentState->stackOfNb(runningAutomata->getN());
-    std::vector<std::string> s = currentState->stackOfNb(25);
-
+    std::vector<std::string> s = currentState->stackOfNb(runningAutomaton->getN());
     std::vector<bool> v;
-    int i = -1;
-    for(std::vector<std::string>::iterator it = s.begin(); it != s.end(); it++) { i++;
-        std::cout << "INDEX " << i << " : " << *it << std::endl; }
- //       v.push_back((runningAutomata->next(*it) == '1') ? true : false);
- //   currentState->setState(v);
+    for(std::vector<std::string>::iterator it = s.begin(); it != s.end(); it++)
+        v.push_back((runningAutomaton->next(*it) == '1') ? true : false);
+    currentState->setState(v);
+}
+
+std::string AutomataManager::serializeAutomaton() const {
+    try {
+        if (!runningAutomaton) throw -1;
+        std::ostringstream flux;
+        flux << runningAutomaton->getN() << "|" << runningAutomaton->getDefaultNext() << runningAutomaton->getBst() << "|" << runningAutomaton->getRuleNbNeighbDeath() << "|" << runningAutomaton->getRuleNbNeighbLife();
+        return flux.str();
+    }
+    catch (int) {
+        std::cerr << "Automaton doesn't exist" << std::endl;
+        return "";
+    }
 }
 
 
