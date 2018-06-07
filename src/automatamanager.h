@@ -88,6 +88,7 @@ public:
 
       void exportInitialState(QFile * file) const; // IS WORKING
       void exportCurrentState(QFile * file) const; // IS WORKING
+      void exportAutomaton(QFile *file) const;
 
       void deleteAutomaton(unsigned int i) const;
       void deleteState(unsigned int i) const; // IS WORKING

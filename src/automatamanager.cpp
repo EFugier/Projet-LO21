@@ -93,13 +93,7 @@ unsigned int AutomataManager::saveCurrentState(std::string const& name) const {
 }
 
 unsigned int AutomataManager::saveAutomaton(std::string const& name) const {
-    std::ostringstream flux;
-    flux << "INSERT INTO automata(name, is2d, value, lastUse) VALUES('";
-    flux << name << "', " << ((currentState->getNrow() == 1) ? "true" : "false") << runningAutomaton->serialize() << "', date('now'))";
-    sqlite3_exec(db, flux.str().c_str(), nullptr,nullptr,nullptr);
-    Uint * ptr = new Uint;
-    sqlite3_exec(db, "SELECT id FROM automata WHERE id=@@Identity", callback_get_id_automaton, ptr, nullptr);
-    return *ptr;
+    return runningAutomaton->save(name, db);
 }
 
 static int callback_get_id_automaton(void *ptr, int count, char **data, char **columns) {
@@ -170,6 +164,10 @@ void AutomataManager::exportInitialState(QFile *file) const {
 
 void AutomataManager::exportCurrentState(QFile *file) const {
     currentState->exportToFile(file);
+}
+
+void AutomataManager::exportAutomaton(QFile *file) const {
+    runningAutomaton->exportToFile(file);
 }
 
 // Run the automaton
