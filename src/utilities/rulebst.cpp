@@ -84,27 +84,27 @@ std::string RuleBst::serialize() {
     while(1) {
         // fork node
         if (node->left && node->right) {
-            seq.append(1, 'f');
+            seq.push_back('f');
             toProcess.push(node->right);
         }
         // start with the left child
         if (node->left) {
             node = node->left;
-            seq.append(1, '0');
+            seq.push_back('0');
         }
         else if (node->right) {
             node = node->right;
-            seq.append(1, '1');
+            seq.push_back('1');
         }
         // leaf
         else {
-            seq.append(1, node->value);
+            seq.push_back(node->value);
 
             if (toProcess.empty()) break;  // last leaf
 
             node = toProcess.top();
             toProcess.pop();
-            seq.append(1, '1');
+            seq.push_back('1');
         }
     }
     return seq;
