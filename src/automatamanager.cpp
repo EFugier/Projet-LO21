@@ -182,17 +182,4 @@ void AutomataManager::next() {
     currentState->setState(v);
 }
 
-std::string AutomataManager::serializeAutomaton() const {
-    try {
-        if (!runningAutomaton) throw -1;
-        std::ostringstream flux;
-        flux << runningAutomaton->getN() << "|" << runningAutomaton->getDefaultNext() << runningAutomaton->getBst() << "|" << runningAutomaton->getRuleNbNeighbDeath() << "|" << runningAutomaton->getRuleNbNeighbLife();
-        return flux.str();
-    }
-    catch (int) {
-        std::cerr << "Automaton doesn't exist" << std::endl;
-        return "";
-    }
-}
-
 
