@@ -34,7 +34,6 @@ class AutomataManager {
 // Methods :
     void connectToDb();
     void createDb() const;
-    std::string serializeAutomaton() const;
 
 // Constructor :
     AutomataManager();
