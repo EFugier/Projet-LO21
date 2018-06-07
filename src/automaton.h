@@ -14,20 +14,23 @@
 class Automaton {
     private:
         Automaton() = delete;
-    public:
         struct Range {
+
             unsigned int a;
             unsigned int b;
         };
+    public:
 
-        int n;
+        unsigned int n;
+        unsigned int dim;
         char defaultNext;
         std::unordered_map<std::string, char> specialRules;
         RuleBst* ruleBst;
         std::vector<Range> ruleNbNeighbLife;
         std::vector<Range> ruleNbNeighbDeath;
 
-        Automaton(int n) : n(n), ruleBst() {}
+        Automaton(unsigned int n, unsigned int dim, char dn) :
+            n(n), dim(dim), defaultNext(dn), ruleBst() {}
         char next(std::string s);
 
         void insertSpecialRule(std::string s, char c);

@@ -52,8 +52,7 @@ void Automaton::insertRangeInto(std::vector<Range>& coll, unsigned int a, unsign
         }
     }
     if (!done) {
-        Range r = {a, b};        
-        coll.push_back(r);
+        coll.push_back(Range {a, b});
     }
 }
 
@@ -87,8 +86,8 @@ void Automaton::deserializeNbRules(const std::string& s) {
             isb = false;
             
             // append the new range
-            if (life) ruleNbNeighbLife.push_back(Range {std::stoi(a), std::stoi(b)});
-            else ruleNbNeighbDeath.push_back(Range {std::stoi(a), std::stoi(b)});
+            if (life) ruleNbNeighbLife.push_back(Range {static_cast<unsigned int>(std::stoul(a)), static_cast<unsigned int>(std::stoul(b))});
+            else ruleNbNeighbDeath.push_back(Range {static_cast<unsigned int>(std::stoul(a)), static_cast<unsigned int>(std::stoul(b))});
 
             // reset a and b
             a.clear(); b.clear();
