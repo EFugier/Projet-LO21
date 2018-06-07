@@ -47,7 +47,7 @@ class Automaton {
 
         Automaton(const unsigned int id, sqlite3 * db); // Constructor from SQL database
         Automaton(QString const& fileName);
-        Automaton() {}
+        Automaton() : ruleBst() {}
 
         char next(std::string s);
 
