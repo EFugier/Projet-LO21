@@ -28,6 +28,7 @@ char Automaton::next(std::string s) {
         if (r.a <= nb_neigh && nb_neigh <= r.b) return '0'; 
     }
 
+    // if nothing is matched return the default value
     return defaultNext;
 }
 

@@ -43,7 +43,7 @@ class Automaton {
 
         // getters & setters
         inline unsigned int getN() { return n;}
-        inline unsigned int getDim() { return dim;}
+        inline unsigned int getDim() { return dim; }
 
 
 };
