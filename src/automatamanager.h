@@ -9,6 +9,9 @@
 #include "state.h"
 #include "automaton.h"
 #include <QString>
+#include <QTimer>
+#include <QObject>
+#include <QTimer>
 
 enum dim {d1, d2};
 typedef std::map<const unsigned int, const std::string> Map;
@@ -30,6 +33,7 @@ class AutomataManager {
     State * initialState;
     State * currentState;
     sqlite3 * db;
+    QTimer * timer;
 
 // Methods :
     void connectToDb();
@@ -67,18 +71,18 @@ public:
 
     /* Create an automaton from a specific set of rules
      * indicated by the id i of the automaton */
-     Automaton * selectedAutomaton(unsigned int const i);
+     void selectedAutomaton(unsigned int const i);
 
     /* Create an empty automaton
      * */
-     Automaton * AutomataManager::createAutomaton(unsigned int deg, dim d, char def = 's');
+     void createAutomaton(unsigned int deg, dim d, char def);
 
 
 
       void selectedState(unsigned int const i); // IS WORKING
       // Set the initial state from the DB via the ID of the state
 
-      void selectedState(State& initial); // IS WORKING
+      void selectedState(State const& initial); // IS WORKING
       void selectedState(QString& nameFile); // IS WORKING
 
       unsigned int saveInitialState(std::string const& name) const; // IS WORKING
@@ -86,16 +90,18 @@ public:
 
       unsigned int saveAutomaton(std::string const& name) const; // IS WORKING
 
-      void exportInitialState(QFile * file) const; // IS WORKING
-      void exportCurrentState(QFile * file) const; // IS WORKING
-      void exportAutomaton(QFile *file) const;
+      void exportInitialState(QString& name) const; // IS WORKING
+      void exportCurrentState(QString& name) const; // IS WORKING
+      void exportAutomaton(QString& name) const;
 
-      void deleteAutomaton(unsigned int i) const;
-      void deleteState(unsigned int i) const; // IS WORKING
+      void deleteAutomata() const;
+      void deleteStates() const;
 
       void next();
-      State* getState() { return initialState; }
+      Automaton * getAutomaton() const { return runningAutomaton; }
       ~AutomataManager();
+
+      void setTimer(unsigned int ms);
 };
 
 #endif // AUTOMATAMANAGER_H

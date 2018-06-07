@@ -58,8 +58,8 @@ public:
     void setState(Vec& v); // state setter
 
     // Long term saves :
-    Uint save(const std::string& name, sqlite3 * db); // save to DB // IS WORKING
-    void exportToFile(QFile * file); // export to file // IS WORKING
+    Uint save(const std::string& name, sqlite3 * db) const; // save to DB // IS WORKING
+    void exportToFile(QString& name) const; // export to file // IS WORKING
 
     std::vector<std::string> stackOfNb(Uint n) const; // IS WORKING
 signals:

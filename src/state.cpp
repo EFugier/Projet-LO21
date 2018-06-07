@@ -90,7 +90,7 @@ void State::setState(Vec& v) {
 
 // Long term saves :
 
-Uint State::save(const std::string& name, sqlite3 * db) {
+Uint State::save(const std::string& name, sqlite3 * db) const {
     std::ostringstream flux;
     flux << "INSERT INTO states(name, nrow, ncol, value, lastUse) VALUES('";
     flux << name << "', " << nrow << ", " << ncol << ", '" << toString() << "', date('now'))";
@@ -100,9 +100,10 @@ Uint State::save(const std::string& name, sqlite3 * db) {
     return *ptr;
 }
 
-void State::exportToFile(QFile * file) {
-    file->open(QIODevice::WriteOnly);
-    QTextStream out(file);
+void State::exportToFile(QString& name) const {
+    QFile file(name);
+    file.open(QIODevice::WriteOnly);
+    QTextStream out(&file);
     out << 'r' << nrow << "c" << ncol << "v" << QString(toString().c_str());
 }
 
