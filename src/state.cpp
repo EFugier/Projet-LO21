@@ -28,7 +28,6 @@ State::State(QString const& fileName) : QObject(0) {
     if (!file.open(QIODevice::ReadOnly)) return;
     QTextStream in(&file);
     QString value = in.readLine();
-
     QString::iterator it = value.begin();
     if (*it != 'r') return;
     it++;
@@ -48,7 +47,7 @@ State::State(const Uint id, sqlite3 * db) : QObject(0) {
     std::ostringstream req1, req2;
     req1 << "SELECT nrow, ncol, value FROM states WHERE id = " << id;
     sqlite3_exec(db, req1.str().c_str(), callback_load_state, this, nullptr);
-    req2 << "UPDATE states SET lastUse = now() WHERE id = " << id;
+    req2 << "UPDATE states SET lastUse = date('now') WHERE id = " << id;
     sqlite3_exec(db, req2.str().c_str(), nullptr, nullptr, nullptr);
 }
 
@@ -96,10 +95,9 @@ Uint State::save(const std::string& name, sqlite3 * db) {
     flux << "INSERT INTO states(name, nrow, ncol, value, lastUse) VALUES('";
     flux << name << "', " << nrow << ", " << ncol << ", '" << toString() << "', date('now'))";
     sqlite3_exec(db, flux.str().c_str(), nullptr,nullptr,nullptr);
- //   Uint * ptr = new Uint;
-   // sqlite3_exec(db, "SELECT id FROM states WHERE id=@@Identity", callback_get_id, ptr, nullptr);
-   // return *ptr;
-    return 0;
+    Uint * ptr = new Uint;
+    sqlite3_exec(db, "SELECT id FROM states WHERE id=@@Identity", callback_get_id, ptr, nullptr);
+    return *ptr;
 }
 
 void State::exportToFile(QFile * file) {
@@ -121,12 +119,24 @@ void State::loadStateFromString(char *str) {
         state.push_back(*(str++) == '1');
 }
 
-std::vector<std::string> State::stackOfNb(Uint n) const {
-    int deg = static_cast<int>((std::sqrt(n)-1)/2);
+std::vector<std::string> State::stackOfNb(Uint n) const { 
     int s_nrow = static_cast<int>(nrow);
     int s_ncol = static_cast<int>(ncol);
     // If n is the number of neighbours, deg is the degree (9 neighbours <=> 1 deg for instance)
     std::vector<std::string> s;
+
+    if (nrow == 1) {
+        int deg = static_cast<int>((n-1)/2);
+        for (int ind(0); ind<s_ncol; ind++) {
+            std::ostringstream flux;
+            for (int i(static_cast<int>(ind-deg)) ; i <= static_cast<int>(ind+deg) ; i++)
+                flux << (state[mod(i,ncol)] ? 1 : 0);
+            s.push_back(flux.str());
+        }
+        return s;
+    }
+
+    int deg = static_cast<int>((std::sqrt(n)-1)/2);
     for (int ind(0); ind<s_nrow*s_ncol; ind++) {
         std::ostringstream flux;
         for (int i(static_cast<int>(ind / s_ncol) - deg) ; i <= static_cast<int>(ind / s_ncol) + deg ; i++)
