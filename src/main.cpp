@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "maincontroller.h"
 #include "./utilities/rulebst.h"
 
 void testRuleBst() {
@@ -23,8 +24,13 @@ void testRuleBst() {
 }
 
 int main() {
+	QApplication app(argc, argv);
+    MainController w;
+    w.show();
+
     testRuleBst();
     //  std::string pause;
     //  std::cin >> pause;
-    return 0;
+
+    return app.exec();
 }
