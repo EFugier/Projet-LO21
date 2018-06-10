@@ -23,8 +23,11 @@ void testRuleBst() {
     std::cout<<bst2.next('0')<<std::endl<<std::flush;
 }
 
-int main() {
-	QApplication app(argc, argv);
+int main(int argc, char *argv[])
+
+{
+
+    QApplication app(argc, argv);
     MainController w;
     w.show();
 
