@@ -11,6 +11,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QIODevice>
+#include <QString>
 
 // TODO
 // Improve the insertRangeInto function
@@ -21,7 +22,6 @@ const std::vector<std::string> explode(const std::string& s, const char& c);
 
 class Automaton {
     private:
-        Automaton() = delete;
         struct Range {
             unsigned int a;
             unsigned int b;
@@ -46,8 +46,8 @@ class Automaton {
             n(n), dim(dim), defaultNext(dn), ruleBst() {}
 
         Automaton(const unsigned int id, sqlite3 * db); // Constructor from SQL database
-        Automaton::Automaton(QString const& fileName);
-
+        Automaton(QString const& fileName);
+        Automaton() : ruleBst() {}
 
         char next(std::string s);
 
@@ -63,7 +63,7 @@ class Automaton {
 
         unsigned int save(const std::string& name, sqlite3 * db); // save to DB
 
-        void exportToFile(QFile * file);
+        void exportToFile(QString& name);
 
         // getters & setters
         inline unsigned int getN() { return n;}

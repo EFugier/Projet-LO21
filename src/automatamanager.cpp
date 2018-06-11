@@ -1,4 +1,4 @@
-#include "automatamanager.h".h"
+#include "automatamanager.h"
 
 AutomataManager* AutomataManager::instance = nullptr;
 
@@ -20,8 +20,10 @@ dim AutomataManager::AutomatonDescription::getDimension() const {
 
 // Constructor, destructor and getIstance (because of the singleton pattern) :
 
-AutomataManager::AutomataManager() : runningAutomaton(0), currentState(0), initialState(0), db(0)
+AutomataManager::AutomataManager() : runningAutomaton(0), initialState(0), currentState(0), db(0)
 {
+    timer = new QTimer();
+    QObject::connect(timer, &QTimer::timeout, [=]() { next(); });
     connectToDb();
 }
 
@@ -29,6 +31,7 @@ AutomataManager::~AutomataManager() {
     delete initialState;
     delete currentState;
     delete runningAutomaton;
+    delete timer;
     sqlite3_close(db);
 }
 
@@ -93,13 +96,7 @@ unsigned int AutomataManager::saveCurrentState(std::string const& name) const {
 }
 
 unsigned int AutomataManager::saveAutomaton(std::string const& name) const {
-    std::ostringstream flux;
-    flux << "INSERT INTO automata(name, is2d, value, lastUse) VALUES('";
-    flux << name << "', " << ((currentState->getNrow() == 1) ? "true" : "false") << runningAutomaton->serialize() << "', date('now'))";
-    sqlite3_exec(db, flux.str().c_str(), nullptr,nullptr,nullptr);
-    Uint * ptr = new Uint;
-    sqlite3_exec(db, "SELECT id FROM automata WHERE id=@@Identity", callback_get_id_automaton, ptr, nullptr);
-    return *ptr;
+    return runningAutomaton->save(name, db);
 }
 
 static int callback_get_id_automaton(void *ptr, int count, char **data, char **columns) {
@@ -108,18 +105,14 @@ static int callback_get_id_automaton(void *ptr, int count, char **data, char **c
     return 0;
 }
 
-// Delete from database
+// Delete from database TODO
 
-void AutomataManager::deleteAutomaton(unsigned int i) const {
-    std::ostringstream req;
-    req << "DELETE FROM automata WHERE id = " << i;
-    sqlite3_exec(db, req.str().c_str(), nullptr,nullptr,nullptr);
+void AutomataManager::deleteAutomata() const {
+    sqlite3_exec(db, "DELETE FROM automota", nullptr,nullptr,nullptr);
 }
 
-void AutomataManager::deleteState(unsigned int i) const {
-    std::ostringstream req;
-    req << "DELETE FROM states WHERE id = " << i;
-    sqlite3_exec(db, req.str().c_str(), nullptr,nullptr,nullptr);
+void AutomataManager::deleteStates() const {
+    sqlite3_exec(db, "DELETE FROM states", nullptr,nullptr,nullptr);
 }
 
 // Load a state
@@ -129,7 +122,7 @@ void AutomataManager::selectedState(unsigned int const i) {
     currentState = new State(*initialState);
 }
 
-void AutomataManager::selectedState(State& initial) {
+void AutomataManager::selectedState(State const& initial) {
     initialState = new State(initial);
     currentState = new State(initial);
 }
@@ -141,35 +134,38 @@ void AutomataManager::selectedState(QString& nameFile) {
 
 // Load an automaton
 
-Automaton * AutomataManager::selectedAutomaton(unsigned int const i) {
+void AutomataManager::selectedAutomaton(unsigned int const i) {
     std::ostringstream req1, req2;
     req1 << "SELECT value FROM automata WHERE id = " << i;
     sqlite3_exec(db, req1.str().c_str(), callback_load_automata, this, nullptr);
     req2 << "UPDATE automata SET lastUse = date('now') WHERE id = " << i;
     sqlite3_exec(db, req2.str().c_str(), nullptr, nullptr, nullptr);
-    return runningAutomaton;
 }
 
 static int callback_load_automata(void *ptr, int count, char **data, char **columns) {
     AutomataManager * amPtr = static_cast<AutomataManager*>(ptr);
-    amPtr->runningAutomaton = new Automaton(std::string(data[0]));
+    amPtr->runningAutomaton = new Automaton();
+    amPtr->runningAutomaton->deserialize(std::string(data[0]));
     return 0;
 }
 
-Automaton * AutomataManager::createAutomaton(unsigned int deg, dim d, char def = 's') {
+void AutomataManager::createAutomaton(unsigned int deg, dim d, char def = 's') {
     unsigned int n = 2*deg+1;
     runningAutomaton = new Automaton((d == d1 ? n : n*n), (d == d1 ? 1 : 2), def);
-    return runningAutomaton;
 }
 
 // Save state to file
 
-void AutomataManager::exportInitialState(QFile *file) const {
-    initialState->exportToFile(file);
+void AutomataManager::exportInitialState(QString& name) const {
+    initialState->exportToFile(name);
 }
 
-void AutomataManager::exportCurrentState(QFile *file) const {
-    currentState->exportToFile(file);
+void AutomataManager::exportCurrentState(QString& name) const {
+    currentState->exportToFile(name);
+}
+
+void AutomataManager::exportAutomaton(QString& name) const {
+    runningAutomaton->exportToFile(name);
 }
 
 // Run the automaton
@@ -182,4 +178,8 @@ void AutomataManager::next() {
     currentState->setState(v);
 }
 
+void AutomataManager::setTimer(unsigned int ms) {
+    if (timer->isActive()) timer->stop();
+    if (ms) timer->start(ms);
+}
 

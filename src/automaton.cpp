@@ -35,7 +35,7 @@ Automaton::Automaton(QString const& fileName) {
 
 static int callback_load_automata(void *ptr, int count, char **data, char **columns) {
     Automaton * auPtr = static_cast<Automaton *>(ptr);
-    ptr->deserialize(std::string(data[0]));
+    auPtr->deserialize(std::string(data[0]));
     return 0;
 }
 
@@ -178,8 +178,9 @@ static int callback_get_id_automata(void *ptr, int count, char **data, char **co
     return 0;
 }
 
-void Automaton::exportToFile(QFile * file) {
-    file->open(QIODevice::WriteOnly);
-    QTextStream out(file);
-    out << serialize();
+void Automaton::exportToFile(QString& name) {
+    QFile file(name);
+    file.open(QIODevice::WriteOnly);
+    QTextStream out(&file);
+    out << QString(serialize().c_str());
 }
