@@ -56,7 +56,7 @@ char RuleBst::next(char c) {
 }
 
 
-void RuleBst::insert(const std::string& s, char c) {
+void RuleBst::insert(const std::string& s, char cc) {
     Node * node = root;
     for(const char& c : s) {
         if (c == '0') {  // go left
@@ -68,7 +68,7 @@ void RuleBst::insert(const std::string& s, char c) {
             node = node->right;
         }
     }
-    node->value = c;  // end of the branch
+    node->value = cc;  // end of the branch
 }
 
 
