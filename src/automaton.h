@@ -1,6 +1,7 @@
 #ifndef AUTOMATON_H
 #define AUTOMATON_H
 
+#include <stdexcept>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -51,7 +52,10 @@ class Automaton {
 
         char next(std::string s);
 
-        void insertSpecialRule(std::string s, char c);
+        void insertSpecialRule(std::string s, char c) {
+            if (s.length() != n) throw std::invalid_argument("wrong string size");
+            ruleBst->insert(s, c);
+        }
 
         void insertRuleNbLife(unsigned int a, unsigned int b) { insertRangeInto(ruleNbNeighbLife, a, b); }
         void insertRuleNbDeath(unsigned int a, unsigned int b) { insertRangeInto(ruleNbNeighbDeath, a, b); }
