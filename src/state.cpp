@@ -113,6 +113,7 @@ void State::randomState() {
     srand(time(0));
     Vec::iterator it;
     for (it = state.begin(); it != state.end(); ++it) *it = rand()%2;
+    emit valueChanged(state);
 }
 
 void State::loadStateFromString(char *str) {
