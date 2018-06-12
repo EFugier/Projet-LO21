@@ -31,7 +31,7 @@ MainController::MainController() : instance(AutomataManager::getInstance()){
 
 
 void MainController::createActions(){
-    NewAutomaton=new QAction(QIcon("D:\\codecpp\\Cute\\Projet_LO21\\start.png"), tr("&New Automaton"), this);
+    NewAutomaton=new QAction(QIcon(":/images/start.png"), tr("&New Automaton"), this);
     connect(NewAutomaton, &QAction::triggered, this, &MainController::newAutomaton);
 
     ImportAutomaton = new QAction(tr("&Import Automaton..."), this);
@@ -178,7 +178,7 @@ void MainController::createActions(){
     Exit=new QAction(tr("&Exit"), this);
     connect(Exit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
-    NewRule=new QAction(QIcon("D:\\codecpp\\Cute\\LO21_Cellular\\param.png"), tr("&New Rule"), this);
+    NewRule=new QAction(QIcon(":/images/param.png"), tr("&New Rule"), this);
     connect(NewRule, &QAction::triggered, this, &MainController::newRule);
     NextStep=new QAction(tr("&Next Step"), this);
     SetTimer=new QAction(tr("&Set Timer"), this);
@@ -263,11 +263,11 @@ fileToolBar->addAction(NewAutomaton);
 
  QPushButton * play= new QPushButton();
 play->setMaximumWidth(70);
-play->setIcon(QIcon("D:\\codecpp\\Cute\\LO21_Cellular\\play.png"));
+play->setIcon(QIcon(":/images/play.png"));
 
 QPushButton * pause= new QPushButton();
 pause->setMaximumWidth(70);
-pause->setIcon(QIcon("D:\\codecpp\\Cute\\LO21_Cellular\\pause.png"));
+pause->setIcon(QIcon(":/images/pause.png"));
 
 QLCDNumber * lcd = new QLCDNumber(2);
 //lcd->setMinimumSize(QSize(50,30));

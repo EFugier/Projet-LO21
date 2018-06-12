@@ -17,8 +17,10 @@ SOURCES += \
     utilities/rulebst.cpp \
     utilities/sqlite3.c \
     maincontroller.cpp \
-    main.cpp \
     matrixcontroller.cpp \
     rulescontroller.cpp
 
 QT += widgets
+
+RESOURCES += \
+    application.qrc
