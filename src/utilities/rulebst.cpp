@@ -56,14 +56,14 @@ char RuleBst::next(char c) {
 }
 
 
-void RuleBst::insert(const std::string& s, char cc) {
+void RuleBst::insert(const std::vector<bool>& s, char cc) {
     Node * node = root;
-    for(const char& c : s) {
-        if (c == '0') {  // go left
+    for(const bool& b : s) {
+        if (b) {  // go left
             if (!node->left) node->left = new Node('0');
             node = node->left;
         }
-        else if (c == '1') {  // go right
+        else {  // go right
             if (!node->right) node->right = new Node('1');
             node = node->right;
         }

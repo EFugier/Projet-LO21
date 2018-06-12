@@ -52,9 +52,9 @@ class Automaton {
 
         char next(std::string s);
 
-        void insertSpecialRule(std::string s, char c) {
-            if (s.length() != n) throw std::invalid_argument("wrong string size");
-            ruleBst->insert(s, c);
+        void insertPositionRule(std::vector<bool> v, char c) {
+            if (v.size() != n) throw std::invalid_argument("wrong size");
+            ruleBst->insert(v, c);
         }
 
         void insertRuleNbInto(unsigned int a, unsigned int b, char c) {
@@ -62,9 +62,6 @@ class Automaton {
             else if (c == 'd') insertRangeInto(ruleNbNeighbDeath, a, b); 
             else if (c == 's') insertRangeInto(ruleNbNeighbSame, a, b); 
         }
-        void insertRuleNbLife(unsigned int a, unsigned int b) { insertRangeInto(ruleNbNeighbLife, a, b); }
-        void insertRuleNbDeath(unsigned int a, unsigned int b) { insertRangeInto(ruleNbNeighbDeath, a, b); }
-        void insertRuleNbSame(unsigned int a, unsigned int b) { insertRangeInto(ruleNbNeighbLife, a, b); }
         void insertRangeInto(std::vector<Range>& coll, unsigned int a, unsigned int b);
         std::string serializeNbRules();
         void deserializeNbRules(const std::string& s);

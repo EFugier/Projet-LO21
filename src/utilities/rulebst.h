@@ -2,6 +2,7 @@
 #define BST_H
 
 #include <iostream>
+#include <vector>
 
 class Node {
     /** Simple node class to be used in a binary tree */
@@ -35,7 +36,7 @@ class RuleBst
 
         char next(char c);
 
-        void insert(const std::string& s, char c); ///< insert path in BST
+        void insert(const std::vector<bool>& s, char c); ///< insert path in BST
         void printTree(int indent=0) {
             printTree(root, indent);
         }
