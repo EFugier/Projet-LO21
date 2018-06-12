@@ -34,11 +34,10 @@ private:
     Uint ncol;
 
     // Private methods :
-    void randomState(); // Create a random nrow*ncol vector of booleans // IS WORKING
     void loadStateFromString(char*str); // load a state from a string of 0 and 1
 
 public:
-    std::string toString() const; // Convert the vector of booleans to a string // IS WORKING
+    QString toString() const; // Convert the vector of booleans to a string // IS WORKING
 
     // Constructors :
     State(State const& old); // Copy constructor // IS WORKING
@@ -57,8 +56,11 @@ public:
     // setter :
     void setState(Vec& v); // state setter
 
+
+    void randomState(); // Create a random nrow*ncol vector of booleans // IS WORKING
+
     // Long term saves :
-    Uint save(const std::string& name, sqlite3 * db) const; // save to DB // IS WORKING
+    Uint save(const QString& name, sqlite3 * db) const; // save to DB // IS WORKING
     void exportToFile(QString& name) const; // export to file // IS WORKING
 
     std::vector<std::string> stackOfNb(Uint n) const; // IS WORKING

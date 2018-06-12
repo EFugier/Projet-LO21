@@ -65,7 +65,7 @@ class Automaton {
 
         void deserialize(const std::string& s);
 
-        unsigned int save(const std::string& name, sqlite3 * db); // save to DB
+        unsigned int save(const QString& name, sqlite3 * db); // save to DB
 
         void exportToFile(QString& name);
 

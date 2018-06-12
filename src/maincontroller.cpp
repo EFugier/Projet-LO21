@@ -1,21 +1,20 @@
 #include "maincontroller.h"
 
 
-MainController::MainController(){
-    //instance=AutomataManager::getInstance();
-
-    mainController= new QWidget(this);
+MainController::MainController() : instance(AutomataManager::getInstance()){
+    // !!!!!!!! j'ai initialisé l'instance après les : prcq c'est obligatoire
+    // pour un attribut référence !!!!!!!!!
+    mainController = new QWidget(this);
     setCentralWidget(mainController);
     mainLayout = new QHBoxLayout;
     mainController->setLayout(mainLayout);
     this->setWindowTitle("Cellular Automaton");
-
     //Grille random au démarrage
-    model= new StateModel(25,25);
+    model= new State(25,25);
+    // !!!!!!! J'ai remplacé StateModel par State !!!!!!!!
     view = new MatrixController(25,25);
     QObject::connect(model, SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
     model->randomState();
-
     toolsLayout= new QVBoxLayout;
     createActions();
     createMenus();
@@ -35,20 +34,18 @@ void MainController::createActions(){
     NewAutomaton=new QAction(QIcon("D:\\codecpp\\Cute\\Projet_LO21\\start.png"), tr("&New Automaton"), this);
     connect(NewAutomaton, &QAction::triggered, this, &MainController::newAutomaton);
 
-
-
-    ImportAutomaton=new QAction(tr("&Import Automaton..."), this);
+    ImportAutomaton = new QAction(tr("&Import Automaton..."), this);
     connect(ImportAutomaton, &QAction::triggered, [this]()
     {
         QString str=openFile();
-        //instance.selectedAutomaton(str);
+        instance.selectedAutomaton(str);
     });
 
     ImportGrid=new QAction(tr("&Import Grid..."), this);
     connect(ImportGrid, &QAction::triggered, [this]()
     {
         QString str=openFile();
-        //instance.selectedState(str);
+        instance.selectedState(str);
     });
 
     OpenRecentAutomata=new QAction(tr("&Open Recent Automaton"), this);
@@ -56,7 +53,7 @@ void MainController::createActions(){
     OpenRecentGrid=new QAction(tr("&Open Recent Grid"), this);
     subMenuGrid=new QMenu();
 
-    // Test
+/*    // Test
     std::vector<int> vect;
     for(int i=0; i<6; i++) vect.push_back(i);
     for(std::vector<int>::iterator it=vect.begin(); it!=vect.end(); it++){
@@ -64,22 +61,24 @@ void MainController::createActions(){
         insertNewAction(subMenuGrid,*it,"Grid"+QString::number(*it), selectedAutomaton);
     }
 
+//      Pour charger les derniers automates BDD :*/
 
-//      Pour charger les derniers automates BDD :
-
-//      std::vector<const AutomataManager::AutomatonDescription> * vect = instance.getArrayOfAutomata();
-//       for(std::vector<const AutomataManager::AutomatonDescription>::iterator it=vect->begin(); it!=vect->end(); it++){
-//        QString str=(*it).getName()+((*it).getDimension() == d2 ? "2D" : "1D");
-//        insertNewAction(subMenuAutomata,*it,str, selectedAutomaton);
-//    }
+     std::vector<const AutomataManager::AutomatonDescription> * vect = instance.getArrayOfAutomata();
+     for(std::vector<const AutomataManager::AutomatonDescription>::iterator it=vect->begin(); it!=vect->end(); it++){
+         QString str=(*it).getName()+((*it).getDimension() == d2 ? "2D" : "1D");
+         insertNewAction(subMenuAutomata,(*it).getId(),str, &AutomataManager::selectedAutomaton);
+        // !!!!!!! j'ai remplacé *it par (*it).getId() puisque c'est l'ID que tu veux
+         // j'ai mis &AutomataManager::selectedAutomaton comme pointeur de fonction !!!!!!!!
+     }
 
 
 //      Pour charger les derniers états BDD:
 
-//      std::map<const unsigned int, const std::string> * vect = instance.getArrayOfStates();
-//       for(std::map<const unsigned int, const std::string>::iterator it=vect->begin(); it!=vect->end(); it++){
-//        insertNewAction(subMenuGrid,it->first,it->second, selectedState);
-//    }
+    std::map<const unsigned int, const QString> * mapStates = instance.getArrayOfStates();
+    for(std::map<const unsigned int, const QString>::iterator it=mapStates->begin(); it!=mapStates->end(); it++){
+        insertNewAction(subMenuGrid,it->first,it->second, &AutomataManager::selectedState);
+    }
+    // !!!! j'ai remplacé "vect" par "mapStates" prcq ça marchait pas le nom vect était utilisé juste au dessus !!!!!
 
     ExportAutomaton=new QAction(tr("&Export Automaton..."), this);
     connect(ExportAutomaton, &QAction::triggered, this, [this]()
@@ -124,9 +123,9 @@ void MainController::createActions(){
         if (ok && !name.isEmpty())
         {
             QMessageBox::information(this, "Saved", name + " Saved");
-//          insertNewAction(subMenuAutomata,instance.saveAutomaton(str),name, selectedAutomaton);
-
-            insertNewAction(subMenuAutomata,995,name, selectedAutomaton); //Test
+            insertNewAction(subMenuAutomata,instance.saveAutomaton(name),name, &AutomataManager::selectedAutomaton);
+            // !!!! j'ai remplacé saveAutomaton(str) par saveAutomaton(name) !!!!
+       //     insertNewAction(subMenuAutomata,995,name, instance.selectedAutomaton); //Test
         }
         else
         {
@@ -143,8 +142,8 @@ void MainController::createActions(){
 
         if (ok && !name.isEmpty())
         {
-        //  insertNewAction(subMenuAutomata,instance.saveCurrentState(name),name, selectedState);
-            insertNewAction(subMenuGrid,995,name, selectedAutomaton); //Test
+              insertNewAction(subMenuAutomata,instance.saveCurrentState(name),name, &AutomataManager::selectedState);
+        // insertNewAction(subMenuGrid,995,name, selectedAutomaton); //Test
 
             QMessageBox::information(this, "Saved", name + " Saved");
         }
@@ -163,10 +162,10 @@ void MainController::createActions(){
 
         if (ok && !name.isEmpty())
         {
-          //int id= instance.saveInitialState(name);
-        //  insertNewAction(subMenuAutomata,id,name, selectedState);
+          int id= instance.saveInitialState(name);
+          insertNewAction(subMenuAutomata,id,name, &AutomataManager::selectedState);
 
-            insertNewAction(subMenuGrid,995,name, selectedAutomaton);
+        //    insertNewAction(subMenuGrid,995,name, selectedAutomaton);
             QMessageBox::information(this, "Saved", name + " Saved");
         }
         else
@@ -187,59 +186,58 @@ void MainController::createActions(){
 }
 
 
-void MainController::insertNewAction(QMenu* menu, int id, const QString& name, void (MainController::* selectedFunction)(int) ){
+void MainController::insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*selectedFunction)(unsigned int const) ){
+    // !!!!!!! J'ai remplacé l'argument int de la fonction pointée par unsigned int const !!!!!!!
+    QAction* newAction= new QAction(name);
+    newAction->setData(QVariant(id));
 
-QAction* newAction= new QAction(name);
-newAction->setData(QVariant(id));
-
-if(menu->actions().empty())  {
-    QAction* Clear= new QAction(tr("&Clear"));
-    connect(Clear, &QAction::triggered, this, [menu, this]()
-    {
-        menu->clear();
-    });
-    menu->addSeparator();
-    menu->addAction(Clear);
-}
+    if(menu->actions().empty())  {
+        QAction* Clear= new QAction(tr("&Clear"));
+        connect(Clear, &QAction::triggered, this, [menu, this]()
+        {
+            menu->clear();
+        });
+        menu->addSeparator();
+        menu->addAction(Clear);
+    }
 
     menu->insertAction(menu->actions()[0],newAction);
 
-
-connect(newAction, &QAction::triggered, this, [newAction, menu, name, selectedFunction, this]()
-{
-    // Ici, point critique car selectedFunction est un pointeur de fonction, pour tester j'ai mis une fonction membre de la classe
-    // MainController, mais il faut utiliser une fonction contenu dans AutomataManager
-    (this->*selectedFunction)(newAction->data().toInt());
-    insertNewAction(menu,newAction->data().toInt(),name,selectedFunction);
-    menu->removeAction(newAction);
-
-});
+    connect(newAction, &QAction::triggered, this, [newAction, menu, name, selectedFunction, this]()
+    {
+        // Ici, point critique car selectedFunction est un pointeur de fonction, pour tester j'ai mis une fonction membre de la classe
+        // MainController, mais il faut utiliser une fonction contenu dans AutomataManager
+        (instance.*selectedFunction)(newAction->data().toInt());
+        // !!!!! j'ai remplacé this-> par instance. !!!!!
+        insertNewAction(menu,newAction->data().toInt(),name,selectedFunction);
+        menu->removeAction(newAction);
+    });
 }
 
 
 
 void MainController::createMenus(){
-fileMenu= menuBar()->addMenu(tr("&File"));
-fileMenu->addAction(NewAutomaton);
-fileMenu->addAction(OpenRecentAutomata);
-OpenRecentAutomata->setMenu(subMenuAutomata);
-fileMenu->addAction(OpenRecentGrid);
-OpenRecentGrid->setMenu(subMenuGrid);
-fileMenu->addAction(SaveAutomaton);
-fileMenu->addAction(SaveAutomatonAs);
-fileMenu->addAction(SaveCurrentGrid);
-fileMenu->addAction(SaveInitialGrid);
-fileMenu->addAction(ImportAutomaton);
-fileMenu->addAction(ImportGrid);
-fileMenu->addAction(ExportAutomaton);
-fileMenu->addAction(ExportCurrentGrid);
-fileMenu->addAction(ExportInitialGrid);
-fileMenu->addAction(Exit);
+    fileMenu= menuBar()->addMenu(tr("&File"));
+    fileMenu->addAction(NewAutomaton);
+    fileMenu->addAction(OpenRecentAutomata);
+    OpenRecentAutomata->setMenu(subMenuAutomata);
+    fileMenu->addAction(OpenRecentGrid);
+    OpenRecentGrid->setMenu(subMenuGrid);
+    fileMenu->addAction(SaveAutomaton);
+    fileMenu->addAction(SaveAutomatonAs);
+    fileMenu->addAction(SaveCurrentGrid);
+    fileMenu->addAction(SaveInitialGrid);
+    fileMenu->addAction(ImportAutomaton);
+    fileMenu->addAction(ImportGrid);
+    fileMenu->addAction(ExportAutomaton);
+    fileMenu->addAction(ExportCurrentGrid);
+    fileMenu->addAction(ExportInitialGrid);
+    fileMenu->addAction(Exit);
 
-editMenu= menuBar()->addMenu(tr("&Edit"));
-editMenu->addAction(NewRule);
-editMenu->addAction(SetTimer);
-editMenu->addAction(NextStep);
+    editMenu= menuBar()->addMenu(tr("&Edit"));
+    editMenu->addAction(NewRule);
+    editMenu->addAction(SetTimer);
+    editMenu->addAction(NextStep);
 
 }
 
@@ -371,10 +369,10 @@ connect(param->buttonBox, &QDialogButtonBox::rejected, param, &QDialog::reject);
 param->show();
 }
 
-
+/*
 void MainController::selectedAutomaton(int n){
 std::cout<<n;
-}
+} */
 
 QString MainController::openFile(){
 QString filename =  QFileDialog::getOpenFileName(

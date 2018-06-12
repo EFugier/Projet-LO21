@@ -6,7 +6,7 @@
 #include"qttools.h"
 #include "matrixcontroller.h"
 #include "rulescontroller.h"
-
+#include "automatamanager.h"
 
 class AutomataParameters : public QDialog
 {
@@ -37,11 +37,10 @@ class MainController : public QMainWindow{
 public:
     MainController();
 private:
-    //AutomataManager& instance;
-    StateModel * model;
+    AutomataManager& instance;
+    State * model;
     MatrixController * view;
     AutomataParameters * param;
-
     QMenu *fileMenu;
     QMenu *editMenu;
     QMenu *subMenuAutomata;
@@ -72,8 +71,8 @@ private:
     void createMenus();
     void createToolBars();
     QString openFile();
-    void insertNewAction(QMenu* menu, int id, const QString& name, void (MainController::*)(int) );
-    void selectedAutomaton(int);
+    void insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*)(unsigned int const) );
+ //   void selectedAutomaton(int);
     void newAutomaton();
     void newRule();
 

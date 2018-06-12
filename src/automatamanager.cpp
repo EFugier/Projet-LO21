@@ -4,13 +4,13 @@ AutomataManager* AutomataManager::instance = nullptr;
 
 // Constructor and getters for the inner class AutomatonDescription :
 
-AutomataManager::AutomatonDescription::AutomatonDescription(unsigned int i, std::string n, dim d) : id(i), name(n), dimension(d) {}
+AutomataManager::AutomatonDescription::AutomatonDescription(unsigned int i, QString n, dim d) : id(i), name(n), dimension(d) {}
 
 unsigned int AutomataManager::AutomatonDescription::getId() const {
     return id;
 }
 
-const std::string& AutomataManager::AutomatonDescription::getName() const {
+const QString& AutomataManager::AutomatonDescription::getName() const {
     return name;
 }
 
@@ -68,7 +68,7 @@ std::vector<const AutomataManager::AutomatonDescription> * AutomataManager::getA
 
 static int select_callback_automata(void *ptr, int count, char **data, char **columns) {
     std::vector<const AutomataManager::AutomatonDescription> * vecPtr = static_cast<std::vector<const AutomataManager::AutomatonDescription>*>(ptr);
-    AutomataManager::AutomatonDescription a(atoi(data[0]),std::string(data[1]),((data[2]) ? d2 : d1));
+    AutomataManager::AutomatonDescription a(atoi(data[0]),QString(data[1]),((data[2]) ? d2 : d1));
     vecPtr->push_back(a);
     return 0;
 }
@@ -81,21 +81,21 @@ Map * AutomataManager::getArrayOfStates() const {
 
 static int select_callback_states(void *ptr, int count, char **data, char **columns) {
     Map * mapPtr = static_cast<Map*>(ptr);
-    mapPtr->insert(std::pair<const unsigned int, const std::string>(atoi(data[0]), std::string(data[1])));
+    mapPtr->insert(std::pair<const unsigned int, const QString>(atoi(data[0]), QString(data[1])));
     return 0;
 }
 
 // Save to the database :
 
-unsigned int AutomataManager::saveInitialState(std::string const& name) const {
+unsigned int AutomataManager::saveInitialState(QString const& name) const {
     return initialState->save(name, db);
 }
 
-unsigned int AutomataManager::saveCurrentState(std::string const& name) const {
+unsigned int AutomataManager::saveCurrentState(QString const& name) const {
     return currentState->save(name, db);
 }
 
-unsigned int AutomataManager::saveAutomaton(std::string const& name) const {
+unsigned int AutomataManager::saveAutomaton(QString const& name) const {
     return runningAutomaton->save(name, db);
 }
 
@@ -135,13 +135,11 @@ void AutomataManager::selectedState(QString& nameFile) {
 // Load an automaton
 
 void AutomataManager::selectedAutomaton(unsigned int const i) {
-    std::ostringstream req1, req2;
-    req1 << "SELECT value FROM automata WHERE id = " << i;
-    sqlite3_exec(db, req1.str().c_str(), callback_load_automata, this, nullptr);
-    req2 << "UPDATE automata SET lastUse = date('now') WHERE id = " << i;
-    sqlite3_exec(db, req2.str().c_str(), nullptr, nullptr, nullptr);
+    runningAutomaton = new Automaton(i, db);
 }
-
+void AutomataManager::selectedAutomaton(QString& nameFile) {
+    runningAutomaton = new Automaton(nameFile);
+}
 static int callback_load_automata(void *ptr, int count, char **data, char **columns) {
     AutomataManager * amPtr = static_cast<AutomataManager*>(ptr);
     amPtr->runningAutomaton = new Automaton();

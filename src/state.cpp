@@ -90,10 +90,10 @@ void State::setState(Vec& v) {
 
 // Long term saves :
 
-Uint State::save(const std::string& name, sqlite3 * db) const {
+Uint State::save(const QString& name, sqlite3 * db) const {
     std::ostringstream flux;
     flux << "INSERT INTO states(name, nrow, ncol, value, lastUse) VALUES('";
-    flux << name << "', " << nrow << ", " << ncol << ", '" << toString() << "', date('now'))";
+    flux << name.toStdString() << "', " << nrow << ", " << ncol << ", '" << toString().toStdString() << "', date('now'))";
     sqlite3_exec(db, flux.str().c_str(), nullptr,nullptr,nullptr);
     Uint * ptr = new Uint;
     sqlite3_exec(db, "SELECT id FROM states WHERE id=@@Identity", callback_get_id, ptr, nullptr);
@@ -104,7 +104,7 @@ void State::exportToFile(QString& name) const {
     QFile file(name);
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
-    out << 'r' << nrow << "c" << ncol << "v" << QString(toString().c_str());
+    out << 'r' << nrow << "c" << ncol << "v" << QString(toString());
 }
 
 // Private methods :
@@ -152,12 +152,12 @@ std::vector<std::string> State::stackOfNb(Uint n) const {
      * */
 }
 
-std::string State::toString() const {
+QString State::toString() const {
     std::ostringstream flux;
     Vec::const_iterator it = state.begin();
     for(; it != state.end(); it++)
         flux << ((*it) ? 1 : 0);
-    return flux.str();
+    return QString().fromStdString(flux.str());
 }
 
 int mod(int x, int m) {

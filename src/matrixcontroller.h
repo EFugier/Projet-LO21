@@ -4,7 +4,7 @@
 
 #include "qttools.h"
 
-
+/*
 class StateModel : public QObject{
     Q_OBJECT
 
@@ -31,7 +31,7 @@ public slots:
     void randomSlot(){
         randomState();
     }
-};
+}; */
 
 
 
