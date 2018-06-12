@@ -295,10 +295,25 @@ editToolBar->addWidget(lecture);
 
 
 void MainController::newRule(){
-RulesController * rulesController = new RulesController((view->rowCount()%2 ? view->rowCount() : view->rowCount()-1),(view->columnCount()%2 ? view->columnCount() : view->columnCount()-1));
-rulesController->setMinimumSize(QSize( 200, 200 ));
-rulesController->setWindowTitle("New Rule");
-rulesController->show();
+    RulesController * rulesController = new RulesController((view->rowCount()%2 ? view->rowCount() : view->rowCount()-1),(view->columnCount()%2 ? view->columnCount() : view->columnCount()-1));
+    rulesController->setMinimumSize(QSize( 200, 200 ));
+    rulesController->setWindowTitle("New Rule");
+    connect(rulesController->buttonBox, &QDialogButtonBox::accepted, rulesController, [rulesController]() {
+        char v = (rulesController->dead->isChecked() ? 'd' : (rulesController->alive->isChecked() ? 'a' : 's'));
+        if (!rulesController->tabWidget->currentIndex()) { // Voisins
+            NeighbourRule* nr = dynamic_cast<NeighbourRule*>(rulesController->tabWidget->currentWidget());
+            instance.getAutomaton().insertRuleNbInto(nr->from->value(), nr->to->value(), v);
+        }
+        else {
+            PositionRule * pr = dynamic_cast<PositionRule*>(rulesController->tabWidget->currentWidget());
+            if (v=='s') {
+                instance.getAutomaton().insertPositionRule(pr->positionMatrix->serializeGrid(true), 'a');
+                instance.getAutomaton().insertPositionRule(pr->positionMatrix->serializeGrid(false), 'd');
+            }
+            else instance.getAutomaton().insertPositionRule(pr->positionMatrix->serializeGrid(), v);
+        }
+    });
+    rulesController->show();
 }
 
 void MainController::newAutomaton(){

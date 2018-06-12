@@ -8,9 +8,9 @@ RulesController::RulesController(int column, int row, QWidget *parent) : QDialog
     tabWidget->addTab(new PositionRule(column,row), tr("Position Rule"));
 
     QGroupBox *nextCellState = new QGroupBox(tr("Next cell-state"));
-    QRadioButton *dead = new QRadioButton(tr("Dead"));
-    QRadioButton *alive = new QRadioButton(tr("Alive"));
-    QRadioButton *same = new QRadioButton(tr("Same"));
+    dead = new QRadioButton(tr("Dead"));
+    alive = new QRadioButton(tr("Alive"));
+    same = new QRadioButton(tr("Same"));
 
 
     QVBoxLayout *nextCellStateLayout = new QVBoxLayout;
@@ -20,7 +20,8 @@ RulesController::RulesController(int column, int row, QWidget *parent) : QDialog
     nextCellState->setLayout(nextCellStateLayout);
 
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+ //   connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(tabWidget);
@@ -74,12 +75,12 @@ return vect;
 NeighbourRule::NeighbourRule(QWidget *parent): QWidget(parent)
 {
     QGroupBox *nextCellState = new QGroupBox(tr("Number of neighbours"));
-    QSpinBox *from = new QSpinBox();
+    from = new QSpinBox();
+    to = new QSpinBox();
+    min = new QCheckBox(tr("min"));
+    max = new QCheckBox(tr("max ∞"));
     QLabel * fromLab = new QLabel("From");
-    QSpinBox * to = new QSpinBox();
     QLabel * toLab = new QLabel("To");
-    QCheckBox *min = new QCheckBox(tr("min"));
-    QCheckBox *max = new QCheckBox(tr("max ∞"));
 
 
     QVBoxLayout *nextCellStateLayout = new QVBoxLayout;

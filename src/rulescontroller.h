@@ -18,6 +18,10 @@ public:
 private:
     QTabWidget *tabWidget;
     QDialogButtonBox *buttonBox;
+    QRadioButton * dead;
+    QRadioButton * alive;
+    QRadioButton * same;
+
 };
 
 
@@ -38,6 +42,13 @@ class NeighbourRule : public QWidget
 {
     Q_OBJECT
 
+    friend class RulesController;
+
+private :
+    QSpinBox *from;
+    QSpinBox * to;
+    QCheckBox *min;
+    QCheckBox *max;
 public:
     explicit NeighbourRule(QWidget *parent = nullptr);
 };

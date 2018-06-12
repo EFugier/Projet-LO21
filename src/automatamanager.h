@@ -98,7 +98,7 @@ public:
       void deleteStates() const;
 
       void next();
-      Automaton * getAutomaton() const { return runningAutomaton; }
+      Automaton& getAutomaton() const { return *runningAutomaton; }
       ~AutomataManager();
       State* getState() { return initialState; }
       void setTimer(unsigned int ms);

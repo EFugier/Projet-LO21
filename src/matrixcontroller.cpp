@@ -55,9 +55,19 @@ void MatrixController::cellActivation(QModelIndex index)
 }
 
 std::vector<bool> MatrixController:: serializeGrid(){
-std::vector<bool> vect;
-for(int i(0); i<rowCount(); i++)
-       for(int j(0); j<columnCount(); j++)
-           vect.push_back(item(i,j)->text()=='1' );
-return vect;
+    std::vector<bool> vect;
+    for(int i(0); i<rowCount(); i++)
+        for(int j(0); j<columnCount(); j++)
+            vect.push_back(item(i,j)->text()=='1' );
+    return vect;
+}
+
+
+std::vector<bool> MatrixController:: serializeGrid(bool v) {
+    std::vector<bool> vect;
+    for(int i(0); i<rowCount(); i++)
+        for(int j(0); j<columnCount(); j++)
+            vect.push_back(item(i,j)->text()=='1' );
+    vect[vect.size()/2] = v;
+    return vect;
 }

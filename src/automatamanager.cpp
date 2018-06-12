@@ -171,8 +171,10 @@ void AutomataManager::exportAutomaton(QString& name) const {
 void AutomataManager::next() {
     std::vector<std::string> s = currentState->stackOfNb(runningAutomaton->getN());
     std::vector<bool> v;
-    for(std::vector<std::string>::iterator it = s.begin(); it != s.end(); it++)
-        v.push_back((runningAutomaton->next(*it) == '1') ? true : false);
+    for(std::vector<std::string>::iterator it = s.begin(); it != s.end(); it++) {
+        char tmp = runningAutomaton->next(*it);
+        v.push_back(tmp == 's' ? (*it)[(*it).size()/2] : (tmp == 'a' ? true : false));
+    }
     currentState->setState(v);
 }
 

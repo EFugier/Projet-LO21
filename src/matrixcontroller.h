@@ -43,6 +43,7 @@ public:
     MatrixController(int column, int rows=1, QWidget* parent=nullptr);
 //    MatrixController(int r, int c, QWidget* p=nullptr);
     std::vector<bool> serializeGrid();
+    std::vector<bool> serializeGrid(bool v);
 
 
 private slots:
