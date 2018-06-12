@@ -44,7 +44,7 @@ class Automaton {
         std::vector<Range> ruleNbNeighbSame;
 
         Automaton(unsigned int n, unsigned int dim, char dn) :
-            n(n), dim(dim), defaultNext(dn), ruleBst() {}
+            n(n), dim(dim), defaultNext(dn), ruleBst(), ruleNbNeighbDeath() {}
 
         Automaton(const unsigned int id, sqlite3 * db); // Constructor from SQL database
         Automaton(QString const& fileName);
@@ -58,7 +58,7 @@ class Automaton {
         }
 
         void insertRuleNbInto(unsigned int a, unsigned int b, char c) {
-            if (c == 'l') insertRangeInto(ruleNbNeighbLife, a, b); 
+            if (c == 'a') insertRangeInto(ruleNbNeighbLife, a, b);
             else if (c == 'd') insertRangeInto(ruleNbNeighbDeath, a, b); 
             else if (c == 's') insertRangeInto(ruleNbNeighbSame, a, b); 
         }

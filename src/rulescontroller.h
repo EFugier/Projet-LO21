@@ -29,6 +29,8 @@ class PositionRule : public QWidget
 {
     Q_OBJECT
 
+    friend class MainController;
+
 public:
     explicit PositionRule(int column, int rows=1, QWidget* parent=nullptr);
 //    std::vector<bool> serializeGrid();
@@ -43,6 +45,7 @@ class NeighbourRule : public QWidget
     Q_OBJECT
 
     friend class RulesController;
+    friend class MainController;
 
 private :
     QSpinBox *from;

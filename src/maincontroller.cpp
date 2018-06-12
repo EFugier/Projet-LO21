@@ -298,7 +298,7 @@ void MainController::newRule(){
     RulesController * rulesController = new RulesController((view->rowCount()%2 ? view->rowCount() : view->rowCount()-1),(view->columnCount()%2 ? view->columnCount() : view->columnCount()-1));
     rulesController->setMinimumSize(QSize( 200, 200 ));
     rulesController->setWindowTitle("New Rule");
-    connect(rulesController->buttonBox, &QDialogButtonBox::accepted, rulesController, [rulesController]() {
+    connect(rulesController->buttonBox, &QDialogButtonBox::accepted, rulesController, [rulesController, this]() {
         char v = (rulesController->dead->isChecked() ? 'd' : (rulesController->alive->isChecked() ? 'a' : 's'));
         if (!rulesController->tabWidget->currentIndex()) { // Voisins
             NeighbourRule* nr = dynamic_cast<NeighbourRule*>(rulesController->tabWidget->currentWidget());
@@ -317,19 +317,18 @@ void MainController::newRule(){
 }
 
 void MainController::newAutomaton(){
-AutomataParameters * param= new AutomataParameters(this);
+    AutomataParameters * param= new AutomataParameters(this);
 
-connect(param->buttonBox, &QDialogButtonBox::accepted, this, [param, this]()
+    connect(param->buttonBox, &QDialogButtonBox::accepted, this, [param, this]()
 {
-    //instance.createAutomaton(neighbourhood->value(), (row->text().isEmpty() ? d1 : d2), (dead->isChecked() ? 'd' : (alive->isChecked() ? 'a' : 's')));
+    instance.createAutomaton(param->neighbourhood->value(), (param->row->text().isEmpty() ? d1 : d2), (param->dead->isChecked() ? 'd' : (param->alive->isChecked() ? 'a' : 's')));
     param->tabWidget->removeTab(1);
 
 // Cas d'un état de départ random
     if(param->random->isChecked()){
-//            if(row->text().isEmpty()) instance.selectedState(State(column->text().toUInt()));
-//            else  instance.selectedState(State(row->text().toUInt(),column->text().toUInt()));
-// ou simplement    instance.selectedState(State((!row->text().toUInt() ? 1 : row->text().toUInt()),column->text().toUInt()));
-
+        instance.selectedState(State((!param->row->text().toUInt() ? 1 : param->row->text().toUInt()), param->column->text().toUInt()));
+        QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
+        instance.getState()->randomState();
         param->accept();
     }
 
@@ -380,7 +379,7 @@ connect(param->buttonBox, &QDialogButtonBox::accepted, this, [param, this]()
 });
 
 
-connect(param->buttonBox, &QDialogButtonBox::rejected, param, &QDialog::reject);
+    connect(param->buttonBox, &QDialogButtonBox::rejected, param, &QDialog::reject);
 param->show();
 }
 
