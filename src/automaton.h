@@ -42,6 +42,7 @@ class Automaton {
         RuleBst* ruleBst;
         std::vector<Range> ruleNbNeighbLife;
         std::vector<Range> ruleNbNeighbDeath;
+        std::vector<Range> ruleNbNeighbSame;
 
         Automaton(unsigned int n, unsigned int dim, char dn) :
             n(n), dim(dim), defaultNext(dn), ruleBst() {}
@@ -59,6 +60,7 @@ class Automaton {
 
         void insertRuleNbLife(unsigned int a, unsigned int b) { insertRangeInto(ruleNbNeighbLife, a, b); }
         void insertRuleNbDeath(unsigned int a, unsigned int b) { insertRangeInto(ruleNbNeighbDeath, a, b); }
+        void insertRuleNbSame(unsigned int a, unsigned int b) { insertRangeInto(ruleNbNeighbLife, a, b); }
         void insertRangeInto(std::vector<Range>& coll, unsigned int a, unsigned int b);
         std::string serializeNbRules();
         void deserializeNbRules(const std::string& s);

@@ -4,11 +4,11 @@
 #include "./utilities/rulebst.h"
 
 void testRuleBst() {
-    std::string s1("011a");
-    std::string s2("001d");
+    std::string s1("011");
+    std::string s2("001");
     RuleBst bst;
-    bst.insert(s1);
-    bst.insert(s2);
+    bst.insert(s1, 'a');
+    bst.insert(s2, 'd');
     std::cout<<bst.serialize()<<std::endl<<std::flush;
     bst.printTree();
     std::cout<<"#1 ok"<<std::endl<<std::flush;

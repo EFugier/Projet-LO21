@@ -112,6 +112,8 @@ std::string Automaton::serializeNbRules() {
     for(Range& r : ruleNbNeighbLife) seq += std::to_string(r.a)+","+std::to_string(r.b)+",";
     seq.push_back(';');
     for(Range& r : ruleNbNeighbDeath) seq += std::to_string(r.a)+","+std::to_string(r.b)+",";
+    seq.push_back(';');
+    for(Range& r : ruleNbNeighbSame) seq += std::to_string(r.a)+","+std::to_string(r.b)+",";
 
     return seq;
 }
@@ -119,10 +121,12 @@ std::string Automaton::serializeNbRules() {
 
 void Automaton::deserializeNbRules(const std::string& s) {
     ruleNbNeighbLife.clear();
+    ruleNbNeighbDeath.clear();
+    ruleNbNeighbSame.clear();
 
     std::string a = "";
     std::string b = "";
-    bool life = true;  // save in nbLife
+    char tabType = 'l';  // the save in nbLife
 
     bool isa = true, isb = false;
     for(const char& c : s) {
@@ -136,8 +140,18 @@ void Automaton::deserializeNbRules(const std::string& s) {
             isb = false;
             
             // append the new range
-            if (life) ruleNbNeighbLife.push_back(Range {static_cast<unsigned int>(std::stoul(a)), static_cast<unsigned int>(std::stoul(b))});
-            else ruleNbNeighbDeath.push_back(Range {static_cast<unsigned int>(std::stoul(a)), static_cast<unsigned int>(std::stoul(b))});
+            if (tabType == 'l') ruleNbNeighbLife.push_back(Range {
+                    static_cast<unsigned int>(std::stoul(a)),
+                    static_cast<unsigned int>(std::stoul(b))
+                    });
+            else if (tabType == 'd') ruleNbNeighbDeath.push_back(Range {
+                    static_cast<unsigned int>(std::stoul(a)),
+                    static_cast<unsigned int>(std::stoul(b))
+                    });
+            else ruleNbNeighbSame.push_back(Range {
+                    static_cast<unsigned int>(std::stoul(a)),
+                    static_cast<unsigned int>(std::stoul(b))
+                    });
 
             // reset a and b
             a.clear(); b.clear();
@@ -146,7 +160,7 @@ void Automaton::deserializeNbRules(const std::string& s) {
         if (c == ';') { // start of ruleNbNeighbDeath
             isa = true;
             isb = false;
-            life = false;
+            tabType = tabType == 'l' ? 'd' : 's';
             continue;
         }
 
