@@ -36,7 +36,6 @@ class Automaton {
         unsigned int dim;
         std::unordered_map<std::string, char> specialRules;
 
-    public:
         char defaultNext;
 
         RuleBst* ruleBst;
@@ -58,6 +57,11 @@ class Automaton {
             ruleBst->insert(s, c);
         }
 
+        void insertRuleNbInto(unsigned int a, unsigned int b, char c) {
+            if (c == 'l') insertRangeInto(ruleNbNeighbLife, a, b); 
+            else if (c == 'd') insertRangeInto(ruleNbNeighbDeath, a, b); 
+            else if (c == 's') insertRangeInto(ruleNbNeighbSame, a, b); 
+        }
         void insertRuleNbLife(unsigned int a, unsigned int b) { insertRangeInto(ruleNbNeighbLife, a, b); }
         void insertRuleNbDeath(unsigned int a, unsigned int b) { insertRangeInto(ruleNbNeighbDeath, a, b); }
         void insertRuleNbSame(unsigned int a, unsigned int b) { insertRangeInto(ruleNbNeighbLife, a, b); }
