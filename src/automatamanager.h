@@ -14,7 +14,7 @@
 #include <QTimer>
 
 enum dim {d1, d2};
-typedef std::map<const unsigned int, const std::string> Map;
+typedef std::map<const unsigned int, const QString> Map;
 static int select_callback_automata(void *ptr, int count, char **data, char **columns);
 static int select_callback_states(void *ptr, int count, char **data, char **columns);
 static int callback_load_automata(void *ptr, int count, char **data, char **columns);
@@ -49,12 +49,12 @@ public:
     // An internal class to store the description of an automaton from the database
     class AutomatonDescription {
         unsigned int id;
-        std::string name;
+        QString name;
         dim dimension;
     public:
-        AutomatonDescription(unsigned int i, std::string n, dim d);
+        AutomatonDescription(unsigned int i, QString n, dim d);
         unsigned int getId() const;
-        const std::string& getName() const;
+        const QString& getName() const;
         dim getDimension() const;
     };
 
@@ -72,7 +72,7 @@ public:
     /* Create an automaton from a specific set of rules
      * indicated by the id i of the automaton */
      void selectedAutomaton(unsigned int const i);
-
+     void selectedAutomaton(QString& nameFile);
     /* Create an empty automaton
      * */
      void createAutomaton(unsigned int deg, dim d, char def);
@@ -85,10 +85,10 @@ public:
       void selectedState(State const& initial); // IS WORKING
       void selectedState(QString& nameFile); // IS WORKING
 
-      unsigned int saveInitialState(std::string const& name) const; // IS WORKING
-      unsigned int saveCurrentState(std::string const& name) const; // IS WORKING
+      unsigned int saveInitialState(QString const& name) const; // IS WORKING
+      unsigned int saveCurrentState(QString const& name) const; // IS WORKING
 
-      unsigned int saveAutomaton(std::string const& name) const; // IS WORKING
+      unsigned int saveAutomaton(QString const& name) const; // IS WORKING
 
       void exportInitialState(QString& name) const; // IS WORKING
       void exportCurrentState(QString& name) const; // IS WORKING

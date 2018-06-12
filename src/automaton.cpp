@@ -162,10 +162,10 @@ std::string Automaton::serialize() {
     return flux.str();
 }
 
-unsigned int Automaton::save(const std::string& name, sqlite3 * db) {
+unsigned int Automaton::save(const QString& name, sqlite3 * db) {
     std::ostringstream flux;
     flux << "INSERT INTO automata(name, is2d, value, lastUse) VALUES('";
-    flux << name << "', " << (dim == 2 ? "true" : "false") << ", " << serialize() << ", '" << "', date('now'))";
+    flux << name.toStdString() << "', " << (dim == 2 ? "true" : "false") << ", " << serialize() << ", '" << "', date('now'))";
     sqlite3_exec(db, flux.str().c_str(), nullptr,nullptr,nullptr);
     unsigned int * ptr = new unsigned int;
     sqlite3_exec(db, "SELECT id FROM automata WHERE id=@@Identity", callback_get_id_automata, ptr, nullptr);
