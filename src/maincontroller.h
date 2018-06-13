@@ -48,6 +48,7 @@ private:
     QToolBar *fileToolBar;
     QToolBar *editToolBar;
 
+    QPushButton * play;
     QAction *NewAutomaton;
     QAction *ImportAutomaton;
     QAction *ImportGrid;

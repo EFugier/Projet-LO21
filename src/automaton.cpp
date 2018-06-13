@@ -49,6 +49,7 @@ void Automaton::deserialize(const std::string &s) {
 }
 
 char Automaton::next(std::string s) {
+    std::cout << serialize() << std::endl;
     if (s.length() != n) throw std::invalid_argument("wrong string size");
     ruleBst->reset();
     bool inTree = true;
@@ -63,7 +64,7 @@ char Automaton::next(std::string s) {
             ruleBst->reset();
             inTree = false;
         }
-        else if (state != c) { // leaf
+        else if (inTree && state != c) { // leaf
             return state;
         }
     }
@@ -72,6 +73,7 @@ char Automaton::next(std::string s) {
         if (r.a <= nb_neigh && nb_neigh <= r.b) return 'a'; 
     }
     for(const Range& r : ruleNbNeighbDeath) { // Death number rules
+        std::cout << "A = " << r.a << " et B = " << r.b << " et nb_neigh = " << nb_neigh << std::endl;
         if (r.a <= nb_neigh && nb_neigh <= r.b) return 'd'; 
     }
     for(const Range& r : ruleNbNeighbSame) { // Same number rules
@@ -84,7 +86,7 @@ char Automaton::next(std::string s) {
 
 
 void Automaton::insertRangeInto(std::vector<Range>& coll, unsigned int a, unsigned int b) {
-    bool done = false;
+   /* bool done = false;
     // Easy fusion
     for(Range& r : coll) { // Death number rules
         if (r.a <= a && b <= r.b) break;
@@ -104,9 +106,9 @@ void Automaton::insertRangeInto(std::vector<Range>& coll, unsigned int a, unsign
             break;
         }
     }
-    if (!done) {
+    if (!done) { */
         coll.push_back(Range {a, b});
-    }
+    //}
 }
 
 

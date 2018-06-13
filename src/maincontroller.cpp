@@ -261,9 +261,14 @@ fileToolBar->addAction(NewAutomaton);
  QDial * timer= new QDial();
  timer->setMaximumSize(30,30);
 
- QPushButton * play= new QPushButton();
+play = new QPushButton();
 play->setMaximumWidth(70);
 play->setIcon(QIcon(":/images/play.png"));
+
+QObject::connect(play, &QPushButton::clicked, [this] () {
+    instance.next();
+});
+
 
 QPushButton * pause= new QPushButton();
 pause->setMaximumWidth(70);
@@ -312,24 +317,35 @@ void MainController::newRule(){
             }
             else instance.getAutomaton().insertPositionRule(pr->positionMatrix->serializeGrid(), v);
         }
+        param->accept();
     });
     rulesController->show();
 }
 
 void MainController::newAutomaton(){
-    AutomataParameters * param= new AutomataParameters(this);
+    param= new AutomataParameters(this);
 
-    connect(param->buttonBox, &QDialogButtonBox::accepted, this, [param, this]()
+    connect(param->buttonBox, &QDialogButtonBox::accepted, this, [this]()
 {
-    instance.createAutomaton(param->neighbourhood->value(), (param->row->text().isEmpty() ? d1 : d2), (param->dead->isChecked() ? 'd' : (param->alive->isChecked() ? 'a' : 's')));
+     instance.createAutomaton(param->neighbourhood->value(), (param->row->text().isEmpty() ? d1 : d2), (param->dead->isChecked() ? 'd' : (param->alive->isChecked() ? 'a' : 's')));
+
     param->tabWidget->removeTab(1);
 
 // Cas d'un état de départ random
     if(param->random->isChecked()){
         instance.selectedState(State((!param->row->text().toUInt() ? 1 : param->row->text().toUInt()), param->column->text().toUInt()));
         QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
-        instance.getState()->randomState();
         param->accept();
+
+
+
+        view->setRowCount(instance.getState()->getNrow());
+        view->setColumnCount(instance.getState()->getNrow());
+        view->setFixedWidth(view->columnCount()*CELLSIZE);
+        view->setFixedHeight(view->rowCount()*CELLSIZE);
+
+        instance.getState()->randomState();
+
     }
 
 
@@ -348,7 +364,7 @@ void MainController::newAutomaton(){
            param->tabWidget->setCurrentIndex(1);
            param->row->setText("");
 
-            connect(param->buttonBox, &QDialogButtonBox::accepted, [param,ptrMatrix,this](){
+            connect(param->buttonBox, &QDialogButtonBox::accepted, [ptrMatrix,this](){
                 std::vector<bool> vect = ptrMatrix->serializeGrid();
 
     //                if(param->row->text().isEmpty()) instance.selectedState(State(param->column->text().toUInt(),vect));

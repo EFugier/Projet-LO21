@@ -172,10 +172,13 @@ void AutomataManager::next() {
     std::vector<std::string> s = currentState->stackOfNb(runningAutomaton->getN());
     std::vector<bool> v;
     for(std::vector<std::string>::iterator it = s.begin(); it != s.end(); it++) {
-        char tmp = runningAutomaton->next(*it);
+       char tmp = runningAutomaton->next(*it);
+       std::cout << "tmp = " << tmp << std::endl;
         v.push_back(tmp == 's' ? (*it)[(*it).size()/2] : (tmp == 'a' ? true : false));
     }
-    currentState->setState(v);
+
+   currentState->setState(v);
+
 }
 
 void AutomataManager::setTimer(unsigned int ms) {

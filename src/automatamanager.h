@@ -100,7 +100,7 @@ public:
       void next();
       Automaton& getAutomaton() const { return *runningAutomaton; }
       ~AutomataManager();
-      State* getState() { return initialState; }
+      State* getState() { return currentState; }
       void setTimer(unsigned int ms);
 };
 
