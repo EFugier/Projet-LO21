@@ -69,10 +69,13 @@ char Automaton::next(std::string s) {
     }
 
     for(const Range& r : ruleNbNeighbLife) { // Life number rules
-        if (r.a <= nb_neigh && nb_neigh <= r.b) return '1'; 
+        if (r.a <= nb_neigh && nb_neigh <= r.b) return 'a'; 
     }
     for(const Range& r : ruleNbNeighbDeath) { // Death number rules
-        if (r.a <= nb_neigh && nb_neigh <= r.b) return '0'; 
+        if (r.a <= nb_neigh && nb_neigh <= r.b) return 'd'; 
+    }
+    for(const Range& r : ruleNbNeighbSame) { // Same number rules
+        if (r.a <= nb_neigh && nb_neigh <= r.b) return 's'; 
     }
 
     // if nothing is matched return the default value
@@ -135,11 +138,11 @@ void Automaton::deserializeNbRules(const std::string& s) {
             isb = true;
             continue;
         }
-        if (c == ',' && isb) { // end of a range
+        if (c == ',' && isb) { // end of a range, insert
             isa = true;
             isb = false;
             
-            // append the new range
+            // append the new range to the right container
             if (tabType == 'l') ruleNbNeighbLife.push_back(Range {
                     static_cast<unsigned int>(std::stoul(a)),
                     static_cast<unsigned int>(std::stoul(b))
