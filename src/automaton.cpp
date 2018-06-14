@@ -88,29 +88,7 @@ char Automaton::next(std::string s) {
 
 
 void Automaton::insertRangeInto(std::vector<Range>& coll, unsigned int a, unsigned int b) {
-   /* bool done = false;
-    // Easy fusion
-    for(Range& r : coll) { // Death number rules
-        if (r.a <= a && b <= r.b) break;
-        if (a <= r.a && r.b <= b) {
-            r.a = a; r.b = b;
-            done = true;
-            break;
-        }
-        if (a <= r.a && b <= r.b) {
-            r.a = a;
-            done = true;
-            break;
-        }
-        if (r.a <= a && r.b <= b) {
-            r.b = b;
-            done = true;
-            break;
-        }
-    }
-    if (!done) { */
-        coll.push_back(Range {a, b});
-    //}
+    coll.push_back(Range {a, b});
 }
 
 
