@@ -49,6 +49,8 @@ private:
     QToolBar *editToolBar;
 
     QPushButton * play;
+    QPushButton * pause;
+    QDial * timer;
     QAction *NewAutomaton;
     QAction *ImportAutomaton;
     QAction *ImportGrid;

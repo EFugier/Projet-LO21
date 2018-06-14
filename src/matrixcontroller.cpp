@@ -4,7 +4,7 @@ void MatrixController:: onChange(std::vector<bool>& v){
         std::vector<bool>::iterator it = v.begin();
         for(int i(0); i<rowCount(); i++)
             for(int j(0); j<columnCount(); j++)
-                item(i,j)->setBackgroundColor((*(it++)? QColor(255,255,255) : QColor(0,0,0)));
+                item(i,j)->setBackgroundColor((*(it++)? QColor(0,0,0) : QColor(255,255,255)));
     }
 
 

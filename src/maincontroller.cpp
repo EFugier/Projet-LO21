@@ -258,7 +258,7 @@ fileToolBar->addAction(NewAutomaton);
  editToolBar->addAction(NewRule);
 
 
- QDial * timer= new QDial();
+ timer= new QDial();
  timer->setMaximumSize(30,30);
 
 play = new QPushButton();
@@ -266,13 +266,22 @@ play->setMaximumWidth(70);
 play->setIcon(QIcon(":/images/play.png"));
 
 QObject::connect(play, &QPushButton::clicked, [this] () {
-    instance.next();
+    int v = timer->value();
+    if (!v) instance.next();
+    else instance.setTimer(v);
 });
 
+QObject::connect(timer, &QDial::valueChanged, [this] () {
+   instance.setTimer(timer->value());
+});
 
-QPushButton * pause= new QPushButton();
+pause= new QPushButton();
 pause->setMaximumWidth(70);
 pause->setIcon(QIcon(":/images/pause.png"));
+
+QObject::connect(pause, &QPushButton::clicked, [this] () {
+    instance.setTimer(0);
+});
 
 QLCDNumber * lcd = new QLCDNumber(2);
 //lcd->setMinimumSize(QSize(50,30));

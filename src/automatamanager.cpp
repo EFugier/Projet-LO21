@@ -173,8 +173,7 @@ void AutomataManager::next() {
     std::vector<bool> v;
     for(std::vector<std::string>::iterator it = s.begin(); it != s.end(); it++) {
        char tmp = runningAutomaton->next(*it);
-       std::cout << "tmp = " << tmp << std::endl;
-        v.push_back(tmp == 's' ? (*it)[(*it).size()/2] : (tmp == 'a' ? true : false));
+        v.push_back(tmp == 's' ? (*it)[(*it).size()/2] == '1' : (tmp == 'a' ? true : false));
     }
 
    currentState->setState(v);
