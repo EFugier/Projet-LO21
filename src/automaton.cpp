@@ -69,11 +69,13 @@ char Automaton::next(std::string s) {
         }
     }
 
+    // The current cell isn't a neighboor of itself
+    if (s[n/2] == '1') nb_neigh--;
+
     for(const Range& r : ruleNbNeighbLife) { // Life number rules
         if (r.a <= nb_neigh && nb_neigh <= r.b) return 'a'; 
     }
     for(const Range& r : ruleNbNeighbDeath) { // Death number rules
-        std::cout << "A = " << r.a << " et B = " << r.b << " et nb_neigh = " << nb_neigh << std::endl;
         if (r.a <= nb_neigh && nb_neigh <= r.b) return 'd'; 
     }
     for(const Range& r : ruleNbNeighbSame) { // Same number rules
