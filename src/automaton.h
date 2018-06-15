@@ -57,6 +57,7 @@ class Automaton {
         void insertPositionRule(std::vector<bool> v, char c) {
             if (v.size() != n) throw std::invalid_argument("wrong size");
             ruleBst->insert(v, c);
+            std::cout << serialize() << std::endl;
         }
 
         void insertRuleNbInto(unsigned int a, unsigned int b, char c) {

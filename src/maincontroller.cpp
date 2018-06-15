@@ -310,7 +310,7 @@ editToolBar->addWidget(lecture);
 
 
 void MainController::newRule(){
-    RulesController * rulesController = new RulesController((view->rowCount()%2 ? view->rowCount() : view->rowCount()-1),(view->columnCount()%2 ? view->columnCount() : view->columnCount()-1));
+    RulesController * rulesController = new RulesController(sqrt(instance.getAutomaton().getN()),sqrt(instance.getAutomaton().getN()));
     rulesController->setMinimumSize(QSize( 200, 200 ));
     rulesController->setWindowTitle("New Rule");
     connect(rulesController->buttonBox, &QDialogButtonBox::accepted, rulesController, [rulesController, this]() {
@@ -327,7 +327,7 @@ void MainController::newRule(){
             }
             else instance.getAutomaton().insertPositionRule(pr->positionMatrix->serializeGrid(), v);
         }
-        param->accept();
+        rulesController->accept();
     });
     rulesController->show();
 }
