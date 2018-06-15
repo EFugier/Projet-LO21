@@ -64,7 +64,6 @@ char Automaton::next(std::string s) {
             inTree = false;
         }
         else if (inTree && state != c) { // leaf
-            std::cout << state;
             return state;
         }
     }

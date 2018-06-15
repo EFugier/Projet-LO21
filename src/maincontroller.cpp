@@ -381,8 +381,8 @@ void MainController::newAutomaton(){
     //                  else  instance.selectedState(State(param->row->text().toUInt(),param->column->text().toUInt(),vect));
 
     // Solution précédente plus possible, nécessité de faire une méthode avec paramètre par défaut selectedState(int column,int row=1, QWidget *parent=nullptr)
-    //  instance.selectedState(ptrMatrix->columnCount(),ptrMatrix->rowCount(),vect);
-
+                instance.selectedState(State(ptrMatrix->rowCount(),ptrMatrix->columnCount(),vect));
+                QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
                 //Recopie de l'état initial
                 view->setRowCount((ptrMatrix->rowCount()==1? ptrMatrix->columnCount() : ptrMatrix->rowCount()));
                 view->setColumnCount(ptrMatrix->columnCount());

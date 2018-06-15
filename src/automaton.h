@@ -75,7 +75,6 @@ class Automaton {
         void insertPositionRule(std::vector<bool> v, char c) {
             if (v.size() != n) throw std::invalid_argument("wrong size");
             ruleBst->insert(v, c);
-            std::cout << serialize() << std::endl;
         }
 
         ///< Insere une regle sur le nombre de voisins de type donne
