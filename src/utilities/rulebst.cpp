@@ -60,11 +60,11 @@ void RuleBst::insert(const std::vector<bool>& s, char cc) {
     Node * node = root;
     for(const bool& b : s) {
         if (b) {  // go left
-            if (!node->left) node->left = new Node('0');
+            if (!node->left) node->left = new Node('1');
             node = node->left;
         }
         else {  // go right
-            if (!node->right) node->right = new Node('1');
+            if (!node->right) node->right = new Node('0');
             node = node->right;
         }
     }
