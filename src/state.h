@@ -56,12 +56,15 @@ public:
     // setter :
     void setState(Vec& v); // state setter
 
+    void emitSignal() {
+        emit valueChanged(state);
+    }
 
     void randomState(); // Create a random nrow*ncol vector of booleans // IS WORKING
 
     // Long term saves :
     Uint save(const QString& name, sqlite3 * db) const; // save to DB // IS WORKING
-    void exportToFile(QString& name) const; // export to file // IS WORKING
+    void exportToFile(QString const& name) const; // export to file // IS WORKING
 
     std::vector<std::string> stackOfNb(Uint n) const; // IS WORKING
 signals:

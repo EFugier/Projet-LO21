@@ -38,7 +38,6 @@ public:
     MainController();
 private:
     AutomataManager& instance;
-    State * model;
     MatrixController * view;
     AutomataParameters * param;
     QMenu *fileMenu;

@@ -153,15 +153,15 @@ void AutomataManager::createAutomaton(unsigned int deg, dim d, char def = 's') {
 
 // Save state to file
 
-void AutomataManager::exportInitialState(QString& name) const {
+void AutomataManager::exportInitialState(QString const& name) const {
     initialState->exportToFile(name);
 }
 
-void AutomataManager::exportCurrentState(QString& name) const {
+void AutomataManager::exportCurrentState(QString const& name) const {
     currentState->exportToFile(name);
 }
 
-void AutomataManager::exportAutomaton(QString& name) const {
+void AutomataManager::exportAutomaton(QString const& name) const {
     runningAutomaton->exportToFile(name);
 }
 

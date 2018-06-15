@@ -98,7 +98,7 @@ class Automaton {
 
         unsigned int save(const QString& name, sqlite3 * db); // save to DB
 
-        void exportToFile(QString& name);
+        void exportToFile(QString const& name);
 
         ///< Getters & Setters
         inline unsigned int getN() { return n;}

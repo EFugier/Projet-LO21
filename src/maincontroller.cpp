@@ -11,11 +11,10 @@ MainController::MainController() : instance(AutomataManager::getInstance()){
     this->setWindowTitle("Cellular Automaton");
     //Grille random au démarrage
     instance.selectedState(State(25,25));
-    model= instance.getState();
     // !!!!!!! J'ai remplacé StateModel par State !!!!!!!!
     view = new MatrixController(25,25);
-    QObject::connect(model, SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
-    model->randomState();
+    QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
+    instance.getState()->emitSignal();
     toolsLayout= new QVBoxLayout;
     createActions();
     createMenus();
@@ -47,6 +46,8 @@ void MainController::createActions(){
     {
         QString str=openFile();
         instance.selectedState(str);
+        QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
+        instance.getState()->emitSignal();
     });
 
     OpenRecentAutomata=new QAction(tr("&Open Recent Automaton"), this);
@@ -85,20 +86,20 @@ void MainController::createActions(){
     connect(ExportAutomaton, &QAction::triggered, this, [this]()
     {
         QString chemin = QFileDialog::getSaveFileName(0, "Export Automaton", QString());
-        std::cout<<chemin.toStdString();
-//        instance.exportAutomaton(QFileDialog::getSaveFileName(0, "Export Automaton", QString()));
+      //  std::cout<<chemin.toStdString();
+        instance.exportAutomaton(chemin);
     });
 
     ExportCurrentGrid=new QAction(tr("&Export Current Grid..."), this);
     connect(ExportCurrentGrid, &QAction::triggered, this, [this]()
     {
-//        instance.exportCurrentState(QFileDialog::getSaveFileName(0, "Export Grid", QString()));
+        instance.exportCurrentState(QFileDialog::getSaveFileName(0, "Export Grid", QString()));
     });
 
     ExportInitialGrid=new QAction(tr("&Export Initial Grid..."), this);
     connect(ExportInitialGrid, &QAction::triggered, this, [this]()
     {
-//        instance.exportInitialState(QFileDialog::getSaveFileName(0, "Export Grid", QString()));
+        instance.exportInitialState(QFileDialog::getSaveFileName(0, "Export Grid", QString()));
     });
 
     SaveAutomaton=new QAction(tr("&Save Automaton"), this);
@@ -123,8 +124,9 @@ void MainController::createActions(){
 
         if (ok && !name.isEmpty())
         {
-            QMessageBox::information(this, "Saved", name + " Saved");
             insertNewAction(subMenuAutomata,instance.saveAutomaton(name),name, &AutomataManager::selectedAutomaton);
+            QMessageBox::information(this, "Saved", name + " Saved");
+
             // !!!! j'ai remplacé saveAutomaton(str) par saveAutomaton(name) !!!!
        //     insertNewAction(subMenuAutomata,995,name, instance.selectedAutomaton); //Test
         }
@@ -163,8 +165,7 @@ void MainController::createActions(){
 
         if (ok && !name.isEmpty())
         {
-          int id= instance.saveInitialState(name);
-          insertNewAction(subMenuAutomata,id,name, &AutomataManager::selectedState);
+          insertNewAction(subMenuAutomata,instance.saveInitialState(name),name, &AutomataManager::selectedState);
 
         //    insertNewAction(subMenuGrid,995,name, selectedAutomaton);
             QMessageBox::information(this, "Saved", name + " Saved");
@@ -212,6 +213,8 @@ void MainController::insertNewAction(QMenu* menu, int id, const QString& name, v
         // !!!!! j'ai remplacé this-> par instance. !!!!!
         insertNewAction(menu,newAction->data().toInt(),name,selectedFunction);
         menu->removeAction(newAction);
+        QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
+        instance.getState()->emitSignal();
     });
 }
 
@@ -419,8 +422,8 @@ QString filename =  QFileDialog::getOpenFileName(
           this,
           "Open Document",
           QDir::currentPath(),
-          "All files (*.*) ;; Document files (*.doc *.rtf);; PNG files (*.png)");
-    if( !filename.isNull() )
+          "All files (*.*)");
+    if( filename.isNull() )
     {
         throw "Error";
     }

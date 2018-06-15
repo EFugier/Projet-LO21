@@ -90,9 +90,9 @@ public:
 
       unsigned int saveAutomaton(QString const& name) const; // IS WORKING
 
-      void exportInitialState(QString& name) const; // IS WORKING
-      void exportCurrentState(QString& name) const; // IS WORKING
-      void exportAutomaton(QString& name) const;
+      void exportInitialState(QString const& name) const; // IS WORKING
+      void exportCurrentState(QString const& name) const; // IS WORKING
+      void exportAutomaton(QString const& name) const;
 
       void deleteAutomata() const;
       void deleteStates() const;

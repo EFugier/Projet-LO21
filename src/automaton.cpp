@@ -176,7 +176,7 @@ static int callback_get_id_automata(void *ptr, int count, char **data, char **co
     return 0;
 }
 
-void Automaton::exportToFile(QString& name) {
+void Automaton::exportToFile(QString const& name) {
     QFile file(name);
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);

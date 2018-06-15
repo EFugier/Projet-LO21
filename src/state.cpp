@@ -23,9 +23,9 @@ State::State(State const& old) : QObject(0), nrow(old.getNrow()), ncol(old.getNc
 }
 
 State::State(QString const& fileName) : QObject(0) {
-    if (fileName.isEmpty()) return;
+   if (fileName.isEmpty()) return;
     QFile file(fileName);
-    if (!file.open(QIODevice::ReadOnly)) return;
+   if (!file.open(QIODevice::ReadOnly)) return;
     QTextStream in(&file);
     QString value = in.readLine();
     QString::iterator it = value.begin();
@@ -35,9 +35,11 @@ State::State(QString const& fileName) : QObject(0) {
     for (;*it != 'c'; it++) nrowStm << (*it).toLatin1();
     nrow = std::stoi(nrowStm.str());
     it++;
+
     for (;*it != 'v'; it++) ncolStm << (*it).toLatin1();
     ncol = std::stoi(ncolStm.str());
     it++;
+
     state = Vec();
     for(;it != value.end(); it++) state.push_back(*it == '1');
 }
@@ -100,7 +102,7 @@ Uint State::save(const QString& name, sqlite3 * db) const {
     return *ptr;
 }
 
-void State::exportToFile(QString& name) const {
+void State::exportToFile(QString const& name) const {
     QFile file(name);
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
