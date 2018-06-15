@@ -137,7 +137,7 @@ std::vector<std::string> State::stackOfNb(Uint n) const {
         }
         return s;
     }
-
+    std::cout << "nrow = " << nrow << " ncol = " << ncol << std::endl;
     int deg = static_cast<int>((std::sqrt(n)-1)/2);
     for (int ind(0); ind<s_nrow*s_ncol; ind++) {
         std::ostringstream flux;
