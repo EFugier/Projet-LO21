@@ -4,8 +4,9 @@
 #include <iostream>
 #include <vector>
 
+/// \class Node
+/// Simple node class to make a binary tree
 class Node {
-    /** Simple node class to be used in a binary tree */
     public:
         char value;
         Node * left;
@@ -19,13 +20,15 @@ class Node {
 };
 
 
+/// \class Node
+/// Binary tree to store special position
 class RuleBst
 {
     /** Class used to store special position rule
      * allows O(nb of neighbours) time checking complexity */
     private:
-        Node * root; ///< root of the tree
-        Node * ite; ///< Current position of the iterator
+        Node * root; /// root of the tree
+        Node * ite; /// Current position of the iterator
         RuleBst(const RuleBst&) = delete;
         const RuleBst& operator=(const RuleBst&) = delete;
 
@@ -36,22 +39,29 @@ class RuleBst
 
         char next(char c);
 
-        void insert(const std::vector<bool>& s, char c); ///< insert path in BST
+        /// insert path in BST
+        void insert(const std::vector<bool>& s, char c);
         void printTree(int indent=0) {
             printTree(root, indent);
         }
-        void printTree(Node* init, int indent=0); ///< insert path in BST
+        /// insert path in BST
+        void printTree(Node* init, int indent=0);
 
-        inline void reset() { ite = root; } ///< reset iterator 
-        void deleteTree() { ///< free the memory used by the tree
+        /// reset iterator
+        inline void reset() { ite = root; }
+        /// free the memory used by the tree
+        void deleteTree() {
             deleteTree(root);
             root = nullptr;
             ite = nullptr;
         }
+        /// delete tree from a special node
         void deleteTree(Node* node);
 
-        std::string serialize(); ///< trun the bst into a string
-        void deserialize(const std::string& s); ///< trun a string into a bst
+        /// trun the bst into a string
+        std::string serialize();
+        /// trun a string into a bst
+        void deserialize(const std::string& s);
 };
 
 
