@@ -45,6 +45,6 @@
 #include <QWidgetAction>
 #include <QLCDNumber>
 
-#define CELLSIZE 15
+#define CELLSIZE 10
 
 #endif // QTTOOLS_H

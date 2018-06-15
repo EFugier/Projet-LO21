@@ -16,8 +16,11 @@ MatrixController:: MatrixController(int c, int r, QWidget* p) : QTableWidget(r,c
             }
 
         setEditTriggers(QAbstractItemView::NoEditTriggers);
+
         setFixedWidth(c*CELLSIZE);
         setFixedHeight(r*CELLSIZE);
+        setMaximumHeight(maximumHeight());
+        setMaximumWidth(maximumWidth());
 
         setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

@@ -1,7 +1,7 @@
 #include "rulescontroller.h"
 
 
-RulesController::RulesController(int column, int row, QWidget *parent) : QDialog(parent)
+RulesController::RulesController(char def, int column, int row, QWidget *parent) : QDialog(parent)
 {
     tabWidget = new QTabWidget;
     tabWidget->addTab(new NeighbourRule(), tr("Neighbour Rule"));
@@ -12,6 +12,17 @@ RulesController::RulesController(int column, int row, QWidget *parent) : QDialog
     alive = new QRadioButton(tr("Alive"));
     same = new QRadioButton(tr("Same"));
 
+    switch (def) {
+        case 'a':
+            alive->hide();
+            break;
+        case 'd':
+            dead->hide();
+            break;
+        case 's':
+            same->hide();
+            break;
+    }
 
     QVBoxLayout *nextCellStateLayout = new QVBoxLayout;
     nextCellStateLayout->addWidget(dead);

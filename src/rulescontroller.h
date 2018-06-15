@@ -13,7 +13,7 @@ class RulesController : public QDialog
     friend class MainController;
 
 public:
-    RulesController(int column, int row=1, QWidget *parent = 0);
+    RulesController(char def, int column, int row=1, QWidget *parent = 0);
 
 private:
     QTabWidget *tabWidget;

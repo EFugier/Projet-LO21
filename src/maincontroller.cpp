@@ -313,7 +313,7 @@ editToolBar->addWidget(lecture);
 
 
 void MainController::newRule(){
-    RulesController * rulesController = new RulesController(sqrt(instance.getAutomaton().getN()),sqrt(instance.getAutomaton().getN()));
+    RulesController * rulesController = new RulesController(instance.getAutomaton().defaultNext, sqrt(instance.getAutomaton().getN()),sqrt(instance.getAutomaton().getN()));
     rulesController->setMinimumSize(QSize( 200, 200 ));
     rulesController->setWindowTitle("New Rule");
     connect(rulesController->buttonBox, &QDialogButtonBox::accepted, rulesController, [rulesController, this]() {
@@ -357,7 +357,7 @@ void MainController::newAutomaton(){
         view->setFixedWidth(view->columnCount()*CELLSIZE);
         view->setFixedHeight(view->rowCount()*CELLSIZE);
 
-        instance.getState()->randomState();
+        instance.getState()->emitSignal();
 
     }
 
@@ -394,8 +394,14 @@ void MainController::newAutomaton(){
 
                 for(int i(0); i<view->rowCount(); i++)
                     for(int j(0); j<view->columnCount(); j++){
-                           if (i<ptrMatrix->rowCount() && j<ptrMatrix->columnCount()) view->item(i,j)->setBackgroundColor(ptrMatrix->item(i,j)->backgroundColor());
-                           else view->item(i,j)->setBackgroundColor("white");
+                           if (i<ptrMatrix->rowCount() && j<ptrMatrix->columnCount()) {
+                               view->setItem(i,j, new QTableWidgetItem);
+                               view->item(i,j)->setBackgroundColor(ptrMatrix->item(i,j)->backgroundColor());
+                           }
+                           else {
+                               view->setItem(i,j, new QTableWidgetItem);
+                               view->item(i,j)->setBackgroundColor("white");
+                           }
                      }
 
                 param->accept();
@@ -444,6 +450,7 @@ AutomataParameters::AutomataParameters(QWidget *parent) : QDialog(parent)
     dead = new QRadioButton(tr("Dead"));
     alive = new QRadioButton(tr("Alive"));
     same = new QRadioButton(tr("Same"));
+    same->setChecked(true);
 
 
     QVBoxLayout *defaultCellStateLayout = new QVBoxLayout;
@@ -464,8 +471,8 @@ AutomataParameters::AutomataParameters(QWidget *parent) : QDialog(parent)
     row->setFixedSize(QSize(25,25));
     column->setHidden(true);
     row->setHidden(true);
-    column->setValidator( new QIntValidator(0, 100, this));
-    row->setValidator( new QIntValidator(0, 100, this) );
+    column->setValidator( new QIntValidator(0, maximumWidth(), this));
+    row->setValidator( new QIntValidator(0, maximumHeight(), this) );
     QLabel * times = new QLabel("x");
     times->setFixedWidth(10);
     times->setMargin(0);
@@ -488,6 +495,7 @@ AutomataParameters::AutomataParameters(QWidget *parent) : QDialog(parent)
         column->setHidden(false);
         times->setHidden(true);
         row->setHidden(true);
+        row->setText("");
     });
 
     connect(d2, &QRadioButton::clicked, this, [this, times]()
@@ -499,13 +507,14 @@ AutomataParameters::AutomataParameters(QWidget *parent) : QDialog(parent)
 
     QLabel * neighbourhoodLab= new QLabel(tr("Neighbourhood Level:"));
     neighbourhood = new QSpinBox();
-
+    neighbourhood->setValue(1);
 
     dimensionLayout->addWidget(neighbourhoodLab);
     dimensionLayout->addWidget(neighbourhood);
     dimension->setLayout(dimensionLayout);
 
     random = new QCheckBox(tr("Random Initial Grid"));
+    random->click();
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -518,6 +527,9 @@ AutomataParameters::AutomataParameters(QWidget *parent) : QDialog(parent)
     basicParametersLayout->addWidget(random);
     basicParametersLayout->addWidget(buttonBox);
     setWindowTitle(tr("New Automaton"));
+    column->setText("25");
+    row->setText("25");
+    d2->click();
 }
 
 
