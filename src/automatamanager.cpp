@@ -175,9 +175,7 @@ void AutomataManager::next() {
        char tmp = runningAutomaton->next(*it);
         v.push_back(tmp == 's' ? (*it)[(*it).size()/2] == '1' : (tmp == 'a' ? true : false));
     }
-
    currentState->setState(v);
-
 }
 
 void AutomataManager::setTimer(unsigned int ms) {

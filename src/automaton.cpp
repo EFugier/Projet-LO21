@@ -49,7 +49,6 @@ void Automaton::deserialize(const std::string &s) {
 }
 
 char Automaton::next(std::string s) {
-    std::cout << serialize() << std::endl;
     if (s.length() != n) throw std::invalid_argument("wrong string size");
     ruleBst->reset();
     bool inTree = true;
@@ -164,7 +163,7 @@ std::string Automaton::serialize() {
 unsigned int Automaton::save(const QString& name, sqlite3 * db) {
     std::ostringstream flux;
     flux << "INSERT INTO automata(name, is2d, value, lastUse) VALUES('";
-    flux << name.toStdString() << "', " << (dim == 2 ? "true" : "false") << ", " << serialize() << ", '" << "', date('now'))";
+    flux << name.toStdString() << "', " << (dim == 2 ? "true" : "false") << ", '" << serialize() << "', " << "date('now'))";
     sqlite3_exec(db, flux.str().c_str(), nullptr,nullptr,nullptr);
     unsigned int * ptr = new unsigned int;
     sqlite3_exec(db, "SELECT id FROM automata WHERE id=@@Identity", callback_get_id_automata, ptr, nullptr);
