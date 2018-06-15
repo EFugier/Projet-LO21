@@ -13,7 +13,7 @@ class RulesController : public QDialog
     friend class MainController;
 
 public:
-    RulesController(char def, int column, int row=1, QWidget *parent = 0);
+    RulesController(char def, int N, int column, int row=1, QWidget *parent = 0);
 
 private:
     QTabWidget *tabWidget;
@@ -51,9 +51,9 @@ private :
     QSpinBox *from;
     QSpinBox * to;
     QCheckBox *min;
-    QCheckBox *max;
+    QPushButton *max;
 public:
-    explicit NeighbourRule(QWidget *parent = nullptr);
+    explicit NeighbourRule(int N, QWidget *parent = nullptr);
 };
 
 

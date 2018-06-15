@@ -1,10 +1,10 @@
 #include "rulescontroller.h"
 
 
-RulesController::RulesController(char def, int column, int row, QWidget *parent) : QDialog(parent)
+RulesController::RulesController(char def, int N, int column, int row, QWidget *parent) : QDialog(parent)
 {
     tabWidget = new QTabWidget;
-    tabWidget->addTab(new NeighbourRule(), tr("Neighbour Rule"));
+    tabWidget->addTab(new NeighbourRule(N), tr("Neighbour Rule"));
     tabWidget->addTab(new PositionRule(column,row), tr("Position Rule"));
 
     QGroupBox *nextCellState = new QGroupBox(tr("Next cell-state"));
@@ -83,16 +83,34 @@ return vect;
  */
 
 
-NeighbourRule::NeighbourRule(QWidget *parent): QWidget(parent)
+NeighbourRule::NeighbourRule(int N, QWidget *parent): QWidget(parent)
 {
     QGroupBox *nextCellState = new QGroupBox(tr("Number of neighbours"));
     from = new QSpinBox();
     to = new QSpinBox();
-    min = new QCheckBox(tr("min"));
-    max = new QCheckBox(tr("max ∞"));
+    to->setMaximum(N);
+    min = new QCheckBox(tr("exactly"));
+    max = new QPushButton(tr("max ∞"));
+    QObject::connect(max, &QPushButton::clicked, [this, N] () {
+        to->setValue(N);
+    });
+
     QLabel * fromLab = new QLabel("From");
     QLabel * toLab = new QLabel("To");
 
+    QObject::connect(min, &QCheckBox::clicked, [this, toLab] () {
+        if (!to->isHidden()) {
+            to->hide();
+            max->hide();
+            toLab->hide();
+            to->setValue(from->value());
+        }
+        else {
+            to->show();
+            max->show();
+            toLab->show();
+        }
+    });
 
     QVBoxLayout *nextCellStateLayout = new QVBoxLayout;
     nextCellStateLayout->addWidget(fromLab);

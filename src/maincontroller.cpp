@@ -313,7 +313,7 @@ editToolBar->addWidget(lecture);
 
 
 void MainController::newRule(){
-    RulesController * rulesController = new RulesController(instance.getAutomaton().defaultNext, sqrt(instance.getAutomaton().getN()),sqrt(instance.getAutomaton().getN()));
+    RulesController * rulesController = new RulesController(instance.getAutomaton().defaultNext,instance.getAutomaton().getN(), sqrt(instance.getAutomaton().getN()),sqrt(instance.getAutomaton().getN()));
     rulesController->setMinimumSize(QSize( 200, 200 ));
     rulesController->setWindowTitle("New Rule");
     connect(rulesController->buttonBox, &QDialogButtonBox::accepted, rulesController, [rulesController, this]() {
