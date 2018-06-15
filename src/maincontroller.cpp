@@ -10,7 +10,8 @@ MainController::MainController() : instance(AutomataManager::getInstance()){
     mainController->setLayout(mainLayout);
     this->setWindowTitle("Cellular Automaton");
     //Grille random au démarrage
-    model= new State(25,25);
+    instance.selectedState(State(25,25));
+    model= instance.getState();
     // !!!!!!! J'ai remplacé StateModel par State !!!!!!!!
     view = new MatrixController(25,25);
     QObject::connect(model, SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
@@ -246,7 +247,7 @@ void MainController::createToolBars()
 fileToolBar = new QToolBar();
 addToolBar(Qt::LeftToolBarArea, fileToolBar);
 fileToolBar->setOrientation(Qt::Vertical);
-fileToolBar->setFixedWidth(150);
+fileToolBar->setFixedWidth(toolsLayout->maximumSize().width());
 fileToolBar->setIconSize( QSize( 120, 120 ) );
 fileToolBar->addAction(NewAutomaton);
 
