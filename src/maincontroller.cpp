@@ -1,21 +1,17 @@
 #include "maincontroller.h"
 
-
 MainController::MainController() : instance(AutomataManager::getInstance()){
-    // !!!!!!!! j'ai initialisé l'instance après les : prcq c'est obligatoire
-    // pour un attribut référence !!!!!!!!!
     mainController = new QWidget(this);
     setCentralWidget(mainController);
     mainLayout = new QHBoxLayout;
     mainController->setLayout(mainLayout);
     this->setWindowTitle("Cellular Automaton");
-    //Grille random au démarrage
-    instance.selectedState(State(25,25));
-    // !!!!!!! J'ai remplacé StateModel par State !!!!!!!!
-    view = new MatrixController(25,25);
+    instance.selectedState(State(DEF,DEF));
+    view = new MatrixController(DEF,DEF);
+    view->setDimension(d2);
     QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
     instance.getState()->emitSignal();
-    toolsLayout= new QVBoxLayout;
+    toolsLayout = new QVBoxLayout;
     createActions();
     createMenus();
     createToolBars();
@@ -25,7 +21,6 @@ MainController::MainController() : instance(AutomataManager::getInstance()){
     toolsLayout->addWidget(fileToolBar);
     toolsLayout->addWidget(editToolBar);
     mainLayout->addWidget(view);
-
 
 }
 
@@ -39,6 +34,16 @@ void MainController::createActions(){
     {
         QString str=openFile();
         instance.selectedAutomaton(str);
+        dim d = (instance.getAutomaton().getDim() == 1 ? d1 : d2);
+        if (view->dimension != d) {
+            view->setDimension(d);
+            if (d == d1)
+                instance.selectedState(State(view->columnCount()));
+            else
+                instance.selectedState(State(view->columnCount(), view->rowCount()));
+            QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
+            instance.getState()->emitSignal();
+        }
     });
 
     ImportGrid=new QAction(tr("&Import Grid..."), this);
@@ -47,7 +52,11 @@ void MainController::createActions(){
         QString str=openFile();
         instance.selectedState(str);
         QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
+        view->setDimension(instance.getAutomaton().getDim() == 1 ? d1 : d2);
         instance.getState()->emitSignal();
+
+        int d = instance.getState()->getNrow();
+        if (instance.getAutomaton().dim != d) instance.selectedAutomaton();
     });
 
     OpenRecentAutomata=new QAction(tr("&Open Recent Automaton"), this);
@@ -55,38 +64,25 @@ void MainController::createActions(){
     OpenRecentGrid=new QAction(tr("&Open Recent Grid"), this);
     subMenuGrid=new QMenu();
 
-/*    // Test
-    std::vector<int> vect;
-    for(int i=0; i<6; i++) vect.push_back(i);
-    for(std::vector<int>::iterator it=vect.begin(); it!=vect.end(); it++){
-        insertNewAction(subMenuAutomata,*it,"Automate"+QString::number(*it), selectedAutomaton);
-        insertNewAction(subMenuGrid,*it,"Grid"+QString::number(*it), selectedAutomaton);
-    }
-
 //      Pour charger les derniers automates BDD :*/
 
-     std::vector<const AutomataManager::AutomatonDescription> * vect = instance.getArrayOfAutomata();
-     for(std::vector<const AutomataManager::AutomatonDescription>::iterator it=vect->begin(); it!=vect->end(); it++){
-         QString str=(*it).getName()+((*it).getDimension() == d2 ? "2D" : "1D");
-         insertNewAction(subMenuAutomata,(*it).getId(),str, &AutomataManager::selectedAutomaton);
-        // !!!!!!! j'ai remplacé *it par (*it).getId() puisque c'est l'ID que tu veux
-         // j'ai mis &AutomataManager::selectedAutomaton comme pointeur de fonction !!!!!!!!
-     }
+    std::vector<const AutomataManager::AutomatonDescription> * vect = instance.getArrayOfAutomata();
+    for(std::vector<const AutomataManager::AutomatonDescription>::iterator it=vect->begin(); it!=vect->end(); it++){
+        QString str=(*it).getName()+((*it).getDimension() == d2 ? "2D" : "1D");
+        insertNewAction(subMenuAutomata,(*it).getId(),str, &AutomataManager::selectedAutomaton);
+    }
 
-
-//      Pour charger les derniers états BDD:
+    //      Pour charger les derniers états BDD:
 
     std::map<const unsigned int, const QString> * mapStates = instance.getArrayOfStates();
     for(std::map<const unsigned int, const QString>::iterator it=mapStates->begin(); it!=mapStates->end(); it++){
         insertNewAction(subMenuGrid,it->first,it->second, &AutomataManager::selectedState);
     }
-    // !!!! j'ai remplacé "vect" par "mapStates" prcq ça marchait pas le nom vect était utilisé juste au dessus !!!!!
 
     ExportAutomaton=new QAction(tr("&Export Automaton..."), this);
     connect(ExportAutomaton, &QAction::triggered, this, [this]()
     {
         QString chemin = QFileDialog::getSaveFileName(0, "Export Automaton", QString());
-      //  std::cout<<chemin.toStdString();
         instance.exportAutomaton(chemin);
     });
 
@@ -106,7 +102,6 @@ void MainController::createActions(){
     connect(SaveAutomaton, &QAction::triggered, this, [this]()
     {
         bool ok=true;
-        // ok= instance.saveAutomaton(subMenuAutomata->actions()[0]->data().toInt());
 
         if(ok)
             QMessageBox::information(this, "Saved", subMenuAutomata->actions()[0]->text() + " Saved");
@@ -126,9 +121,6 @@ void MainController::createActions(){
         {
             insertNewAction(subMenuAutomata,instance.saveAutomaton(name),name, &AutomataManager::selectedAutomaton);
             QMessageBox::information(this, "Saved", name + " Saved");
-
-            // !!!! j'ai remplacé saveAutomaton(str) par saveAutomaton(name) !!!!
-       //     insertNewAction(subMenuAutomata,995,name, instance.selectedAutomaton); //Test
         }
         else
         {
@@ -145,8 +137,7 @@ void MainController::createActions(){
 
         if (ok && !name.isEmpty())
         {
-              insertNewAction(subMenuAutomata,instance.saveCurrentState(name),name, &AutomataManager::selectedState);
-        // insertNewAction(subMenuGrid,995,name, selectedAutomaton); //Test
+            insertNewAction(subMenuAutomata,instance.saveCurrentState(name),name, &AutomataManager::selectedState);
 
             QMessageBox::information(this, "Saved", name + " Saved");
         }
@@ -165,9 +156,8 @@ void MainController::createActions(){
 
         if (ok && !name.isEmpty())
         {
-          insertNewAction(subMenuAutomata,instance.saveInitialState(name),name, &AutomataManager::selectedState);
+            insertNewAction(subMenuAutomata,instance.saveInitialState(name),name, &AutomataManager::selectedState);
 
-        //    insertNewAction(subMenuGrid,995,name, selectedAutomaton);
             QMessageBox::information(this, "Saved", name + " Saved");
         }
         else
@@ -247,104 +237,107 @@ void MainController::createMenus(){
 
 void MainController::createToolBars()
 {
-fileToolBar = new QToolBar();
-addToolBar(Qt::LeftToolBarArea, fileToolBar);
-fileToolBar->setOrientation(Qt::Vertical);
-fileToolBar->setFixedWidth(toolsLayout->maximumSize().width());
-fileToolBar->setIconSize( QSize( 120, 120 ) );
-fileToolBar->addAction(NewAutomaton);
+    fileToolBar = new QToolBar();
+    addToolBar(Qt::LeftToolBarArea, fileToolBar);
+    fileToolBar->setOrientation(Qt::Vertical);
+    fileToolBar->setFixedWidth(toolsLayout->maximumSize().width());
+    fileToolBar->setIconSize( QSize( 120, 120 ) );
+    fileToolBar->addAction(NewAutomaton);
 
- editToolBar = new QToolBar();
- addToolBar(Qt::LeftToolBarArea, editToolBar);
- editToolBar->setOrientation(Qt::Vertical);
- editToolBar->setFixedWidth(maximumWidth());
- editToolBar->setIconSize( QSize( 120, 120 ) );
- editToolBar->addAction(NewRule);
-
-
- timer= new QDial();
- timer->setMaximum(10000);
- timer->setMaximumSize(30,30);
-
-play = new QPushButton();
-play->setMaximumWidth(70);
-play->setIcon(QIcon(":/images/play.png"));
-
-QObject::connect(play, &QPushButton::clicked, [this] () {
-    int v = timer->value();
-    if (!v || view->getAnim()) instance.next();
-    else instance.setTimer(v);
-});
-
-QObject::connect(timer, &QDial::valueChanged, [this] () {
-   instance.setTimer(timer->value());
-});
-
-pause= new QPushButton();
-pause->setMaximumWidth(70);
-pause->setIcon(QIcon(":/images/pause.png"));
-
-QObject::connect(pause, &QPushButton::clicked, [this] () {
-    instance.setTimer(0);
-});
-
-lcd = new QLCDNumber(5);
-//lcd->setMinimumSize(QSize(50,30));
-lcd->setMinimumWidth(30);
-lcd->setMaximumHeight(23);
-lcd->setSegmentStyle( QLCDNumber::Filled );
-QPalette palette = lcd->palette();
-palette.setColor(QPalette::Normal, QPalette::Light, Qt::white);
-palette.setColor(QPalette::Normal, QPalette::Dark, Qt::black);
-lcd->setPalette(palette);
+    editToolBar = new QToolBar();
+    addToolBar(Qt::LeftToolBarArea, editToolBar);
+    editToolBar->setOrientation(Qt::Vertical);
+    editToolBar->setFixedWidth(maximumWidth());
+    editToolBar->setIconSize( QSize( 120, 120 ) );
+    editToolBar->addAction(NewRule);
 
 
-connect(timer, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
+    timer= new QDial();
+    timer->setMaximum(10000);
+    timer->setMaximumSize(30,30);
 
-QWidget * lecture = new QWidget;
-lecture->setLayout(new QHBoxLayout);
-lecture->layout()->addWidget(play);
-lecture->layout()->addWidget(pause);
-lecture->layout()->addWidget(timer);
-lecture->layout()->addWidget(lcd);
-editToolBar->addWidget(lecture);
+    play = new QPushButton();
+    play->setMaximumWidth(70);
+    play->setIcon(QIcon(":/images/play.png"));
 
+    QObject::connect(play, &QPushButton::clicked, [this] () {
+        int v = timer->value();
+        if (!v || view->getAnim()) instance.next();
+        else instance.setTimer(v);
+    });
 
-randomButton = new QPushButton("Random state");
+    QObject::connect(timer, &QDial::valueChanged, [this] () {
+        instance.setTimer(timer->value());
+    });
 
-QWidget * buttonsState = new QWidget;
-buttonsState->setLayout(new QHBoxLayout);
-buttonsState->layout()->addWidget(randomButton);
-editToolBar->addWidget(buttonsState);
+    pause= new QPushButton();
+    pause->setMaximumWidth(70);
+    pause->setIcon(QIcon(":/images/pause.png"));
 
-QObject::connect(randomButton, &QPushButton::clicked, [this] () {
-   instance.getState()->randomState();
-});
-
-animation = new QCheckBox("Animations");
-buttonsState->layout()->addWidget(animation);
-
-QObject::connect(animation, &QCheckBox::clicked, [this] () {
-    if (pause->isVisible()) {
-        pause->hide();
-        timer->hide();
-        lcd->hide();
+    QObject::connect(pause, &QPushButton::clicked, [this] () {
         instance.setTimer(0);
-     }
-    else {
-        pause->show();
-        timer->show();
-        lcd->show();
-    }
-    view->switchBool();
-});
+    });
+
+    lcd = new QLCDNumber(5);
+    //lcd->setMinimumSize(QSize(50,30));
+    lcd->setMinimumWidth(30);
+    lcd->setMaximumHeight(23);
+    lcd->setSegmentStyle( QLCDNumber::Filled );
+    QPalette palette = lcd->palette();
+    palette.setColor(QPalette::Normal, QPalette::Light, Qt::white);
+    palette.setColor(QPalette::Normal, QPalette::Dark, Qt::black);
+    lcd->setPalette(palette);
+
+
+    connect(timer, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
+
+    QWidget * lecture = new QWidget;
+    lecture->setLayout(new QHBoxLayout);
+    lecture->layout()->addWidget(play);
+    lecture->layout()->addWidget(pause);
+    lecture->layout()->addWidget(timer);
+    lecture->layout()->addWidget(lcd);
+    editToolBar->addWidget(lecture);
+
+
+    randomButton = new QPushButton("Random state");
+
+    QWidget * buttonsState = new QWidget;
+    buttonsState->setLayout(new QHBoxLayout);
+    buttonsState->layout()->addWidget(randomButton);
+    editToolBar->addWidget(buttonsState);
+
+    QObject::connect(randomButton, &QPushButton::clicked, [this] () {
+        instance.getState()->randomState();
+    });
+
+    animation = new QCheckBox("Animations");
+    buttonsState->layout()->addWidget(animation);
+
+    QObject::connect(animation, &QCheckBox::clicked, [this] () {
+        if (pause->isVisible()) {
+            pause->hide();
+            timer->hide();
+            lcd->hide();
+            instance.setTimer(0);
+        }
+        else {
+            pause->show();
+            timer->show();
+            lcd->show();
+        }
+        view->switchBool();
+    });
 
 }
 
 
 void MainController::newRule(){
     if (!instance.getPtrAutomaton()) return;
-    RulesController * rulesController = new RulesController(instance.getAutomaton().defaultNext,instance.getAutomaton().getN(), sqrt(instance.getAutomaton().getN()),sqrt(instance.getAutomaton().getN()));
+    RulesController * rulesController;
+
+    if (instance.getAutomaton().dim == 2) rulesController = new RulesController(instance.getAutomaton().defaultNext,instance.getAutomaton().getN(), sqrt(instance.getAutomaton().getN()),sqrt(instance.getAutomaton().getN()));
+    else rulesController = new RulesController(instance.getAutomaton().defaultNext,instance.getAutomaton().getN(), instance.getAutomaton().getN(),1);
     rulesController->setMinimumSize(QSize( 200, 200 ));
     rulesController->setWindowTitle("New Rule");
     connect(rulesController->buttonBox, &QDialogButtonBox::accepted, rulesController, [rulesController, this]() {
@@ -367,7 +360,7 @@ void MainController::newRule(){
 }
 
 void MainController::newAutomaton(){
-   if(instance.getPtrAutomaton()) {
+    if(instance.getPtrAutomaton()) {
         QWidget * yesNo = new QWidget;
         yesNo->setLayout(new QHBoxLayout);
         QLabel * label = new QLabel("An Automaton already exists, do you want to erase it?",yesNo);
@@ -393,61 +386,60 @@ void MainController::newAutomaton(){
     }
     else   {
 
-       param= new AutomataParameters(this);
-       newAutomatonNext();
-   }
-
-}
- void MainController::newAutomatonNext() {
-    connect(param->buttonBox, &QDialogButtonBox::accepted, this, [this]()
-{
-     instance.createAutomaton(param->neighbourhood->value(), (param->row->text().isEmpty() ? d1 : d2), (param->dead->isChecked() ? 'd' : (param->alive->isChecked() ? 'a' : 's')));
-
-    param->tabWidget->removeTab(1);
-
-// Cas d'un état de départ random
-    if(param->random->isChecked()){
-        instance.selectedState(State((!param->row->text().toUInt() ? 1 : param->row->text().toUInt()), param->column->text().toUInt()));
-        QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
-        param->accept();
-
-
-
-        view->setRowCount(instance.getState()->getNrow());
-        view->setColumnCount(instance.getState()->getNrow());
-        view->setFixedWidth(view->columnCount()*CELLSIZE);
-        view->setFixedHeight(view->rowCount()*CELLSIZE);
-
-        instance.getState()->emitSignal();
-
+        param= new AutomataParameters(this);
+        newAutomatonNext();
     }
 
+}
+void MainController::newAutomatonNext() {
+    connect(param->buttonBox, &QDialogButtonBox::accepted, this, [this]()
+    {
+        instance.createAutomaton(param->neighbourhood->value(), (param->row->text().isEmpty() ? d1 : d2), (param->dead->isChecked() ? 'd' : (param->alive->isChecked() ? 'a' : 's')));
 
-    else{
-           MatrixController * ptrMatrix=new MatrixController(param->column->text().toInt(),(!param->row->text().toInt() ? 1 : param->row->text().toInt() ));
-           QObject::connect(ptrMatrix, SIGNAL(clicked(QModelIndex)), ptrMatrix, SLOT(cellActivation(QModelIndex)));
-           QWidget * stateController = new QWidget;
-           stateController->setLayout(new QVBoxLayout);
-           stateController->layout()->addWidget(ptrMatrix);
-           param->buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-           stateController->layout()->addWidget(param->buttonBox);
+        param->tabWidget->removeTab(1);
+
+        // Cas d'un état de départ random
+        if(param->random->isChecked()){
+            dim d = (!param->row->text().toUInt() ? d1 : d2);
+            instance.selectedState(State((d == d1 ? 1 : param->row->text().toUInt()), param->column->text().toUInt()));
+            QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
+            param->accept();
+
+            if (d == d2) view->setRowCount(instance.getState()->getNrow());
+            else view->setRowCount(instance.getState()->getNcol());
+            view->setColumnCount(instance.getState()->getNcol());
+            view->setFixedWidth(view->columnCount()*CELLSIZE);
+            view->setFixedHeight(view->rowCount()*CELLSIZE);
+            view->setDimension(d);
+
+            instance.getState()->emitSignal();
+
+        }
 
 
-           param->tabWidget->addTab(stateController, tr("Initial Grid"));
-           param->resize(param->column->text().toInt()*(CELLSIZE+2),param->row->text().toInt()*(CELLSIZE+2));
-           param->tabWidget->setCurrentIndex(1);
-           param->row->setText("");
+        else{
+            dim d = (!param->row->text().toUInt() ? d1 : d2);
+            MatrixController * ptrMatrix=new MatrixController(param->column->text().toInt(),(!param->row->text().toInt() ? 1 : param->row->text().toInt() ));
+            QObject::connect(ptrMatrix, SIGNAL(clicked(QModelIndex)), ptrMatrix, SLOT(cellActivation(QModelIndex)));
+            QWidget * stateController = new QWidget;
+            stateController->setLayout(new QVBoxLayout);
+            stateController->layout()->addWidget(ptrMatrix);
+            param->buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+            stateController->layout()->addWidget(param->buttonBox);
 
-            connect(param->buttonBox, &QDialogButtonBox::accepted, [ptrMatrix,this](){
+
+            param->tabWidget->addTab(stateController, tr("Initial Grid"));
+            param->resize(param->column->text().toInt()*(CELLSIZE+2),param->row->text().toInt()*(CELLSIZE+2));
+            param->tabWidget->setCurrentIndex(1);
+            param->row->setText("");
+
+            connect(param->buttonBox, &QDialogButtonBox::accepted, [ptrMatrix,this,d](){
                 std::vector<bool> vect = ptrMatrix->serializeGrid();
 
-    //                if(param->row->text().isEmpty()) instance.selectedState(State(param->column->text().toUInt(),vect));
-    //                  else  instance.selectedState(State(param->row->text().toUInt(),param->column->text().toUInt(),vect));
-
-    // Solution précédente plus possible, nécessité de faire une méthode avec paramètre par défaut selectedState(int column,int row=1, QWidget *parent=nullptr)
                 instance.selectedState(State(ptrMatrix->rowCount(),ptrMatrix->columnCount(),vect));
                 QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
                 //Recopie de l'état initial
+                view->setDimension(d);
                 view->setRowCount((ptrMatrix->rowCount()==1? ptrMatrix->columnCount() : ptrMatrix->rowCount()));
                 view->setColumnCount(ptrMatrix->columnCount());
                 view->setFixedWidth(view->columnCount()*CELLSIZE);
@@ -455,16 +447,16 @@ void MainController::newAutomaton(){
 
                 for(int i(0); i<view->rowCount(); i++)
                     for(int j(0); j<view->columnCount(); j++){
-                           if (i<ptrMatrix->rowCount() && j<ptrMatrix->columnCount()) {
-                               view->setItem(i,j, new QTableWidgetItem);
-                               view->item(i,j)->setBackgroundColor(ptrMatrix->item(i,j)->backgroundColor());
-                           }
-                           else {
-                               view->setItem(i,j, new QTableWidgetItem);
-                               view->item(i,j)->setBackgroundColor("white");
-                           }
-                     }
-
+                        if (i<ptrMatrix->rowCount() && j<ptrMatrix->columnCount()) {
+                            view->setItem(i,j, new QTableWidgetItem);
+                            view->item(i,j)->setBackgroundColor(ptrMatrix->item(i,j)->backgroundColor());
+                        }
+                        else {
+                            view->setItem(i,j, new QTableWidgetItem);
+                            view->item(i,j)->setBackgroundColor("white");
+                        }
+                    }
+                instance.getState()->emitSignal();
                 param->accept();
             });
             connect(param->buttonBox, &QDialogButtonBox::rejected, param, &QDialog::reject);
@@ -472,11 +464,11 @@ void MainController::newAutomaton(){
 
 
 
-});
+    });
 
 
     connect(param->buttonBox, &QDialogButtonBox::rejected, param, &QDialog::reject);
-param->show();
+    param->show();
 }
 
 /*
@@ -485,11 +477,11 @@ std::cout<<n;
 } */
 
 QString MainController::openFile(){
-QString filename =  QFileDialog::getOpenFileName(
-          this,
-          "Open Document",
-          QDir::currentPath(),
-          "All files (*.*)");
+    QString filename =  QFileDialog::getOpenFileName(
+                this,
+                "Open Document",
+                QDir::currentPath(),
+                "All files (*.*)");
     if( filename.isNull() )
     {
         throw "Error";
@@ -512,15 +504,15 @@ AutomataParameters::AutomataParameters(QWidget *parent, char def, dim d) : QDial
     alive = new QRadioButton(tr("Alive"));
     same = new QRadioButton(tr("Same"));
     switch (def) {
-        case 's':
-            same->setChecked(true);
-            break;
-        case 'a' :
-            alive->setChecked(true);
-            break;
-        case 'd' :
-            dead->setChecked(true);
-            break;
+    case 's':
+        same->setChecked(true);
+        break;
+    case 'a' :
+        alive->setChecked(true);
+        break;
+    case 'd' :
+        dead->setChecked(true);
+        break;
     }
 
 
@@ -598,8 +590,8 @@ AutomataParameters::AutomataParameters(QWidget *parent, char def, dim d) : QDial
     basicParametersLayout->addWidget(random);
     basicParametersLayout->addWidget(buttonBox);
     setWindowTitle(tr("New Automaton"));
-    column->setText("25");
-    row->setText("25");
+    column->setText(QString::number(DEF));
+    row->setText(QString::number(DEF));
     if (d==d2) bd2->click();
     else bd1->click();
 }

@@ -44,7 +44,10 @@
 #include <QDial>
 #include <QWidgetAction>
 #include <QLCDNumber>
+#include <state.h>
+#include "automatamanager.h"
 
 #define CELLSIZE 10
+#define DEF 50
 
 #endif // QTTOOLS_H

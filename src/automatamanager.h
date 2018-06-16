@@ -73,6 +73,7 @@ public:
      * indicated by the id i of the automaton */
      void selectedAutomaton(unsigned int const i);
      void selectedAutomaton(QString& nameFile);
+     void selectedAutomaton() { runningAutomaton = nullptr; }
     /* Create an empty automaton
      * */
      void createAutomaton(unsigned int deg, dim d, char def);

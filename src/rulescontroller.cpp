@@ -47,7 +47,7 @@ RulesController::RulesController(char def, int N, int column, int row, QWidget *
 PositionRule::PositionRule(int column, int rows, QWidget* parent): QWidget(parent)
 {
 //    positionMatrix= new QTableWidget(rows,column,parent);
-    positionMatrix= new MatrixController(rows,column,parent);
+    positionMatrix= new MatrixController(column,rows,parent);
     positionMatrix->setEditTriggers(QAbstractItemView::NoEditTriggers);
     positionMatrix->setFixedWidth(column*CELLSIZE);
     positionMatrix->setFixedHeight(rows*CELLSIZE);
