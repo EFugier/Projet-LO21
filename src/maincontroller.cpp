@@ -407,7 +407,7 @@ void MainController::newAutomaton(){
 
     else{
            MatrixController * ptrMatrix=new MatrixController(param->column->text().toInt(),(!param->row->text().toInt() ? 1 : param->row->text().toInt() ));
-           QObject::connect(ptrMatrix, SIGNAL(doubleClicked(QModelIndex)), ptrMatrix, SLOT(cellActivation(QModelIndex)));
+           QObject::connect(ptrMatrix, SIGNAL(clicked(QModelIndex)), ptrMatrix, SLOT(cellActivation(QModelIndex)));
            QWidget * stateController = new QWidget;
            stateController->setLayout(new QVBoxLayout);
            stateController->layout()->addWidget(ptrMatrix);
