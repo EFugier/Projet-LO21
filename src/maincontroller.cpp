@@ -263,6 +263,7 @@ fileToolBar->addAction(NewAutomaton);
 
 
  timer= new QDial();
+ timer->setMaximum(10000);
  timer->setMaximumSize(30,30);
 
 play = new QPushButton();
@@ -287,7 +288,7 @@ QObject::connect(pause, &QPushButton::clicked, [this] () {
     instance.setTimer(0);
 });
 
-QLCDNumber * lcd = new QLCDNumber(2);
+QLCDNumber * lcd = new QLCDNumber(5);
 //lcd->setMinimumSize(QSize(50,30));
 lcd->setMinimumWidth(30);
 lcd->setMaximumHeight(23);
@@ -309,10 +310,22 @@ lecture->layout()->addWidget(lcd);
 editToolBar->addWidget(lecture);
 
 
+randomButton = new QPushButton("Random state");
+
+QWidget * buttonsState = new QWidget;
+buttonsState->setLayout(new QHBoxLayout);
+buttonsState->layout()->addWidget(randomButton);
+editToolBar->addWidget(buttonsState);
+
+QObject::connect(randomButton, &QPushButton::clicked, [this] () {
+   instance.getState()->randomState();
+});
+
 }
 
 
 void MainController::newRule(){
+    if (!instance.getPtrAutomaton()) return;
     RulesController * rulesController = new RulesController(instance.getAutomaton().defaultNext,instance.getAutomaton().getN(), sqrt(instance.getAutomaton().getN()),sqrt(instance.getAutomaton().getN()));
     rulesController->setMinimumSize(QSize( 200, 200 ));
     rulesController->setWindowTitle("New Rule");
@@ -336,8 +349,38 @@ void MainController::newRule(){
 }
 
 void MainController::newAutomaton(){
-    param= new AutomataParameters(this);
+   if(instance.getPtrAutomaton()) {
+        QWidget * yesNo = new QWidget;
+        yesNo->setLayout(new QHBoxLayout);
+        QLabel * label = new QLabel("An Automaton already exists, do you want to erase it?",yesNo);
+        QPushButton * yes = new QPushButton("Yes", yesNo);
+        QPushButton * no = new QPushButton("No", yesNo);
+        yesNo->layout()->addWidget(label);
+        yesNo->layout()->addWidget(yes);
+        yesNo->layout()->addWidget(no);
+        yesNo->show();
+        QObject::connect(yes, &QPushButton::clicked,[this, yesNo] () {
+            instance.deleteAutomaton();
+            param= new AutomataParameters(this);
+            yesNo->close();
+            newAutomatonNext();
+        });
 
+        QObject::connect(no, &QPushButton::clicked,[this, yesNo] () {
+            param = new AutomataParameters(this, instance.getAutomaton().defaultNext, (instance.getAutomaton().dim == 1 ? d1 : d2));
+            yesNo->close();
+            newAutomatonNext();
+
+        });
+    }
+    else   {
+
+       param= new AutomataParameters(this);
+       newAutomatonNext();
+   }
+
+}
+ void MainController::newAutomatonNext() {
     connect(param->buttonBox, &QDialogButtonBox::accepted, this, [this]()
 {
      instance.createAutomaton(param->neighbourhood->value(), (param->row->text().isEmpty() ? d1 : d2), (param->dead->isChecked() ? 'd' : (param->alive->isChecked() ? 'a' : 's')));
@@ -437,7 +480,7 @@ QString filename =  QFileDialog::getOpenFileName(
 }
 
 
-AutomataParameters::AutomataParameters(QWidget *parent) : QDialog(parent)
+AutomataParameters::AutomataParameters(QWidget *parent, char def, dim d) : QDialog(parent)
 {
     tabWidget = new QTabWidget;
     QWidget * basicParameters=new QWidget(this);
@@ -450,7 +493,17 @@ AutomataParameters::AutomataParameters(QWidget *parent) : QDialog(parent)
     dead = new QRadioButton(tr("Dead"));
     alive = new QRadioButton(tr("Alive"));
     same = new QRadioButton(tr("Same"));
-    same->setChecked(true);
+    switch (def) {
+        case 's':
+            same->setChecked(true);
+            break;
+        case 'a' :
+            alive->setChecked(true);
+            break;
+        case 'd' :
+            dead->setChecked(true);
+            break;
+    }
 
 
     QVBoxLayout *defaultCellStateLayout = new QVBoxLayout;
@@ -461,8 +514,8 @@ AutomataParameters::AutomataParameters(QWidget *parent) : QDialog(parent)
     defaultCellStateLayout->addWidget(same);
     defaultCellState->setLayout(defaultCellStateLayout);
 
-    QRadioButton * d1 = new QRadioButton("1D");
-    QRadioButton * d2 = new QRadioButton("2D");
+    QRadioButton * bd1 = new QRadioButton("1D");
+    QRadioButton * bd2 = new QRadioButton("2D");
 
     QHBoxLayout * sizeMatrix= new QHBoxLayout;
     column= new QLineEdit;
@@ -480,8 +533,8 @@ AutomataParameters::AutomataParameters(QWidget *parent) : QDialog(parent)
     row->setTextMargins(0,0,0,0);
     column->setTextMargins(0,0,0,0);
 
-    dimensionLayout->addWidget(d1);
-    dimensionLayout->addWidget(d2);
+    dimensionLayout->addWidget(bd1);
+    dimensionLayout->addWidget(bd2);
     dimensionLayout->addLayout(sizeMatrix);
     sizeMatrix->setAlignment(Qt::AlignLeft);
     sizeMatrix->addStretch(1);
@@ -490,7 +543,7 @@ AutomataParameters::AutomataParameters(QWidget *parent) : QDialog(parent)
     sizeMatrix->addWidget(row);
     sizeMatrix->addStretch(maximumWidth());
 
-    connect(d1, &QRadioButton::clicked, this, [this, times]()
+    connect(bd1, &QRadioButton::clicked, this, [this, times]()
     {
         column->setHidden(false);
         times->setHidden(true);
@@ -498,7 +551,7 @@ AutomataParameters::AutomataParameters(QWidget *parent) : QDialog(parent)
         row->setText("");
     });
 
-    connect(d2, &QRadioButton::clicked, this, [this, times]()
+    connect(bd2, &QRadioButton::clicked, this, [this, times]()
     {
         column->setHidden(false);
         times->setHidden(false);
@@ -529,7 +582,8 @@ AutomataParameters::AutomataParameters(QWidget *parent) : QDialog(parent)
     setWindowTitle(tr("New Automaton"));
     column->setText("25");
     row->setText("25");
-    d2->click();
+    if (d==d2) bd2->click();
+    else bd1->click();
 }
 
 

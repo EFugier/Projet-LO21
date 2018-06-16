@@ -148,7 +148,17 @@ static int callback_load_automata(void *ptr, int count, char **data, char **colu
 
 void AutomataManager::createAutomaton(unsigned int deg, dim d, char def = 's') {
     unsigned int n = 2*deg+1;
-    runningAutomaton = new Automaton((d == d1 ? n : n*n), (d == d1 ? 1 : 2), def);
+    if (!runningAutomaton) runningAutomaton = new Automaton((d == d1 ? n : n*n), (d == d1 ? 1 : 2), def);
+    else {
+        runningAutomaton->n = (d == d1 ? n : n*n);
+        runningAutomaton->dim = (d == d1 ? 1 : 2);
+        runningAutomaton->defaultNext = def;
+    }
+}
+
+void AutomataManager::deleteAutomaton() {
+    delete runningAutomaton;
+    runningAutomaton = nullptr;
 }
 
 // Save state to file
@@ -168,6 +178,7 @@ void AutomataManager::exportAutomaton(QString const& name) const {
 // Run the automaton
 
 void AutomataManager::next() {
+    if (!runningAutomaton) return;
     std::vector<std::string> s = currentState->stackOfNb(runningAutomaton->getN());
     std::vector<bool> v;
     for(std::vector<std::string>::iterator it = s.begin(); it != s.end(); it++) {

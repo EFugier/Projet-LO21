@@ -76,8 +76,7 @@ public:
     /* Create an empty automaton
      * */
      void createAutomaton(unsigned int deg, dim d, char def);
-
-
+     void deleteAutomaton();
 
       void selectedState(unsigned int const i); // IS WORKING
       // Set the initial state from the DB via the ID of the state
@@ -99,6 +98,7 @@ public:
 
       void next();
       Automaton& getAutomaton() const { return *runningAutomaton; }
+      Automaton * getPtrAutomaton() const { return runningAutomaton; }
       ~AutomataManager();
       State* getState() { return currentState; }
       void setTimer(unsigned int ms);

@@ -15,7 +15,7 @@ class AutomataParameters : public QDialog
     friend class MainController;
 
 public:
-    AutomataParameters(QWidget *parent = 0);
+    AutomataParameters(QWidget *parent = 0, char def ='s', dim d = d2);
 
 private:
     QTabWidget *tabWidget;
@@ -49,6 +49,7 @@ private:
 
     QPushButton * play;
     QPushButton * pause;
+    QPushButton * randomButton;
     QDial * timer;
     QAction *NewAutomaton;
     QAction *ImportAutomaton;
@@ -76,6 +77,8 @@ private:
     void insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*)(unsigned int const) );
  //   void selectedAutomaton(int);
     void newAutomaton();
+    void newAutomatonNext();
+
     void newRule();
 
 };
