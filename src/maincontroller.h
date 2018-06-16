@@ -50,7 +50,9 @@ private:
     QPushButton * play;
     QPushButton * pause;
     QPushButton * randomButton;
+    QCheckBox * animation;
     QDial * timer;
+    QLCDNumber * lcd;
     QAction *NewAutomaton;
     QAction *ImportAutomaton;
     QAction *ImportGrid;

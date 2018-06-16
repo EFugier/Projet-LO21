@@ -3,7 +3,7 @@
 
 
 #include "qttools.h"
-
+#include <QMovie>
 /*
 class StateModel : public QObject{
     Q_OBJECT
@@ -38,13 +38,14 @@ public slots:
 class MatrixController : public QTableWidget{
   Q_OBJECT
 
-
+    QMovie *movie;
+    bool anim;
 public:
     MatrixController(int column, int rows=1, QWidget* parent=nullptr);
 //    MatrixController(int r, int c, QWidget* p=nullptr);
     std::vector<bool> serializeGrid();
     std::vector<bool> serializeGrid(bool v);
-
+    void switchBool() { anim = !anim; }
 
 private slots:
     void onChange(std::vector<bool>& v);

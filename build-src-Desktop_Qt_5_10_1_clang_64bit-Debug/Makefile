@@ -744,7 +744,8 @@ qrc_application.cpp: ../src/application.qrc \
 		../src/play.png \
 		../src/start.png \
 		../src/param.png \
-		../src/pause.png
+		../src/pause.png \
+		../src/boom.gif
 	/Users/franckassedou/Qt/5.10.1/clang_64/bin/rcc -name application ../src/application.qrc -o qrc_application.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

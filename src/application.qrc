@@ -4,5 +4,6 @@
         <file>pause.png</file>
         <file>param.png</file>
         <file>start.png</file>
+        <file>boom.gif</file>
     </qresource>
 </RCC>

@@ -288,7 +288,7 @@ QObject::connect(pause, &QPushButton::clicked, [this] () {
     instance.setTimer(0);
 });
 
-QLCDNumber * lcd = new QLCDNumber(5);
+lcd = new QLCDNumber(5);
 //lcd->setMinimumSize(QSize(50,30));
 lcd->setMinimumWidth(30);
 lcd->setMaximumHeight(23);
@@ -319,6 +319,24 @@ editToolBar->addWidget(buttonsState);
 
 QObject::connect(randomButton, &QPushButton::clicked, [this] () {
    instance.getState()->randomState();
+});
+
+animation = new QCheckBox("Animations");
+buttonsState->layout()->addWidget(animation);
+
+QObject::connect(animation, &QCheckBox::clicked, [this] () {
+    if (pause->isVisible()) {
+        pause->hide();
+        timer->hide();
+        lcd->hide();
+        instance.setTimer(0);
+     }
+    else {
+        pause->show();
+        timer->show();
+        lcd->show();
+    }
+    view->switchBool();
 });
 
 }

@@ -1,14 +1,34 @@
 #include "matrixcontroller.h"
 
 void MatrixController:: onChange(std::vector<bool>& v){
+        if (anim) movie->start();
+
         std::vector<bool>::iterator it = v.begin();
         for(int i(0); i<rowCount(); i++)
-            for(int j(0); j<columnCount(); j++)
+            for(int j(0); j<columnCount(); j++) {
+                if (anim && item(i,j)->backgroundColor() == QColor(0,0,0) && !*(it)) {
+                    item(i,j)->setFlags(item(i,j)->flags() | Qt::ItemIsEditable);
+                    QLabel *processLabel = new QLabel;
+                    processLabel->setMovie(movie);
+                    this->setCellWidget(i,j,processLabel);
+                }
                 item(i,j)->setBackgroundColor((*(it++)? QColor(0,0,0) : QColor(255,255,255)));
-    }
+            }
+}
 
 
-MatrixController:: MatrixController(int c, int r, QWidget* p) : QTableWidget(r,c,p){
+MatrixController:: MatrixController(int c, int r, QWidget* p) : QTableWidget(r,c,p), anim(false){
+        movie = new QMovie(":/images/boom.gif");
+        movie->setScaledSize(QSize(CELLSIZE, CELLSIZE));
+        QObject::connect(movie, &QMovie::finished, [this] () {
+            movie->stop();
+            for(int i(0); i<rowCount(); i++)
+                for(int j(0); j<columnCount(); j++){
+                    if (dynamic_cast<QLabel*>(cellWidget(i,j)))
+                     dynamic_cast<QLabel*>(cellWidget(i,j))->clear();
+            }
+
+        });
         for(int i(0); i<rowCount(); i++)
             for(int j(0); j<columnCount(); j++){
                 setItem(i,j, new QTableWidgetItem);
