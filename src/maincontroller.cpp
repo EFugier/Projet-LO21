@@ -272,7 +272,7 @@ play->setIcon(QIcon(":/images/play.png"));
 
 QObject::connect(play, &QPushButton::clicked, [this] () {
     int v = timer->value();
-    if (!v) instance.next();
+    if (!v || view->getAnim()) instance.next();
     else instance.setTimer(v);
 });
 

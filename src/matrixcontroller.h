@@ -39,6 +39,7 @@ class MatrixController : public QTableWidget{
   Q_OBJECT
 
     QMovie *movie;
+    QMovie *movie2;
     bool anim;
 public:
     MatrixController(int column, int rows=1, QWidget* parent=nullptr);
@@ -46,7 +47,7 @@ public:
     std::vector<bool> serializeGrid();
     std::vector<bool> serializeGrid(bool v);
     void switchBool() { anim = !anim; }
-
+    bool getAnim() const { return anim; }
 private slots:
     void onChange(std::vector<bool>& v);
     void cellActivation(QModelIndex);

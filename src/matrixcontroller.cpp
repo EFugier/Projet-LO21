@@ -1,7 +1,10 @@
 #include "matrixcontroller.h"
 
 void MatrixController:: onChange(std::vector<bool>& v){
-        if (anim) movie->start();
+        if (anim) {
+            movie->start();
+            movie2->start();
+        }
 
         std::vector<bool>::iterator it = v.begin();
         for(int i(0); i<rowCount(); i++)
@@ -12,6 +15,12 @@ void MatrixController:: onChange(std::vector<bool>& v){
                     processLabel->setMovie(movie);
                     this->setCellWidget(i,j,processLabel);
                 }
+                else if (anim && item(i,j)->backgroundColor() != QColor(0,0,0) && *(it)) {
+                    item(i,j)->setFlags(item(i,j)->flags() | Qt::ItemIsEditable);
+                    QLabel *processLabel = new QLabel;
+                    processLabel->setMovie(movie2);
+                    this->setCellWidget(i,j,processLabel);
+                }
                 item(i,j)->setBackgroundColor((*(it++)? QColor(0,0,0) : QColor(255,255,255)));
             }
 }
@@ -19,7 +28,9 @@ void MatrixController:: onChange(std::vector<bool>& v){
 
 MatrixController:: MatrixController(int c, int r, QWidget* p) : QTableWidget(r,c,p), anim(false){
         movie = new QMovie(":/images/boom.gif");
+        movie2 = new QMovie(":/images/birth.gif");
         movie->setScaledSize(QSize(CELLSIZE, CELLSIZE));
+        movie2->setScaledSize(QSize(CELLSIZE, CELLSIZE));
         QObject::connect(movie, &QMovie::finished, [this] () {
             movie->stop();
             for(int i(0); i<rowCount(); i++)

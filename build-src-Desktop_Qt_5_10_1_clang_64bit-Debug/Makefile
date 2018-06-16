@@ -742,6 +742,7 @@ compiler_rcc_clean:
 qrc_application.cpp: ../src/application.qrc \
 		../../../Qt/5.10.1/clang_64/bin/rcc \
 		../src/play.png \
+		../src/birth.gif \
 		../src/start.png \
 		../src/param.png \
 		../src/pause.png \
@@ -849,6 +850,8 @@ moc_maincontroller.cpp: ../src/qttools.h \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/QLCDNumber \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/qlcdnumber.h \
 		../src/matrixcontroller.h \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/QMovie \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/qmovie.h \
 		../src/rulescontroller.h \
 		../src/automatamanager.h \
 		../src/utilities/sqlite3.h \
@@ -946,6 +949,8 @@ moc_matrixcontroller.cpp: ../src/qttools.h \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/qwidgetaction.h \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/QLCDNumber \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/qlcdnumber.h \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/QMovie \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/qmovie.h \
 		../src/matrixcontroller.h \
 		moc_predefs.h \
 		../../../Qt/5.10.1/clang_64/bin/moc
@@ -1029,6 +1034,8 @@ moc_rulescontroller.cpp: ../src/qttools.h \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/QLCDNumber \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/qlcdnumber.h \
 		../src/matrixcontroller.h \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/QMovie \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/qmovie.h \
 		../src/rulescontroller.h \
 		moc_predefs.h \
 		../../../Qt/5.10.1/clang_64/bin/moc
@@ -1131,6 +1138,8 @@ main.o: ../src/main.cpp ../src/maincontroller.h \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/QLCDNumber \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/qlcdnumber.h \
 		../src/matrixcontroller.h \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/QMovie \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/qmovie.h \
 		../src/rulescontroller.h \
 		../src/automatamanager.h \
 		../src/utilities/sqlite3.h \
@@ -1277,6 +1286,8 @@ maincontroller.o: ../src/maincontroller.cpp ../src/maincontroller.h \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/QLCDNumber \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/qlcdnumber.h \
 		../src/matrixcontroller.h \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/QMovie \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/qmovie.h \
 		../src/rulescontroller.h \
 		../src/automatamanager.h \
 		../src/utilities/sqlite3.h \
@@ -1371,7 +1382,9 @@ matrixcontroller.o: ../src/matrixcontroller.cpp ../src/matrixcontroller.h \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/QWidgetAction \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/qwidgetaction.h \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/QLCDNumber \
-		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/qlcdnumber.h
+		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/qlcdnumber.h \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/QMovie \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/qmovie.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o matrixcontroller.o ../src/matrixcontroller.cpp
 
 rulescontroller.o: ../src/rulescontroller.cpp ../src/rulescontroller.h \
@@ -1452,7 +1465,9 @@ rulescontroller.o: ../src/rulescontroller.cpp ../src/rulescontroller.h \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/qwidgetaction.h \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/QLCDNumber \
 		../../../Qt/5.10.1/clang_64/lib/QtWidgets.framework/Headers/qlcdnumber.h \
-		../src/matrixcontroller.h
+		../src/matrixcontroller.h \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/QMovie \
+		../../../Qt/5.10.1/clang_64/lib/QtGui.framework/Headers/qmovie.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rulescontroller.o ../src/rulescontroller.cpp
 
 qrc_application.o: qrc_application.cpp 
