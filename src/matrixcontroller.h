@@ -25,7 +25,7 @@ public:
     void onChangeD1(std::vector<bool>& v);
     void onChangeD2(std::vector<bool>& v);
     void setDimension(dim d) { dimension = d; index = 0; }
-
+    dim getDimension() const { return dimension; }
 private slots:
     void onChange(std::vector<bool>& v);
     void cellActivation(QModelIndex);

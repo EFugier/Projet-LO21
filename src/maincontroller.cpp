@@ -53,6 +53,11 @@ void MainController::createActions(){
         instance.selectedState(str);
         QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
         view->setDimension(instance.getAutomaton().getDim() == 1 ? d1 : d2);
+        if (instance.getAutomaton().getDim() == 2) view->setRowCount(instance.getState()->getNrow());
+        else view->setRowCount(instance.getState()->getNcol());
+        view->setColumnCount(instance.getState()->getNcol());
+        view->setFixedWidth(view->columnCount()*CELLSIZE);
+        view->setFixedHeight(view->rowCount()*CELLSIZE);
         instance.getState()->emitSignal();
 
         int d = instance.getState()->getNrow();
@@ -204,6 +209,13 @@ void MainController::insertNewAction(QMenu* menu, int id, const QString& name, v
         insertNewAction(menu,newAction->data().toInt(),name,selectedFunction);
         menu->removeAction(newAction);
         QObject::connect(instance.getState(), SIGNAL(valueChanged(std::vector<bool>&)), view, SLOT(onChange(std::vector<bool>&)));
+        if (instance.getPtrAutomaton() && (instance.getAutomaton().dim == 1 ? d1 : d2) != view->getDimension())
+            view->setDimension((instance.getAutomaton().dim == 1 ? d1 : d2));
+        if (instance.getPtrAutomaton() && instance.getAutomaton().getDim() == 2) view->setRowCount(instance.getState()->getNrow());
+        else view->setRowCount(instance.getState()->getNcol());
+        view->setColumnCount(instance.getState()->getNcol());
+        view->setFixedWidth(view->columnCount()*CELLSIZE);
+        view->setFixedHeight(view->rowCount()*CELLSIZE);
         instance.getState()->emitSignal();
     });
 }
@@ -241,7 +253,7 @@ void MainController::createToolBars()
     addToolBar(Qt::LeftToolBarArea, fileToolBar);
     fileToolBar->setOrientation(Qt::Vertical);
     fileToolBar->setFixedWidth(toolsLayout->maximumSize().width());
-    fileToolBar->setIconSize( QSize( 120, 120 ) );
+    fileToolBar->setIconSize( QSize( 180, 180 ) );
     fileToolBar->addAction(NewAutomaton);
 
     editToolBar = new QToolBar();
@@ -471,10 +483,6 @@ void MainController::newAutomatonNext() {
     param->show();
 }
 
-/*
-void MainController::selectedAutomaton(int n){
-std::cout<<n;
-} */
 
 QString MainController::openFile(){
     QString filename =  QFileDialog::getOpenFileName(

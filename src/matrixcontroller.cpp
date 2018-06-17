@@ -47,6 +47,7 @@ void MatrixController::onChangeD1(std::vector<bool>& v) {
                 item(i,j)->setBackgroundColor(QColor(255,255,255));
             }
       }
+
     else if (index == rowCount()) index = 0;
     int i(index);
     for(int j(0); j<columnCount(); j++) {

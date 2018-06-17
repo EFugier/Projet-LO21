@@ -59,10 +59,7 @@ PositionRule::PositionRule(int column, int rows, QWidget* parent): QWidget(paren
 
     positionMatrix->verticalHeader()->setDefaultSectionSize(CELLSIZE);
     positionMatrix->horizontalHeader()->setDefaultSectionSize(CELLSIZE);
-/*
-    for(int i(0); i<positionMatrix->rowCount(); i++)
-        for(int j(0); j<positionMatrix->columnCount(); j++)
-            positionMatrix->setItem(i,j, new QTableWidgetItem); */
+
    QObject::connect(positionMatrix, SIGNAL(doubleClicked(QModelIndex)), positionMatrix, SLOT(cellActivation(QModelIndex)));
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -92,8 +89,13 @@ NeighbourRule::NeighbourRule(int N, QWidget *parent): QWidget(parent)
     min = new QCheckBox(tr("exactly"));
     max = new QPushButton(tr("max ∞"));
     QObject::connect(max, &QPushButton::clicked, [this, N] () {
-        to->setValue(N);
+        to->setValue(N-1);
     });
+
+    connect(from,  static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), [this] () {
+          if (to->isHidden()) to->setValue(from->value());
+       });
+
 
     QLabel * fromLab = new QLabel("From");
     QLabel * toLab = new QLabel("To");
