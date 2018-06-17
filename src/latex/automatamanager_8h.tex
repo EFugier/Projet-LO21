@@ -1,0 +1,101 @@
+\hypertarget{automatamanager_8h}{}\section{automatamanager.\+h File Reference}
+\label{automatamanager_8h}\index{automatamanager.\+h@{automatamanager.\+h}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include \char`\"{}utilities/sqlite3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}state.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}automaton.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Q\+String$>$}\newline
+{\ttfamily \#include $<$Q\+Timer$>$}\newline
+{\ttfamily \#include $<$Q\+Object$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_automata_manager}{Automata\+Manager}}
+\item 
+class \mbox{\hyperlink{class_automata_manager_1_1_automaton_description}{Automata\+Manager\+::\+Automaton\+Description}}
+\begin{DoxyCompactList}\small\item\em Classe interne permettant de stocker les informations des automates venus de la B\+DD. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::map$<$ const unsigned int, const Q\+String $>$ \mbox{\hyperlink{automatamanager_8h_a83622686c79f1453f6971e58d371a481}{Map}}
+\begin{DoxyCompactList}\small\item\em Enum ayant 2 valeurs possibles \+: d1 (représentant les automates 1D), d2 (représentant les automates 2D) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7}{dim}} \{ \mbox{\hyperlink{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7aec6e5be66411cb5f2e5fc6b6748d1ea1}{d1}}, 
+\mbox{\hyperlink{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7a96ae589b7d5427dde9e5da18bbf68d86}{d2}}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{automatamanager_8h_aba3d552d339364d33bb002568fa83232}{select\+\_\+callback\+\_\+automata}} (void $\ast$ptr, int count, char $\ast$$\ast$data, char $\ast$$\ast$columns)
+\item 
+static int \mbox{\hyperlink{automatamanager_8h_aa3d7762718ab6f2018334a93504de80e}{select\+\_\+callback\+\_\+states}} (void $\ast$ptr, int count, char $\ast$$\ast$data, char $\ast$$\ast$columns)
+\item 
+static int \mbox{\hyperlink{automatamanager_8h_a57bb496b6b1a5b5c28f9f4b37b94e08b}{callback\+\_\+load\+\_\+automata}} (void $\ast$ptr, int count, char $\ast$$\ast$data, char $\ast$$\ast$columns)
+\item 
+static int \mbox{\hyperlink{automatamanager_8h_a00236cc03427d6c64a056255127e5fdd}{callback\+\_\+get\+\_\+id\+\_\+automaton}} (void $\ast$ptr, int count, char $\ast$$\ast$data, char $\ast$$\ast$columns)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{automatamanager_8h_a83622686c79f1453f6971e58d371a481}\label{automatamanager_8h_a83622686c79f1453f6971e58d371a481}} 
+\index{automatamanager.\+h@{automatamanager.\+h}!Map@{Map}}
+\index{Map@{Map}!automatamanager.\+h@{automatamanager.\+h}}
+\subsubsection{\texorpdfstring{Map}{Map}}
+{\footnotesize\ttfamily typedef std\+::map$<$const unsigned int, const Q\+String$>$ \mbox{\hyperlink{automatamanager_8h_a83622686c79f1453f6971e58d371a481}{Map}}}
+
+
+
+Enum ayant 2 valeurs possibles \+: d1 (représentant les automates 1D), d2 (représentant les automates 2D) 
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7}\label{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7}} 
+\index{automatamanager.\+h@{automatamanager.\+h}!dim@{dim}}
+\index{dim@{dim}!automatamanager.\+h@{automatamanager.\+h}}
+\subsubsection{\texorpdfstring{dim}{dim}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7}{dim}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{d1@{d1}!automatamanager.\+h@{automatamanager.\+h}}\index{automatamanager.\+h@{automatamanager.\+h}!d1@{d1}}}\mbox{\Hypertarget{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7aec6e5be66411cb5f2e5fc6b6748d1ea1}\label{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7aec6e5be66411cb5f2e5fc6b6748d1ea1}} 
+d1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{d2@{d2}!automatamanager.\+h@{automatamanager.\+h}}\index{automatamanager.\+h@{automatamanager.\+h}!d2@{d2}}}\mbox{\Hypertarget{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7a96ae589b7d5427dde9e5da18bbf68d86}\label{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7a96ae589b7d5427dde9e5da18bbf68d86}} 
+d2&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{automatamanager_8h_a00236cc03427d6c64a056255127e5fdd}\label{automatamanager_8h_a00236cc03427d6c64a056255127e5fdd}} 
+\index{automatamanager.\+h@{automatamanager.\+h}!callback\+\_\+get\+\_\+id\+\_\+automaton@{callback\+\_\+get\+\_\+id\+\_\+automaton}}
+\index{callback\+\_\+get\+\_\+id\+\_\+automaton@{callback\+\_\+get\+\_\+id\+\_\+automaton}!automatamanager.\+h@{automatamanager.\+h}}
+\subsubsection{\texorpdfstring{callback\+\_\+get\+\_\+id\+\_\+automaton()}{callback\_get\_id\_automaton()}}
+{\footnotesize\ttfamily static int callback\+\_\+get\+\_\+id\+\_\+automaton (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{int}]{count,  }\item[{char $\ast$$\ast$}]{data,  }\item[{char $\ast$$\ast$}]{columns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{automatamanager_8h_a57bb496b6b1a5b5c28f9f4b37b94e08b}\label{automatamanager_8h_a57bb496b6b1a5b5c28f9f4b37b94e08b}} 
+\index{automatamanager.\+h@{automatamanager.\+h}!callback\+\_\+load\+\_\+automata@{callback\+\_\+load\+\_\+automata}}
+\index{callback\+\_\+load\+\_\+automata@{callback\+\_\+load\+\_\+automata}!automatamanager.\+h@{automatamanager.\+h}}
+\subsubsection{\texorpdfstring{callback\+\_\+load\+\_\+automata()}{callback\_load\_automata()}}
+{\footnotesize\ttfamily static int callback\+\_\+load\+\_\+automata (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{int}]{count,  }\item[{char $\ast$$\ast$}]{data,  }\item[{char $\ast$$\ast$}]{columns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{automatamanager_8h_aba3d552d339364d33bb002568fa83232}\label{automatamanager_8h_aba3d552d339364d33bb002568fa83232}} 
+\index{automatamanager.\+h@{automatamanager.\+h}!select\+\_\+callback\+\_\+automata@{select\+\_\+callback\+\_\+automata}}
+\index{select\+\_\+callback\+\_\+automata@{select\+\_\+callback\+\_\+automata}!automatamanager.\+h@{automatamanager.\+h}}
+\subsubsection{\texorpdfstring{select\+\_\+callback\+\_\+automata()}{select\_callback\_automata()}}
+{\footnotesize\ttfamily static int select\+\_\+callback\+\_\+automata (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{int}]{count,  }\item[{char $\ast$$\ast$}]{data,  }\item[{char $\ast$$\ast$}]{columns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Les fonctions de callback sont des prototypes à implémenter donnés par la librairie sqlite. Elles permettent notamment de gérer les résultats des requêtes S\+QL S\+E\+L\+E\+CT. \mbox{\Hypertarget{automatamanager_8h_aa3d7762718ab6f2018334a93504de80e}\label{automatamanager_8h_aa3d7762718ab6f2018334a93504de80e}} 
+\index{automatamanager.\+h@{automatamanager.\+h}!select\+\_\+callback\+\_\+states@{select\+\_\+callback\+\_\+states}}
+\index{select\+\_\+callback\+\_\+states@{select\+\_\+callback\+\_\+states}!automatamanager.\+h@{automatamanager.\+h}}
+\subsubsection{\texorpdfstring{select\+\_\+callback\+\_\+states()}{select\_callback\_states()}}
+{\footnotesize\ttfamily static int select\+\_\+callback\+\_\+states (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{int}]{count,  }\item[{char $\ast$$\ast$}]{data,  }\item[{char $\ast$$\ast$}]{columns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+

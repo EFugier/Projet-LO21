@@ -1,0 +1,421 @@
+\hypertarget{class_main_controller}{}\section{Main\+Controller Class Reference}
+\label{class_main_controller}\index{Main\+Controller@{Main\+Controller}}
+
+
+{\ttfamily \#include $<$maincontroller.\+h$>$}
+
+Inheritance diagram for Main\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_main_controller}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_main_controller_afc816e394f59614efba13d0657a0a351}{Main\+Controller}} ()
+\begin{DoxyCompactList}\small\item\em Constructeur de la classe \mbox{\hyperlink{class_main_controller}{Main\+Controller}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_main_controller_a26b5150d08fd0fecf209c3c8cd5c60b0}{create\+Actions}} ()
+\begin{DoxyCompactList}\small\item\em create\+Actions \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_controller_a4d0f5b5351dcda6ce6e46fc606f916fb}{create\+Menus}} ()
+\begin{DoxyCompactList}\small\item\em Initialisation des menus File et Edit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_controller_a141a116374c3605e54325bba6eaddb94}{create\+Tool\+Bars}} ()
+\begin{DoxyCompactList}\small\item\em Initialisation des toolbars file\+Tool\+Bar et edit\+Tool\+Bar. \end{DoxyCompactList}\item 
+Q\+String \mbox{\hyperlink{class_main_controller_a8cdfea32087af71164493b68c493a0e5}{open\+File}} ()
+\item 
+void \mbox{\hyperlink{class_main_controller_a48891e5a376e8315956222690238938f}{insert\+New\+Action}} (Q\+Menu $\ast$menu, int id, const Q\+String \&name, void(Automata\+Manager\+::$\ast$)(unsigned int const))
+\begin{DoxyCompactList}\small\item\em Fonction générique permettant d\textquotesingle{}ajouter des Q\+Actions à un sous-\/menu, en mettant en tête de liste le dernier item selectionné \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_controller_ad0d31c3c005bf1ba9fda39455965ca0a}{new\+Automaton}} ()
+\begin{DoxyCompactList}\small\item\em Instanction de la classe \mbox{\hyperlink{class_automata_parameters}{Automata\+Parameters}} depuis le \mbox{\hyperlink{class_main_controller}{Main\+Controller}}. On vérifie s\textquotesingle{}il existe déjà un automate créé. Si oui, on demande validation à l\textquotesingle{}utilisateur avant d\textquotesingle{}écraser l\textquotesingle{}automate courant. Sinon, on crée un nouvel automate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_controller_ae5a21e0d0566b2963618e822ad9d5f74}{new\+Automaton\+Next}} ()
+\begin{DoxyCompactList}\small\item\em Permet de transmettre les différents paramètres entrés par l\textquotesingle{}utilisateur dans \mbox{\hyperlink{class_automata_parameters}{Automata\+Parameters}}, et de définir l\textquotesingle{}état initial du modèle relié à la vue. La fenêtre principale de l\textquotesingle{}application est actualisée en conséquence selon si 1D, 2D et/ou random. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_controller_a8083c60cac9d1982633ad543900280a7}{new\+Rule}} ()
+\begin{DoxyCompactList}\small\item\em Instanciation de la classe \mbox{\hyperlink{class_rules_controller}{Rules\+Controller}} par le \mbox{\hyperlink{class_main_controller}{Main\+Controller}}. On vérifie qu\textquotesingle{}il existe bien un automate avant d\textquotesingle{}ajouter une règle, et on transmet la dimension de l\textquotesingle{}automate au constructeur de règles. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_automata_manager}{Automata\+Manager}} \& \mbox{\hyperlink{class_main_controller_ad926f088465fb1b7bbb181a4502aaad0}{instance}}
+\item 
+\mbox{\hyperlink{class_matrix_controller}{Matrix\+Controller}} $\ast$ \mbox{\hyperlink{class_main_controller_a24cdae20cbd62e663687fa079c23e83a}{view}}
+\item 
+\mbox{\hyperlink{class_automata_parameters}{Automata\+Parameters}} $\ast$ \mbox{\hyperlink{class_main_controller_a2c25d49c63992a3b1bcf312c2e02bb23}{param}}
+\item 
+Q\+Menu $\ast$ \mbox{\hyperlink{class_main_controller_a9b3df60ee05928b0296baf0b1051f261}{file\+Menu}}
+\item 
+Q\+Menu $\ast$ \mbox{\hyperlink{class_main_controller_a5ab07a811583fbca2549dbcd9919f71c}{edit\+Menu}}
+\item 
+Q\+Menu $\ast$ \mbox{\hyperlink{class_main_controller_a5242aa3227785bd402ab0e0e45d076e4}{sub\+Menu\+Automata}}
+\item 
+Q\+Menu $\ast$ \mbox{\hyperlink{class_main_controller_abbba1dcac884825de03d3b98835a7234}{sub\+Menu\+Grid}}
+\item 
+Q\+Tool\+Bar $\ast$ \mbox{\hyperlink{class_main_controller_a7c3800aaf55172aa565065272418f7f4}{file\+Tool\+Bar}}
+\item 
+Q\+Tool\+Bar $\ast$ \mbox{\hyperlink{class_main_controller_aee0527d0771c64102a9a3cdeb59024b0}{edit\+Tool\+Bar}}
+\item 
+Q\+Push\+Button $\ast$ \mbox{\hyperlink{class_main_controller_a710fae19858502fb93e097f12dca31f1}{play}}
+\item 
+Q\+Push\+Button $\ast$ \mbox{\hyperlink{class_main_controller_a76a6260f498cf6375d49e041a15ed2a3}{pause}}
+\item 
+Q\+Push\+Button $\ast$ \mbox{\hyperlink{class_main_controller_a122c813df75cca4a64b986ce826bb5a9}{random\+Button}}
+\item 
+Q\+Check\+Box $\ast$ \mbox{\hyperlink{class_main_controller_ac2739da22542b801ef4859087208cf54}{animation}}
+\item 
+Q\+Dial $\ast$ \mbox{\hyperlink{class_main_controller_a6c3d268678f6be5a53f30cc3c4a9aae3}{timer}}
+\item 
+Q\+L\+C\+D\+Number $\ast$ \mbox{\hyperlink{class_main_controller_a663d9bd8f3ca551a0634c9ff6e65be77}{lcd}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_aa4e27060ff692d2e336d89534d437ec5}{New\+Automaton}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_aa0379ddfda571ec99218a2fb0a1b205c}{Import\+Automaton}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_a5457e18d4c2df72f7c5684d7ead37346}{Import\+Grid}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_acf34814052183a7b16b799073b0f7d42}{Open\+Recent\+Automata}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_a88ac3d205cf726f1d354a1944cfccfa0}{Open\+Recent\+Grid}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_aea174540239231764b8abdfc7d62b900}{Save\+Automaton}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_a4a10844a4ef8fa3ea5918f881d39da17}{Save\+Automaton\+As}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_ad0e894d761ecd9367868ea39694a9e33}{Save\+Initial\+Grid}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_abe302a428893230967ead1c5612a2c10}{Save\+Current\+Grid}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_abfbbaa5a2ca58e3c3eb23c7ec2512273}{Export\+Automaton}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_ac4da878595e3190049a7fee30f360537}{Export\+Current\+Grid}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_ae348be948bfabf7f1756792d85d2c3a7}{Export\+Initial\+Grid}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_a5db737ac032ba58ba169a7ecf95c1a56}{Exit}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_af37c04bcfa78a77f2e7d717a5afa89e1}{New\+Rule}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_a6bf8a7e4bd6677520dd6dcbd6659f5f3}{Set\+Timer}}
+\item 
+Q\+Action $\ast$ \mbox{\hyperlink{class_main_controller_a1ac3369371a9809fb9a20bbe138c220c}{Next\+Step}}
+\item 
+Q\+Widget $\ast$ \mbox{\hyperlink{class_main_controller_a2a3c3891d166eb53dff1422783687c18}{main\+Controller}}
+\item 
+Q\+H\+Box\+Layout $\ast$ \mbox{\hyperlink{class_main_controller_a21f032f82ef8e0679f60415185697c90}{main\+Layout}}
+\item 
+Q\+V\+Box\+Layout $\ast$ \mbox{\hyperlink{class_main_controller_a20c2cdd1c4ec1dda449df88f9d491696}{tools\+Layout}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_main_controller_afc816e394f59614efba13d0657a0a351}\label{class_main_controller_afc816e394f59614efba13d0657a0a351}} 
+\index{Main\+Controller@{Main\+Controller}!Main\+Controller@{Main\+Controller}}
+\index{Main\+Controller@{Main\+Controller}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Main\+Controller()}{MainController()}}
+{\footnotesize\ttfamily Main\+Controller\+::\+Main\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructeur de la classe \mbox{\hyperlink{class_main_controller}{Main\+Controller}}. 
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_main_controller_a26b5150d08fd0fecf209c3c8cd5c60b0}\label{class_main_controller_a26b5150d08fd0fecf209c3c8cd5c60b0}} 
+\index{Main\+Controller@{Main\+Controller}!create\+Actions@{create\+Actions}}
+\index{create\+Actions@{create\+Actions}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{create\+Actions()}{createActions()}}
+{\footnotesize\ttfamily void Main\+Controller\+::create\+Actions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+create\+Actions 
+
+\mbox{\Hypertarget{class_main_controller_a4d0f5b5351dcda6ce6e46fc606f916fb}\label{class_main_controller_a4d0f5b5351dcda6ce6e46fc606f916fb}} 
+\index{Main\+Controller@{Main\+Controller}!create\+Menus@{create\+Menus}}
+\index{create\+Menus@{create\+Menus}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{create\+Menus()}{createMenus()}}
+{\footnotesize\ttfamily void Main\+Controller\+::create\+Menus (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Initialisation des menus File et Edit. 
+
+\mbox{\Hypertarget{class_main_controller_a141a116374c3605e54325bba6eaddb94}\label{class_main_controller_a141a116374c3605e54325bba6eaddb94}} 
+\index{Main\+Controller@{Main\+Controller}!create\+Tool\+Bars@{create\+Tool\+Bars}}
+\index{create\+Tool\+Bars@{create\+Tool\+Bars}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{create\+Tool\+Bars()}{createToolBars()}}
+{\footnotesize\ttfamily void Main\+Controller\+::create\+Tool\+Bars (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Initialisation des toolbars file\+Tool\+Bar et edit\+Tool\+Bar. 
+
+\mbox{\Hypertarget{class_main_controller_a48891e5a376e8315956222690238938f}\label{class_main_controller_a48891e5a376e8315956222690238938f}} 
+\index{Main\+Controller@{Main\+Controller}!insert\+New\+Action@{insert\+New\+Action}}
+\index{insert\+New\+Action@{insert\+New\+Action}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{insert\+New\+Action()}{insertNewAction()}}
+{\footnotesize\ttfamily void Main\+Controller\+::insert\+New\+Action (\begin{DoxyParamCaption}\item[{Q\+Menu $\ast$}]{menu,  }\item[{int}]{id,  }\item[{const Q\+String \&}]{name,  }\item[{void(Automata\+Manager\+::$\ast$)(unsigned int const)}]{selected\+Function }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Fonction générique permettant d\textquotesingle{}ajouter des Q\+Actions à un sous-\/menu, en mettant en tête de liste le dernier item selectionné 
+
+
+\begin{DoxyParams}{Parameters}
+{\em menu} & Q\+Menu $\ast$ permettant d\textquotesingle{}avoir accès au sous menu dans lequel l\textquotesingle{}élément doit être ajouté (sub\+Menu\+Automata ou sub\+Menu\+Grid) \\
+\hline
+{\em name} & const Q\+String\& permet de transmettre l\textquotesingle{}id de l\textquotesingle{}item dans le sous menu \\
+\hline
+{\em selected\+Function} & pointeur de fonction void (\mbox{\hyperlink{class_automata_manager}{Automata\+Manager}}\+:\+:$\ast$selected\+Function)(unsigned int const) permettant lors de selection d\textquotesingle{}un automate ou d\textquotesingle{}une grille d\textquotesingle{}appeler la fonction correspondante (selected\+Automaton ou selected\+State) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_main_controller_ad0d31c3c005bf1ba9fda39455965ca0a}\label{class_main_controller_ad0d31c3c005bf1ba9fda39455965ca0a}} 
+\index{Main\+Controller@{Main\+Controller}!new\+Automaton@{new\+Automaton}}
+\index{new\+Automaton@{new\+Automaton}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{new\+Automaton()}{newAutomaton()}}
+{\footnotesize\ttfamily void Main\+Controller\+::new\+Automaton (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Instanction de la classe \mbox{\hyperlink{class_automata_parameters}{Automata\+Parameters}} depuis le \mbox{\hyperlink{class_main_controller}{Main\+Controller}}. On vérifie s\textquotesingle{}il existe déjà un automate créé. Si oui, on demande validation à l\textquotesingle{}utilisateur avant d\textquotesingle{}écraser l\textquotesingle{}automate courant. Sinon, on crée un nouvel automate. 
+
+\mbox{\Hypertarget{class_main_controller_ae5a21e0d0566b2963618e822ad9d5f74}\label{class_main_controller_ae5a21e0d0566b2963618e822ad9d5f74}} 
+\index{Main\+Controller@{Main\+Controller}!new\+Automaton\+Next@{new\+Automaton\+Next}}
+\index{new\+Automaton\+Next@{new\+Automaton\+Next}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{new\+Automaton\+Next()}{newAutomatonNext()}}
+{\footnotesize\ttfamily void Main\+Controller\+::new\+Automaton\+Next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Permet de transmettre les différents paramètres entrés par l\textquotesingle{}utilisateur dans \mbox{\hyperlink{class_automata_parameters}{Automata\+Parameters}}, et de définir l\textquotesingle{}état initial du modèle relié à la vue. La fenêtre principale de l\textquotesingle{}application est actualisée en conséquence selon si 1D, 2D et/ou random. 
+
+\mbox{\Hypertarget{class_main_controller_a8083c60cac9d1982633ad543900280a7}\label{class_main_controller_a8083c60cac9d1982633ad543900280a7}} 
+\index{Main\+Controller@{Main\+Controller}!new\+Rule@{new\+Rule}}
+\index{new\+Rule@{new\+Rule}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{new\+Rule()}{newRule()}}
+{\footnotesize\ttfamily void Main\+Controller\+::new\+Rule (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Instanciation de la classe \mbox{\hyperlink{class_rules_controller}{Rules\+Controller}} par le \mbox{\hyperlink{class_main_controller}{Main\+Controller}}. On vérifie qu\textquotesingle{}il existe bien un automate avant d\textquotesingle{}ajouter une règle, et on transmet la dimension de l\textquotesingle{}automate au constructeur de règles. 
+
+\mbox{\Hypertarget{class_main_controller_a8cdfea32087af71164493b68c493a0e5}\label{class_main_controller_a8cdfea32087af71164493b68c493a0e5}} 
+\index{Main\+Controller@{Main\+Controller}!open\+File@{open\+File}}
+\index{open\+File@{open\+File}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{open\+File()}{openFile()}}
+{\footnotesize\ttfamily Q\+String Main\+Controller\+::open\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_main_controller_ac2739da22542b801ef4859087208cf54}\label{class_main_controller_ac2739da22542b801ef4859087208cf54}} 
+\index{Main\+Controller@{Main\+Controller}!animation@{animation}}
+\index{animation@{animation}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{animation}{animation}}
+{\footnotesize\ttfamily Q\+Check\+Box$\ast$ Main\+Controller\+::animation\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a5ab07a811583fbca2549dbcd9919f71c}\label{class_main_controller_a5ab07a811583fbca2549dbcd9919f71c}} 
+\index{Main\+Controller@{Main\+Controller}!edit\+Menu@{edit\+Menu}}
+\index{edit\+Menu@{edit\+Menu}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{edit\+Menu}{editMenu}}
+{\footnotesize\ttfamily Q\+Menu$\ast$ Main\+Controller\+::edit\+Menu\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_aee0527d0771c64102a9a3cdeb59024b0}\label{class_main_controller_aee0527d0771c64102a9a3cdeb59024b0}} 
+\index{Main\+Controller@{Main\+Controller}!edit\+Tool\+Bar@{edit\+Tool\+Bar}}
+\index{edit\+Tool\+Bar@{edit\+Tool\+Bar}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{edit\+Tool\+Bar}{editToolBar}}
+{\footnotesize\ttfamily Q\+Tool\+Bar$\ast$ Main\+Controller\+::edit\+Tool\+Bar\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a5db737ac032ba58ba169a7ecf95c1a56}\label{class_main_controller_a5db737ac032ba58ba169a7ecf95c1a56}} 
+\index{Main\+Controller@{Main\+Controller}!Exit@{Exit}}
+\index{Exit@{Exit}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Exit}{Exit}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Exit\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_abfbbaa5a2ca58e3c3eb23c7ec2512273}\label{class_main_controller_abfbbaa5a2ca58e3c3eb23c7ec2512273}} 
+\index{Main\+Controller@{Main\+Controller}!Export\+Automaton@{Export\+Automaton}}
+\index{Export\+Automaton@{Export\+Automaton}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Export\+Automaton}{ExportAutomaton}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Export\+Automaton\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_ac4da878595e3190049a7fee30f360537}\label{class_main_controller_ac4da878595e3190049a7fee30f360537}} 
+\index{Main\+Controller@{Main\+Controller}!Export\+Current\+Grid@{Export\+Current\+Grid}}
+\index{Export\+Current\+Grid@{Export\+Current\+Grid}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Export\+Current\+Grid}{ExportCurrentGrid}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Export\+Current\+Grid\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_ae348be948bfabf7f1756792d85d2c3a7}\label{class_main_controller_ae348be948bfabf7f1756792d85d2c3a7}} 
+\index{Main\+Controller@{Main\+Controller}!Export\+Initial\+Grid@{Export\+Initial\+Grid}}
+\index{Export\+Initial\+Grid@{Export\+Initial\+Grid}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Export\+Initial\+Grid}{ExportInitialGrid}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Export\+Initial\+Grid\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a9b3df60ee05928b0296baf0b1051f261}\label{class_main_controller_a9b3df60ee05928b0296baf0b1051f261}} 
+\index{Main\+Controller@{Main\+Controller}!file\+Menu@{file\+Menu}}
+\index{file\+Menu@{file\+Menu}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{file\+Menu}{fileMenu}}
+{\footnotesize\ttfamily Q\+Menu$\ast$ Main\+Controller\+::file\+Menu\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a7c3800aaf55172aa565065272418f7f4}\label{class_main_controller_a7c3800aaf55172aa565065272418f7f4}} 
+\index{Main\+Controller@{Main\+Controller}!file\+Tool\+Bar@{file\+Tool\+Bar}}
+\index{file\+Tool\+Bar@{file\+Tool\+Bar}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{file\+Tool\+Bar}{fileToolBar}}
+{\footnotesize\ttfamily Q\+Tool\+Bar$\ast$ Main\+Controller\+::file\+Tool\+Bar\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_aa0379ddfda571ec99218a2fb0a1b205c}\label{class_main_controller_aa0379ddfda571ec99218a2fb0a1b205c}} 
+\index{Main\+Controller@{Main\+Controller}!Import\+Automaton@{Import\+Automaton}}
+\index{Import\+Automaton@{Import\+Automaton}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Import\+Automaton}{ImportAutomaton}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Import\+Automaton\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a5457e18d4c2df72f7c5684d7ead37346}\label{class_main_controller_a5457e18d4c2df72f7c5684d7ead37346}} 
+\index{Main\+Controller@{Main\+Controller}!Import\+Grid@{Import\+Grid}}
+\index{Import\+Grid@{Import\+Grid}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Import\+Grid}{ImportGrid}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Import\+Grid\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_ad926f088465fb1b7bbb181a4502aaad0}\label{class_main_controller_ad926f088465fb1b7bbb181a4502aaad0}} 
+\index{Main\+Controller@{Main\+Controller}!instance@{instance}}
+\index{instance@{instance}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{instance}{instance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_automata_manager}{Automata\+Manager}}\& Main\+Controller\+::instance\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a663d9bd8f3ca551a0634c9ff6e65be77}\label{class_main_controller_a663d9bd8f3ca551a0634c9ff6e65be77}} 
+\index{Main\+Controller@{Main\+Controller}!lcd@{lcd}}
+\index{lcd@{lcd}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{lcd}{lcd}}
+{\footnotesize\ttfamily Q\+L\+C\+D\+Number$\ast$ Main\+Controller\+::lcd\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a2a3c3891d166eb53dff1422783687c18}\label{class_main_controller_a2a3c3891d166eb53dff1422783687c18}} 
+\index{Main\+Controller@{Main\+Controller}!main\+Controller@{main\+Controller}}
+\index{main\+Controller@{main\+Controller}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{main\+Controller}{mainController}}
+{\footnotesize\ttfamily Q\+Widget$\ast$ Main\+Controller\+::main\+Controller\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a21f032f82ef8e0679f60415185697c90}\label{class_main_controller_a21f032f82ef8e0679f60415185697c90}} 
+\index{Main\+Controller@{Main\+Controller}!main\+Layout@{main\+Layout}}
+\index{main\+Layout@{main\+Layout}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{main\+Layout}{mainLayout}}
+{\footnotesize\ttfamily Q\+H\+Box\+Layout$\ast$ Main\+Controller\+::main\+Layout\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_aa4e27060ff692d2e336d89534d437ec5}\label{class_main_controller_aa4e27060ff692d2e336d89534d437ec5}} 
+\index{Main\+Controller@{Main\+Controller}!New\+Automaton@{New\+Automaton}}
+\index{New\+Automaton@{New\+Automaton}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{New\+Automaton}{NewAutomaton}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+New\+Automaton\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_af37c04bcfa78a77f2e7d717a5afa89e1}\label{class_main_controller_af37c04bcfa78a77f2e7d717a5afa89e1}} 
+\index{Main\+Controller@{Main\+Controller}!New\+Rule@{New\+Rule}}
+\index{New\+Rule@{New\+Rule}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{New\+Rule}{NewRule}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+New\+Rule\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a1ac3369371a9809fb9a20bbe138c220c}\label{class_main_controller_a1ac3369371a9809fb9a20bbe138c220c}} 
+\index{Main\+Controller@{Main\+Controller}!Next\+Step@{Next\+Step}}
+\index{Next\+Step@{Next\+Step}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Next\+Step}{NextStep}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Next\+Step\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_acf34814052183a7b16b799073b0f7d42}\label{class_main_controller_acf34814052183a7b16b799073b0f7d42}} 
+\index{Main\+Controller@{Main\+Controller}!Open\+Recent\+Automata@{Open\+Recent\+Automata}}
+\index{Open\+Recent\+Automata@{Open\+Recent\+Automata}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Open\+Recent\+Automata}{OpenRecentAutomata}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Open\+Recent\+Automata\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a88ac3d205cf726f1d354a1944cfccfa0}\label{class_main_controller_a88ac3d205cf726f1d354a1944cfccfa0}} 
+\index{Main\+Controller@{Main\+Controller}!Open\+Recent\+Grid@{Open\+Recent\+Grid}}
+\index{Open\+Recent\+Grid@{Open\+Recent\+Grid}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Open\+Recent\+Grid}{OpenRecentGrid}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Open\+Recent\+Grid\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a2c25d49c63992a3b1bcf312c2e02bb23}\label{class_main_controller_a2c25d49c63992a3b1bcf312c2e02bb23}} 
+\index{Main\+Controller@{Main\+Controller}!param@{param}}
+\index{param@{param}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{param}{param}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_automata_parameters}{Automata\+Parameters}}$\ast$ Main\+Controller\+::param\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a76a6260f498cf6375d49e041a15ed2a3}\label{class_main_controller_a76a6260f498cf6375d49e041a15ed2a3}} 
+\index{Main\+Controller@{Main\+Controller}!pause@{pause}}
+\index{pause@{pause}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{pause}{pause}}
+{\footnotesize\ttfamily Q\+Push\+Button$\ast$ Main\+Controller\+::pause\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a710fae19858502fb93e097f12dca31f1}\label{class_main_controller_a710fae19858502fb93e097f12dca31f1}} 
+\index{Main\+Controller@{Main\+Controller}!play@{play}}
+\index{play@{play}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{play}{play}}
+{\footnotesize\ttfamily Q\+Push\+Button$\ast$ Main\+Controller\+::play\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a122c813df75cca4a64b986ce826bb5a9}\label{class_main_controller_a122c813df75cca4a64b986ce826bb5a9}} 
+\index{Main\+Controller@{Main\+Controller}!random\+Button@{random\+Button}}
+\index{random\+Button@{random\+Button}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{random\+Button}{randomButton}}
+{\footnotesize\ttfamily Q\+Push\+Button$\ast$ Main\+Controller\+::random\+Button\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_aea174540239231764b8abdfc7d62b900}\label{class_main_controller_aea174540239231764b8abdfc7d62b900}} 
+\index{Main\+Controller@{Main\+Controller}!Save\+Automaton@{Save\+Automaton}}
+\index{Save\+Automaton@{Save\+Automaton}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Save\+Automaton}{SaveAutomaton}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Save\+Automaton\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a4a10844a4ef8fa3ea5918f881d39da17}\label{class_main_controller_a4a10844a4ef8fa3ea5918f881d39da17}} 
+\index{Main\+Controller@{Main\+Controller}!Save\+Automaton\+As@{Save\+Automaton\+As}}
+\index{Save\+Automaton\+As@{Save\+Automaton\+As}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Save\+Automaton\+As}{SaveAutomatonAs}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Save\+Automaton\+As\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_abe302a428893230967ead1c5612a2c10}\label{class_main_controller_abe302a428893230967ead1c5612a2c10}} 
+\index{Main\+Controller@{Main\+Controller}!Save\+Current\+Grid@{Save\+Current\+Grid}}
+\index{Save\+Current\+Grid@{Save\+Current\+Grid}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Save\+Current\+Grid}{SaveCurrentGrid}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Save\+Current\+Grid\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_ad0e894d761ecd9367868ea39694a9e33}\label{class_main_controller_ad0e894d761ecd9367868ea39694a9e33}} 
+\index{Main\+Controller@{Main\+Controller}!Save\+Initial\+Grid@{Save\+Initial\+Grid}}
+\index{Save\+Initial\+Grid@{Save\+Initial\+Grid}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Save\+Initial\+Grid}{SaveInitialGrid}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Save\+Initial\+Grid\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a6bf8a7e4bd6677520dd6dcbd6659f5f3}\label{class_main_controller_a6bf8a7e4bd6677520dd6dcbd6659f5f3}} 
+\index{Main\+Controller@{Main\+Controller}!Set\+Timer@{Set\+Timer}}
+\index{Set\+Timer@{Set\+Timer}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{Set\+Timer}{SetTimer}}
+{\footnotesize\ttfamily Q\+Action$\ast$ Main\+Controller\+::\+Set\+Timer\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a5242aa3227785bd402ab0e0e45d076e4}\label{class_main_controller_a5242aa3227785bd402ab0e0e45d076e4}} 
+\index{Main\+Controller@{Main\+Controller}!sub\+Menu\+Automata@{sub\+Menu\+Automata}}
+\index{sub\+Menu\+Automata@{sub\+Menu\+Automata}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{sub\+Menu\+Automata}{subMenuAutomata}}
+{\footnotesize\ttfamily Q\+Menu$\ast$ Main\+Controller\+::sub\+Menu\+Automata\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_abbba1dcac884825de03d3b98835a7234}\label{class_main_controller_abbba1dcac884825de03d3b98835a7234}} 
+\index{Main\+Controller@{Main\+Controller}!sub\+Menu\+Grid@{sub\+Menu\+Grid}}
+\index{sub\+Menu\+Grid@{sub\+Menu\+Grid}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{sub\+Menu\+Grid}{subMenuGrid}}
+{\footnotesize\ttfamily Q\+Menu$\ast$ Main\+Controller\+::sub\+Menu\+Grid\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a6c3d268678f6be5a53f30cc3c4a9aae3}\label{class_main_controller_a6c3d268678f6be5a53f30cc3c4a9aae3}} 
+\index{Main\+Controller@{Main\+Controller}!timer@{timer}}
+\index{timer@{timer}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{timer}{timer}}
+{\footnotesize\ttfamily Q\+Dial$\ast$ Main\+Controller\+::timer\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a20c2cdd1c4ec1dda449df88f9d491696}\label{class_main_controller_a20c2cdd1c4ec1dda449df88f9d491696}} 
+\index{Main\+Controller@{Main\+Controller}!tools\+Layout@{tools\+Layout}}
+\index{tools\+Layout@{tools\+Layout}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{tools\+Layout}{toolsLayout}}
+{\footnotesize\ttfamily Q\+V\+Box\+Layout$\ast$ Main\+Controller\+::tools\+Layout\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_main_controller_a24cdae20cbd62e663687fa079c23e83a}\label{class_main_controller_a24cdae20cbd62e663687fa079c23e83a}} 
+\index{Main\+Controller@{Main\+Controller}!view@{view}}
+\index{view@{view}!Main\+Controller@{Main\+Controller}}
+\subsubsection{\texorpdfstring{view}{view}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_matrix_controller}{Matrix\+Controller}}$\ast$ Main\+Controller\+::view\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{maincontroller_8h}{maincontroller.\+h}}\item 
+\mbox{\hyperlink{maincontroller_8cpp}{maincontroller.\+cpp}}\end{DoxyCompactItemize}

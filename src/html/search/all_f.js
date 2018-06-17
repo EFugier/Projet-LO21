@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['same',['same',['../class_automata_parameters.html#a9f35c892bdbb5674713978eaac1864b3',1,'AutomataParameters::same()'],['../class_rules_controller.html#afee85c960a94ec09c46e74036cfbb81b',1,'RulesController::same()']]],
+  ['save',['save',['../class_automaton.html#a1d4431d42cc2c71fef33c125d321b633',1,'Automaton::save()'],['../class_state.html#adcb67718b6f2502d7e4e150a18a5bf0b',1,'State::save()']]],
+  ['saveautomaton',['SaveAutomaton',['../class_main_controller.html#aea174540239231764b8abdfc7d62b900',1,'MainController::SaveAutomaton()'],['../class_automata_manager.html#af35d1dbd73d340306477c923d385929a',1,'AutomataManager::saveAutomaton()']]],
+  ['saveautomatonas',['SaveAutomatonAs',['../class_main_controller.html#a4a10844a4ef8fa3ea5918f881d39da17',1,'MainController']]],
+  ['savecurrentgrid',['SaveCurrentGrid',['../class_main_controller.html#abe302a428893230967ead1c5612a2c10',1,'MainController']]],
+  ['savecurrentstate',['saveCurrentState',['../class_automata_manager.html#ade711c622353cbdad0f33d5813cbbcae',1,'AutomataManager']]],
+  ['saveinitialgrid',['SaveInitialGrid',['../class_main_controller.html#ad0e894d761ecd9367868ea39694a9e33',1,'MainController']]],
+  ['saveinitialstate',['saveInitialState',['../class_automata_manager.html#adf2b19b01cf0e63a0037ab13a8fbd428',1,'AutomataManager']]],
+  ['select_5fcallback_5fautomata',['select_callback_automata',['../automatamanager_8cpp.html#aba3d552d339364d33bb002568fa83232',1,'select_callback_automata(void *ptr, int count, char **data, char **columns):&#160;automatamanager.cpp'],['../automatamanager_8h.html#aba3d552d339364d33bb002568fa83232',1,'select_callback_automata(void *ptr, int count, char **data, char **columns):&#160;automatamanager.h']]],
+  ['select_5fcallback_5fstates',['select_callback_states',['../automatamanager_8cpp.html#aa3d7762718ab6f2018334a93504de80e',1,'select_callback_states(void *ptr, int count, char **data, char **columns):&#160;automatamanager.cpp'],['../automatamanager_8h.html#aa3d7762718ab6f2018334a93504de80e',1,'select_callback_states(void *ptr, int count, char **data, char **columns):&#160;automatamanager.h']]],
+  ['selectedautomaton',['selectedAutomaton',['../class_automata_manager.html#a36178106743ae4a2df694ba2d37fd7f8',1,'AutomataManager::selectedAutomaton(unsigned int const i)'],['../class_automata_manager.html#a9143d0dfd5f3cf046e4b254e8b99f92b',1,'AutomataManager::selectedAutomaton(QString &amp;nameFile)'],['../class_automata_manager.html#a2c57916b8483cb830cbd69fddaab8661',1,'AutomataManager::selectedAutomaton()']]],
+  ['selectedstate',['selectedState',['../class_automata_manager.html#a8ed02429103fb56a90f53128e709124b',1,'AutomataManager::selectedState(unsigned int const i)'],['../class_automata_manager.html#a9db032e421b5e3a1441df2741a34c278',1,'AutomataManager::selectedState(State const &amp;initial)'],['../class_automata_manager.html#a64081b6c56600865d3120b1ae1f0db93',1,'AutomataManager::selectedState(QString &amp;nameFile)']]],
+  ['serialize',['serialize',['../class_automaton.html#a1f1af7879a469e3ad8c282d0a58a7da4',1,'Automaton']]],
+  ['serializegrid',['serializeGrid',['../class_matrix_controller.html#a2d83853b18c33b5e9c5d9cda58b69640',1,'MatrixController::serializeGrid()'],['../class_matrix_controller.html#ad746a208e6b2f5ddad05d9da559149d1',1,'MatrixController::serializeGrid(bool v)']]],
+  ['serializenbrules',['serializeNbRules',['../class_automaton.html#a0870a8cd719c779a822780d455e33595',1,'Automaton']]],
+  ['setdimension',['setDimension',['../class_matrix_controller.html#a19a8d008de9323a306daac5aae96ce76',1,'MatrixController']]],
+  ['setstate',['setState',['../class_state.html#ad3c992e4b6e2e857f8f261575d37c3c4',1,'State']]],
+  ['settimer',['setTimer',['../class_automata_manager.html#a53cfb719a7610e1e60145a83e886bb46',1,'AutomataManager::setTimer()'],['../class_main_controller.html#a6bf8a7e4bd6677520dd6dcbd6659f5f3',1,'MainController::SetTimer()']]],
+  ['stackofnb',['stackOfNb',['../class_state.html#a9681c4601cfbcd05f9c203770105bd1e',1,'State']]],
+  ['state',['State',['../class_state.html',1,'State'],['../class_state.html#a7b36c08c9e5e334a2bbd6c4f38f75d21',1,'State::state()'],['../class_state.html#a66c925e564c8e29814ec8519e90fdf90',1,'State::State(State const &amp;old)'],['../class_state.html#aed4ab30fe127984d9d7f1327abd50976',1,'State::State(QString const &amp;fileName)'],['../class_state.html#a8c645ab945f02b1c90b814ebb67bfcc3',1,'State::State(const Uint id, sqlite3 *db)'],['../class_state.html#a647bdb0ebd9012e00ce54400dbb247f0',1,'State::State(const Uint dimension1d)'],['../class_state.html#af599b90d950b89a489ac23a584b1c0e3',1,'State::State(const Uint dimension1d, Vec v)'],['../class_state.html#a72792193d86ae159600a31bf40dd3912',1,'State::State(const Uint rowDimension, const Uint colDimension)'],['../class_state.html#a0fd7e27557fffb01934f86ae99720e9e',1,'State::State(const Uint rowDimension, const Uint colDimension, Vec v)']]],
+  ['state_2ecpp',['state.cpp',['../state_8cpp.html',1,'']]],
+  ['state_2eh',['state.h',['../state_8h.html',1,'']]],
+  ['submenuautomata',['subMenuAutomata',['../class_main_controller.html#a5242aa3227785bd402ab0e0e45d076e4',1,'MainController']]],
+  ['submenugrid',['subMenuGrid',['../class_main_controller.html#abbba1dcac884825de03d3b98835a7234',1,'MainController']]],
+  ['switchbool',['switchBool',['../class_matrix_controller.html#aa2edebadd4baa22559dda6a44a334f7e',1,'MatrixController']]]
+];

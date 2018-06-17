@@ -1,0 +1,71 @@
+\hypertarget{state_8h}{}\section{state.\+h File Reference}
+\label{state_8h}\index{state.\+h@{state.\+h}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$Q\+File$>$}\newline
+{\ttfamily \#include $<$Q\+Text\+Stream$>$}\newline
+{\ttfamily \#include $<$Q\+I\+O\+Device$>$}\newline
+{\ttfamily \#include $<$Q\+String$>$}\newline
+{\ttfamily \#include $<$stack$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include \char`\"{}utilities/sqlite3.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_state}{State}}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ bool $>$ \mbox{\hyperlink{state_8h_aa074fbe250e9d18fbe221bb7473158ad}{Vec}}
+\item 
+typedef unsigned int \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{state_8h_a955be2809aad4f747bbe342128745fb0}{mod}} (int x, int m)
+\item 
+static int \mbox{\hyperlink{state_8h_a49907d7410de0dbca46954697cf587a9}{callback\+\_\+get\+\_\+id}} (void $\ast$ptr, int count, char $\ast$$\ast$data, char $\ast$$\ast$columns)
+\item 
+static int \mbox{\hyperlink{state_8h_a1edbba0557595e5cd85668d258754cbd}{callback\+\_\+load\+\_\+state}} (void $\ast$ptr, int count, char $\ast$$\ast$data, char $\ast$$\ast$columns)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{state_8h_a4840c4503b7d10cea5e08416eb3716f1}\label{state_8h_a4840c4503b7d10cea5e08416eb3716f1}} 
+\index{state.\+h@{state.\+h}!Uint@{Uint}}
+\index{Uint@{Uint}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Uint}{Uint}}
+{\footnotesize\ttfamily typedef unsigned int \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}}}
+
+\mbox{\Hypertarget{state_8h_aa074fbe250e9d18fbe221bb7473158ad}\label{state_8h_aa074fbe250e9d18fbe221bb7473158ad}} 
+\index{state.\+h@{state.\+h}!Vec@{Vec}}
+\index{Vec@{Vec}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{Vec}{Vec}}
+{\footnotesize\ttfamily typedef std\+::vector$<$bool$>$ \mbox{\hyperlink{state_8h_aa074fbe250e9d18fbe221bb7473158ad}{Vec}}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{state_8h_a49907d7410de0dbca46954697cf587a9}\label{state_8h_a49907d7410de0dbca46954697cf587a9}} 
+\index{state.\+h@{state.\+h}!callback\+\_\+get\+\_\+id@{callback\+\_\+get\+\_\+id}}
+\index{callback\+\_\+get\+\_\+id@{callback\+\_\+get\+\_\+id}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{callback\+\_\+get\+\_\+id()}{callback\_get\_id()}}
+{\footnotesize\ttfamily static int callback\+\_\+get\+\_\+id (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{int}]{count,  }\item[{char $\ast$$\ast$}]{data,  }\item[{char $\ast$$\ast$}]{columns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{state_8h_a1edbba0557595e5cd85668d258754cbd}\label{state_8h_a1edbba0557595e5cd85668d258754cbd}} 
+\index{state.\+h@{state.\+h}!callback\+\_\+load\+\_\+state@{callback\+\_\+load\+\_\+state}}
+\index{callback\+\_\+load\+\_\+state@{callback\+\_\+load\+\_\+state}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{callback\+\_\+load\+\_\+state()}{callback\_load\_state()}}
+{\footnotesize\ttfamily static int callback\+\_\+load\+\_\+state (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{int}]{count,  }\item[{char $\ast$$\ast$}]{data,  }\item[{char $\ast$$\ast$}]{columns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{state_8h_a955be2809aad4f747bbe342128745fb0}\label{state_8h_a955be2809aad4f747bbe342128745fb0}} 
+\index{state.\+h@{state.\+h}!mod@{mod}}
+\index{mod@{mod}!state.\+h@{state.\+h}}
+\subsubsection{\texorpdfstring{mod()}{mod()}}
+{\footnotesize\ttfamily int mod (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{m }\end{DoxyParamCaption})}
+

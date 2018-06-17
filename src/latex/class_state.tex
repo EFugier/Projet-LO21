@@ -1,0 +1,378 @@
+\hypertarget{class_state}{}\section{State Class Reference}
+\label{class_state}\index{State@{State}}
+
+
+{\ttfamily \#include $<$state.\+h$>$}
+
+Inheritance diagram for State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_state}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_state_a7a3e3dd36808cc394e8514902d55b856}{value\+Changed}} (std\+::vector$<$ bool $>$ \&)
+\begin{DoxyCompactList}\small\item\em Signal qui sera envoyé à la vue lorsque state est modifié \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Q\+String \mbox{\hyperlink{class_state_aeadbbdbf52ed603425180ccb53d841cd}{to\+String}} () const
+\begin{DoxyCompactList}\small\item\em méthode de sérialisation du vecteur state \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_state_a66c925e564c8e29814ec8519e90fdf90}{State}} (\mbox{\hyperlink{class_state}{State}} const \&old)
+\begin{DoxyCompactList}\small\item\em Constructeur de recopie. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_state_aed4ab30fe127984d9d7f1327abd50976}{State}} (Q\+String const \&file\+Name)
+\begin{DoxyCompactList}\small\item\em Constructeur à partir d\textquotesingle{}un fichier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_state_a8c645ab945f02b1c90b814ebb67bfcc3}{State}} (const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} id, sqlite3 $\ast$db)
+\begin{DoxyCompactList}\small\item\em Constructeur à partir d\textquotesingle{}\textquotesingle{}un automate de la B\+DD. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_state_a647bdb0ebd9012e00ce54400dbb247f0}{State}} (const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} dimension1d)
+\begin{DoxyCompactList}\small\item\em Constructeur d\textquotesingle{}état 1D aléatoire. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_state_af599b90d950b89a489ac23a584b1c0e3}{State}} (const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} dimension1d, \mbox{\hyperlink{state_8h_aa074fbe250e9d18fbe221bb7473158ad}{Vec}} v)
+\begin{DoxyCompactList}\small\item\em Constructeur d\textquotesingle{}état 1D non-\/aléatoire. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_state_a72792193d86ae159600a31bf40dd3912}{State}} (const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} row\+Dimension, const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} col\+Dimension)
+\begin{DoxyCompactList}\small\item\em Constructeur d\textquotesingle{}état 2D aléatoire. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_state_a0fd7e27557fffb01934f86ae99720e9e}{State}} (const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} row\+Dimension, const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} col\+Dimension, \mbox{\hyperlink{state_8h_aa074fbe250e9d18fbe221bb7473158ad}{Vec}} v)
+\begin{DoxyCompactList}\small\item\em Constructeur d\textquotesingle{}état 2D non-\/aléatoire. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} \mbox{\hyperlink{class_state_a7897325c49eb83639365bc61d806fab2}{get\+Nrow}} () const
+\item 
+\mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} \mbox{\hyperlink{class_state_a706098b5c48bcf68bfb3a8676bb5a868}{get\+Ncol}} () const
+\item 
+const \mbox{\hyperlink{state_8h_aa074fbe250e9d18fbe221bb7473158ad}{Vec}} \& \mbox{\hyperlink{class_state_aa2168c5a262b6bce4cbadc069d72d1be}{get\+State}} () const
+\item 
+void \mbox{\hyperlink{class_state_ad3c992e4b6e2e857f8f261575d37c3c4}{set\+State}} (\mbox{\hyperlink{state_8h_aa074fbe250e9d18fbe221bb7473158ad}{Vec}} \&v)
+\item 
+void \mbox{\hyperlink{class_state_a7f9db12892f20438c4e00796e28a0dac}{emit\+Signal}} ()
+\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}émettre le signal value\+Changd, envoyant une référence de state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_state_ae51e526916dea6aa33f0dbd4529f877b}{random\+State}} ()
+\begin{DoxyCompactList}\small\item\em Rempli state de manière aléatoire. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} \mbox{\hyperlink{class_state_adcb67718b6f2502d7e4e150a18a5bf0b}{save}} (const Q\+String \&name, sqlite3 $\ast$db) const
+\begin{DoxyCompactList}\small\item\em Sauvegarde l\textquotesingle{}état dans la B\+DD. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_state_a7dfee0c004e500cca7f050e800daefcf}{export\+To\+File}} (Q\+String const \&name) const
+\begin{DoxyCompactList}\small\item\em Exporte l\textquotesingle{}état dans un fichier. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_state_a9681c4601cfbcd05f9c203770105bd1e}{stack\+Of\+Nb}} (\mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} n) const
+\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}envoyer les voisins significatifs de chaque case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_state_a34eca90486ef2fa8516d255279ce394f}{load\+State\+From\+String}} (char $\ast$str)
+\begin{DoxyCompactList}\small\item\em ncol est le nombre de colonnes de la grille \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{state_8h_aa074fbe250e9d18fbe221bb7473158ad}{Vec}} \mbox{\hyperlink{class_state_a7b36c08c9e5e334a2bbd6c4f38f75d21}{state}}
+\item 
+\mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} \mbox{\hyperlink{class_state_ae3394f187fa7e76395a620c96f03d1a2}{nrow}}
+\begin{DoxyCompactList}\small\item\em state est le vecteur de booléens stockant les valeurs de l\textquotesingle{}état \end{DoxyCompactList}\item 
+\mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} \mbox{\hyperlink{class_state_a94feee6145041e8521a7c94f3e416887}{ncol}}
+\begin{DoxyCompactList}\small\item\em nrow est le nombre de lignes de la grille \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_state_a62de6fe2f55d6e7c3af99e11f5bf3cad}{callback\+\_\+load\+\_\+state}} (void $\ast$ptr, int count, char $\ast$$\ast$data, char $\ast$$\ast$columns)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_state_a66c925e564c8e29814ec8519e90fdf90}\label{class_state_a66c925e564c8e29814ec8519e90fdf90}} 
+\index{State@{State}!State@{State}}
+\index{State@{State}!State@{State}}
+\subsubsection{\texorpdfstring{State()}{State()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily State\+::\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_state}{State}} const \&}]{old }\end{DoxyParamCaption})}
+
+
+
+Constructeur de recopie. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em old} & est l\textquotesingle{}état que l\textquotesingle{}on souhaite recopier \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_state_aed4ab30fe127984d9d7f1327abd50976}\label{class_state_aed4ab30fe127984d9d7f1327abd50976}} 
+\index{State@{State}!State@{State}}
+\index{State@{State}!State@{State}}
+\subsubsection{\texorpdfstring{State()}{State()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily State\+::\+State (\begin{DoxyParamCaption}\item[{Q\+String const \&}]{file\+Name }\end{DoxyParamCaption})}
+
+
+
+Constructeur à partir d\textquotesingle{}un fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & est le pathname du fichier à importer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_state_a8c645ab945f02b1c90b814ebb67bfcc3}\label{class_state_a8c645ab945f02b1c90b814ebb67bfcc3}} 
+\index{State@{State}!State@{State}}
+\index{State@{State}!State@{State}}
+\subsubsection{\texorpdfstring{State()}{State()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily State\+::\+State (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}}}]{id,  }\item[{sqlite3 $\ast$}]{db }\end{DoxyParamCaption})}
+
+
+
+Constructeur à partir d\textquotesingle{}\textquotesingle{}un automate de la B\+DD. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & est l\textquotesingle{}id de l\textquotesingle{}état dans la B\+DD \\
+\hline
+{\em db} & est le pointeur de sqlite représentant la B\+DD \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_state_a647bdb0ebd9012e00ce54400dbb247f0}\label{class_state_a647bdb0ebd9012e00ce54400dbb247f0}} 
+\index{State@{State}!State@{State}}
+\index{State@{State}!State@{State}}
+\subsubsection{\texorpdfstring{State()}{State()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily State\+::\+State (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}}}]{dimension1d }\end{DoxyParamCaption})}
+
+
+
+Constructeur d\textquotesingle{}état 1D aléatoire. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dimension1d} & est la taille (le nombre de colonnes) de l\textquotesingle{}état \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_state_af599b90d950b89a489ac23a584b1c0e3}\label{class_state_af599b90d950b89a489ac23a584b1c0e3}} 
+\index{State@{State}!State@{State}}
+\index{State@{State}!State@{State}}
+\subsubsection{\texorpdfstring{State()}{State()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily State\+::\+State (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}}}]{dimension1d,  }\item[{\mbox{\hyperlink{state_8h_aa074fbe250e9d18fbe221bb7473158ad}{Vec}}}]{v }\end{DoxyParamCaption})}
+
+
+
+Constructeur d\textquotesingle{}état 1D non-\/aléatoire. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dimension1d} & est la taille (le nombre de colonnes) de l\textquotesingle{}état \\
+\hline
+{\em v} & est le vecteur de booléens à mettre dans state \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_state_a72792193d86ae159600a31bf40dd3912}\label{class_state_a72792193d86ae159600a31bf40dd3912}} 
+\index{State@{State}!State@{State}}
+\index{State@{State}!State@{State}}
+\subsubsection{\texorpdfstring{State()}{State()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily State\+::\+State (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}}}]{row\+Dimension,  }\item[{const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}}}]{col\+Dimension }\end{DoxyParamCaption})}
+
+
+
+Constructeur d\textquotesingle{}état 2D aléatoire. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\+Dimension} & est la taille verticale (le nombre de lignes) de l\textquotesingle{}état \\
+\hline
+{\em col\+Dimension} & est la taille horizontale (le nombre de colonnes) de l\textquotesingle{}état \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_state_a0fd7e27557fffb01934f86ae99720e9e}\label{class_state_a0fd7e27557fffb01934f86ae99720e9e}} 
+\index{State@{State}!State@{State}}
+\index{State@{State}!State@{State}}
+\subsubsection{\texorpdfstring{State()}{State()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily State\+::\+State (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}}}]{row\+Dimension,  }\item[{const \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}}}]{col\+Dimension,  }\item[{\mbox{\hyperlink{state_8h_aa074fbe250e9d18fbe221bb7473158ad}{Vec}}}]{v }\end{DoxyParamCaption})}
+
+
+
+Constructeur d\textquotesingle{}état 2D non-\/aléatoire. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\+Dimension} & est la taille verticale (le nombre de lignes) de l\textquotesingle{}état \\
+\hline
+{\em col\+Dimension} & est la taille horizontale (le nombre de colonnes) de l\textquotesingle{}état \\
+\hline
+{\em v} & est le vecteur de booléens à mettre dans state \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_state_a7f9db12892f20438c4e00796e28a0dac}\label{class_state_a7f9db12892f20438c4e00796e28a0dac}} 
+\index{State@{State}!emit\+Signal@{emit\+Signal}}
+\index{emit\+Signal@{emit\+Signal}!State@{State}}
+\subsubsection{\texorpdfstring{emit\+Signal()}{emitSignal()}}
+{\footnotesize\ttfamily void State\+::emit\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Permet d\textquotesingle{}émettre le signal value\+Changd, envoyant une référence de state. 
+
+void \mbox{\hyperlink{class_state_a7f9db12892f20438c4e00796e28a0dac}{emit\+Signal()}} \mbox{\Hypertarget{class_state_a7dfee0c004e500cca7f050e800daefcf}\label{class_state_a7dfee0c004e500cca7f050e800daefcf}} 
+\index{State@{State}!export\+To\+File@{export\+To\+File}}
+\index{export\+To\+File@{export\+To\+File}!State@{State}}
+\subsubsection{\texorpdfstring{export\+To\+File()}{exportToFile()}}
+{\footnotesize\ttfamily void State\+::export\+To\+File (\begin{DoxyParamCaption}\item[{Q\+String const \&}]{name }\end{DoxyParamCaption}) const}
+
+
+
+Exporte l\textquotesingle{}état dans un fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & est le pathname du fichier à créer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_state_a706098b5c48bcf68bfb3a8676bb5a868}\label{class_state_a706098b5c48bcf68bfb3a8676bb5a868}} 
+\index{State@{State}!get\+Ncol@{get\+Ncol}}
+\index{get\+Ncol@{get\+Ncol}!State@{State}}
+\subsubsection{\texorpdfstring{get\+Ncol()}{getNcol()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} State\+::get\+Ncol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{class_state_a7897325c49eb83639365bc61d806fab2}\label{class_state_a7897325c49eb83639365bc61d806fab2}} 
+\index{State@{State}!get\+Nrow@{get\+Nrow}}
+\index{get\+Nrow@{get\+Nrow}!State@{State}}
+\subsubsection{\texorpdfstring{get\+Nrow()}{getNrow()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} State\+::get\+Nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{class_state_aa2168c5a262b6bce4cbadc069d72d1be}\label{class_state_aa2168c5a262b6bce4cbadc069d72d1be}} 
+\index{State@{State}!get\+State@{get\+State}}
+\index{get\+State@{get\+State}!State@{State}}
+\subsubsection{\texorpdfstring{get\+State()}{getState()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{state_8h_aa074fbe250e9d18fbe221bb7473158ad}{Vec}} \& State\+::get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{class_state_a34eca90486ef2fa8516d255279ce394f}\label{class_state_a34eca90486ef2fa8516d255279ce394f}} 
+\index{State@{State}!load\+State\+From\+String@{load\+State\+From\+String}}
+\index{load\+State\+From\+String@{load\+State\+From\+String}!State@{State}}
+\subsubsection{\texorpdfstring{load\+State\+From\+String()}{loadStateFromString()}}
+{\footnotesize\ttfamily void State\+::load\+State\+From\+String (\begin{DoxyParamCaption}\item[{char $\ast$}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+ncol est le nombre de colonnes de la grille 
+
+Méthode de désérialisation d\textquotesingle{}un état 
+\begin{DoxyParams}{Parameters}
+{\em str} & est une chaine issue de la sérialisation d\textquotesingle{}un état \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_state_ae51e526916dea6aa33f0dbd4529f877b}\label{class_state_ae51e526916dea6aa33f0dbd4529f877b}} 
+\index{State@{State}!random\+State@{random\+State}}
+\index{random\+State@{random\+State}!State@{State}}
+\subsubsection{\texorpdfstring{random\+State()}{randomState()}}
+{\footnotesize\ttfamily void State\+::random\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Rempli state de manière aléatoire. 
+
+\mbox{\Hypertarget{class_state_adcb67718b6f2502d7e4e150a18a5bf0b}\label{class_state_adcb67718b6f2502d7e4e150a18a5bf0b}} 
+\index{State@{State}!save@{save}}
+\index{save@{save}!State@{State}}
+\subsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} State\+::save (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{name,  }\item[{sqlite3 $\ast$}]{db }\end{DoxyParamCaption}) const}
+
+
+
+Sauvegarde l\textquotesingle{}état dans la B\+DD. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & est le nom à mettre dans la B\+DD \\
+\hline
+{\em db} & est le pointeur représentant la B\+DD \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Retourne l\textquotesingle{}ID dans la B\+DD de l\textquotesingle{}état nouvellement crée 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_state_ad3c992e4b6e2e857f8f261575d37c3c4}\label{class_state_ad3c992e4b6e2e857f8f261575d37c3c4}} 
+\index{State@{State}!set\+State@{set\+State}}
+\index{set\+State@{set\+State}!State@{State}}
+\subsubsection{\texorpdfstring{set\+State()}{setState()}}
+{\footnotesize\ttfamily void State\+::set\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{state_8h_aa074fbe250e9d18fbe221bb7473158ad}{Vec}} \&}]{v }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_state_a9681c4601cfbcd05f9c203770105bd1e}\label{class_state_a9681c4601cfbcd05f9c203770105bd1e}} 
+\index{State@{State}!stack\+Of\+Nb@{stack\+Of\+Nb}}
+\index{stack\+Of\+Nb@{stack\+Of\+Nb}!State@{State}}
+\subsubsection{\texorpdfstring{stack\+Of\+Nb()}{stackOfNb()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ State\+::stack\+Of\+Nb (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}}}]{n }\end{DoxyParamCaption}) const}
+
+
+
+Permet d\textquotesingle{}envoyer les voisins significatifs de chaque case. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & est le nombre de voisins à prendre en considération \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Retourne un vecteur de strings où chaque string représente les voisins significatifs d\textquotesingle{}une cellule de l\textquotesingle{}état 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_state_aeadbbdbf52ed603425180ccb53d841cd}\label{class_state_aeadbbdbf52ed603425180ccb53d841cd}} 
+\index{State@{State}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!State@{State}}
+\subsubsection{\texorpdfstring{to\+String()}{toString()}}
+{\footnotesize\ttfamily Q\+String State\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+méthode de sérialisation du vecteur state 
+
+\begin{DoxyReturn}{Returns}
+Retourne un Q\+String représentant avec des 0 et des 1 le vecteur state 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_state_a7a3e3dd36808cc394e8514902d55b856}\label{class_state_a7a3e3dd36808cc394e8514902d55b856}} 
+\index{State@{State}!value\+Changed@{value\+Changed}}
+\index{value\+Changed@{value\+Changed}!State@{State}}
+\subsubsection{\texorpdfstring{value\+Changed}{valueChanged}}
+{\footnotesize\ttfamily void State\+::value\+Changed (\begin{DoxyParamCaption}\item[{std\+::vector$<$ bool $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Signal qui sera envoyé à la vue lorsque state est modifié 
+
+
+\begin{DoxyParams}{Parameters}
+{\em On} & envoi la référence de state \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_state_a62de6fe2f55d6e7c3af99e11f5bf3cad}\label{class_state_a62de6fe2f55d6e7c3af99e11f5bf3cad}} 
+\index{State@{State}!callback\+\_\+load\+\_\+state@{callback\+\_\+load\+\_\+state}}
+\index{callback\+\_\+load\+\_\+state@{callback\+\_\+load\+\_\+state}!State@{State}}
+\subsubsection{\texorpdfstring{callback\+\_\+load\+\_\+state}{callback\_load\_state}}
+{\footnotesize\ttfamily int callback\+\_\+load\+\_\+state (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{int}]{count,  }\item[{char $\ast$$\ast$}]{data,  }\item[{char $\ast$$\ast$}]{columns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_state_a94feee6145041e8521a7c94f3e416887}\label{class_state_a94feee6145041e8521a7c94f3e416887}} 
+\index{State@{State}!ncol@{ncol}}
+\index{ncol@{ncol}!State@{State}}
+\subsubsection{\texorpdfstring{ncol}{ncol}}
+{\footnotesize\ttfamily \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} State\+::ncol\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+nrow est le nombre de lignes de la grille 
+
+\mbox{\Hypertarget{class_state_ae3394f187fa7e76395a620c96f03d1a2}\label{class_state_ae3394f187fa7e76395a620c96f03d1a2}} 
+\index{State@{State}!nrow@{nrow}}
+\index{nrow@{nrow}!State@{State}}
+\subsubsection{\texorpdfstring{nrow}{nrow}}
+{\footnotesize\ttfamily \mbox{\hyperlink{state_8h_a4840c4503b7d10cea5e08416eb3716f1}{Uint}} State\+::nrow\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+state est le vecteur de booléens stockant les valeurs de l\textquotesingle{}état 
+
+\mbox{\Hypertarget{class_state_a7b36c08c9e5e334a2bbd6c4f38f75d21}\label{class_state_a7b36c08c9e5e334a2bbd6c4f38f75d21}} 
+\index{State@{State}!state@{state}}
+\index{state@{state}!State@{State}}
+\subsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \mbox{\hyperlink{state_8h_aa074fbe250e9d18fbe221bb7473158ad}{Vec}} State\+::state\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{state_8h}{state.\+h}}\item 
+\mbox{\hyperlink{state_8cpp}{state.\+cpp}}\end{DoxyCompactItemize}

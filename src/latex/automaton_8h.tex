@@ -1,0 +1,51 @@
+\hypertarget{automaton_8h}{}\section{automaton.\+h File Reference}
+\label{automaton_8h}\index{automaton.\+h@{automaton.\+h}}
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include \char`\"{}./utilities/sqlite3.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include \char`\"{}./utilities/rulebst.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Q\+File$>$}\newline
+{\ttfamily \#include $<$Q\+Text\+Stream$>$}\newline
+{\ttfamily \#include $<$Q\+I\+O\+Device$>$}\newline
+{\ttfamily \#include $<$Q\+String$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_automaton}{Automaton}}
+\item 
+struct \mbox{\hyperlink{struct_automaton_1_1_range}{Automaton\+::\+Range}}
+\begin{DoxyCompactList}\small\item\em Permet de stocker un intervalle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{automaton_8h_a57bb496b6b1a5b5c28f9f4b37b94e08b}{callback\+\_\+load\+\_\+automata}} (void $\ast$ptr, int count, char $\ast$$\ast$data, char $\ast$$\ast$columns)
+\item 
+static int \mbox{\hyperlink{automaton_8h_a5d6e70032d96a5404ad816d9c5cf598e}{callback\+\_\+get\+\_\+id\+\_\+automata}} (void $\ast$ptr, int count, char $\ast$$\ast$data, char $\ast$$\ast$columns)
+\item 
+const std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{automaton_8h_ae65208fb00630fa3db3022c4fb941355}{explode}} (const std\+::string \&s, const char \&c)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{automaton_8h_a5d6e70032d96a5404ad816d9c5cf598e}\label{automaton_8h_a5d6e70032d96a5404ad816d9c5cf598e}} 
+\index{automaton.\+h@{automaton.\+h}!callback\+\_\+get\+\_\+id\+\_\+automata@{callback\+\_\+get\+\_\+id\+\_\+automata}}
+\index{callback\+\_\+get\+\_\+id\+\_\+automata@{callback\+\_\+get\+\_\+id\+\_\+automata}!automaton.\+h@{automaton.\+h}}
+\subsubsection{\texorpdfstring{callback\+\_\+get\+\_\+id\+\_\+automata()}{callback\_get\_id\_automata()}}
+{\footnotesize\ttfamily static int callback\+\_\+get\+\_\+id\+\_\+automata (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{int}]{count,  }\item[{char $\ast$$\ast$}]{data,  }\item[{char $\ast$$\ast$}]{columns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{automaton_8h_a57bb496b6b1a5b5c28f9f4b37b94e08b}\label{automaton_8h_a57bb496b6b1a5b5c28f9f4b37b94e08b}} 
+\index{automaton.\+h@{automaton.\+h}!callback\+\_\+load\+\_\+automata@{callback\+\_\+load\+\_\+automata}}
+\index{callback\+\_\+load\+\_\+automata@{callback\+\_\+load\+\_\+automata}!automaton.\+h@{automaton.\+h}}
+\subsubsection{\texorpdfstring{callback\+\_\+load\+\_\+automata()}{callback\_load\_automata()}}
+{\footnotesize\ttfamily static int callback\+\_\+load\+\_\+automata (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{int}]{count,  }\item[{char $\ast$$\ast$}]{data,  }\item[{char $\ast$$\ast$}]{columns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{automaton_8h_ae65208fb00630fa3db3022c4fb941355}\label{automaton_8h_ae65208fb00630fa3db3022c4fb941355}} 
+\index{automaton.\+h@{automaton.\+h}!explode@{explode}}
+\index{explode@{explode}!automaton.\+h@{automaton.\+h}}
+\subsubsection{\texorpdfstring{explode()}{explode()}}
+{\footnotesize\ttfamily const std\+::vector$<$std\+::string$>$ explode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s,  }\item[{const char \&}]{c }\end{DoxyParamCaption})}
+

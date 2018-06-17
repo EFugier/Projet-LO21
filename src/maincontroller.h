@@ -8,6 +8,7 @@
 #include "rulescontroller.h"
 #include "automatamanager.h"
 
+
 class AutomataParameters : public QDialog
 {
     Q_OBJECT
@@ -30,16 +31,16 @@ private:
 };
 
 
-
+/// @class MainController
 class MainController : public QMainWindow{
-     Q_OBJECT
+    Q_OBJECT
 
 public:
-    MainController();
     /**
-     * \fn MainController()
-     * \brief Constructeur de la classe MainController
-    */
+     * @fn MainController()
+     * @brief Constructeur de la classe MainController
+     */
+    MainController();
 
 private:
     AutomataManager& instance;
@@ -78,43 +79,41 @@ private:
     QHBoxLayout *mainLayout;
     QVBoxLayout * toolsLayout;
 
-    void createActions();
     /**
-     * \fn void createActions()
-     * \brief Initialisation des différentes QActions permettant de déclencher les différentes fonctionnalités de l'application depuis les menu
-    */
+     * @fn void createActions()
+     * @brief Initialisation des QActions permettant de déclencher les différentes fonctionnalités de l'application depuis les menus
+     */
+    void createActions();
 
-    void createMenus();
     /**
      * \fn void createMenus()
      * \brief Initialisation des menus File et Edit
     */
+    void createMenus();
 
-    void createToolBars();
     /**
      * \fn void createToolBars
      * \brief Initialisation des toolbars fileToolBar et editToolBar
     */
+    void createToolBars();
+
 
     QString openFile();
-    void insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*)(unsigned int const) );
+
     /**
      * \fn void insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*selectedFunction)(unsigned int const) )
      * \brief Fonction générique permettant d'ajouter des QActions à un sous-menu, en mettant en tête de liste le dernier item selectionné
-     *
      * \param menu QMenu * permettant d'avoir accès au sous menu dans lequel l'élément doit être ajouté (subMenuAutomata ou subMenuGrid)
      * \param name const QString& permet de transmettre l'id de l'item dans le sous menu
-     * \param  selectedFunction pointeur de fonction void (AutomataManager::*selectedFunction)(unsigned int const) permettant lors de selection
-     * d'un automate ou d'une grille d'appeler la fonction correspondante (selectedAutomaton ou selectedState)
-     *
+     * \param  selectedFunction pointeur de fonction void (AutomataManager::*selectedFunction)(unsigned int const) permettant lors de selection d'un automate ou d'une grille d'appeler la fonction correspondante (selectedAutomaton ou selectedState)
     */
+    void insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*)(unsigned int const) );
 
-    void newAutomaton();
     /**
      * \fn void newAutomaton()
-     * \brief Instanction de la classe AutomataParameters depuis le MainController. On vérifie s'il existe déjà un automate créé.
-     *  Si oui, on demande validation à l'utilisateur avant d'écraser l'automate courant. Sinon, on crée un nouvel automate.
+     * \brief Instanction de la classe AutomataParameters depuis le MainController. On vérifie s'il existe déjà un automate créé. Si oui, on demande validation à l'utilisateur avant d'écraser l'automate courant. Sinon, on crée un nouvel automate.
     */
+    void newAutomaton();
 
     void newAutomatonNext();
     /**
