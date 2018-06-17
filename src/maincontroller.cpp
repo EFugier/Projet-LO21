@@ -1,5 +1,10 @@
 #include "maincontroller.h"
 
+/**
+ * \fn MainController()
+ * \brief Constructeur de la classe MainController
+*/
+
 MainController::MainController() : instance(AutomataManager::getInstance()){
     mainController = new QWidget(this);
     setCentralWidget(mainController);
@@ -24,6 +29,11 @@ MainController::MainController() : instance(AutomataManager::getInstance()){
 
 }
 
+
+/**
+ * \fn void createActions()
+ * \brief Initialisation des différentes QActions permettant de déclencher les différentes fonctionnalités de l'application depuis les menu
+*/
 
 void MainController::createActions(){
     NewAutomaton=new QAction(QIcon(":/images/start.png"), tr("&New Automaton"), this);
@@ -182,6 +192,17 @@ void MainController::createActions(){
 
 }
 
+/**
+ * \fn void insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*selectedFunction)(unsigned int const) )
+ * \brief Fonction générique permettant d'ajouter des QActions à un sous-menu, en mettant en tête de liste le dernier item selectionné
+ *
+ * \param menu QMenu * permettant d'avoir accès au sous menu dans lequel l'élément doit être ajouté (subMenuAutomata ou subMenuGrid)
+ * \param name const QString& permet de transmettre l'id de l'item dans le sous menu
+ * \param  selectedFunction pointeur de fonction void (AutomataManager::*selectedFunction)(unsigned int const) permettant lors de selection
+ * d'un automate ou d'une grille d'appeler la fonction correspondante (selectedAutomaton ou selectedState)
+ *
+*/
+
 
 void MainController::insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*selectedFunction)(unsigned int const) ){
     // !!!!!!! J'ai remplacé l'argument int de la fonction pointée par unsigned int const !!!!!!!
@@ -221,6 +242,11 @@ void MainController::insertNewAction(QMenu* menu, int id, const QString& name, v
 }
 
 
+/**
+ * \fn void createMenus()
+ * \brief Initialisation des menus File et Edit
+*/
+
 
 void MainController::createMenus(){
     fileMenu= menuBar()->addMenu(tr("&File"));
@@ -246,6 +272,13 @@ void MainController::createMenus(){
     editMenu->addAction(NextStep);
 
 }
+
+
+/**
+ * \fn void createToolBars
+ * \brief Initialisation des toolbars fileToolBar et editToolBar
+*/
+
 
 void MainController::createToolBars()
 {
@@ -344,6 +377,13 @@ void MainController::createToolBars()
 }
 
 
+/**
+ * \fn void newRule()
+ * \brief Instanciation de la classe RulesController par le MainController. On vérifie qu'il existe bien un automate avant d'ajouter une règle,
+ * et on transmet la dimension de l'automate au constructeur de règles
+*/
+
+
 void MainController::newRule(){
     if (!instance.getPtrAutomaton()) return;
     RulesController * rulesController;
@@ -370,6 +410,14 @@ void MainController::newRule(){
     });
     rulesController->show();
 }
+
+
+/**
+ * \fn void newAutomaton()
+ * \brief Instanction de la classe AutomataParameters depuis le MainController. On vérifie s'il existe déjà un automate créé.
+ *  Si oui, on demande validation à l'utilisateur avant d'écraser l'automate courant. Sinon, on crée un nouvel automate.
+*/
+
 
 void MainController::newAutomaton(){
     if(instance.getPtrAutomaton()) {
@@ -403,6 +451,16 @@ void MainController::newAutomaton(){
     }
 
 }
+
+
+/**
+ * \fn void newAutomatonNext()
+ * \brief Permet de transmettre les différents paramètres entrés par l'utilisateur dans AutomataParameters,
+ *  et de définir l'état initial du modèle relié à la vue.
+ *  La fenêtre principale de l'application est actualisée en conséquence selon si 1D, 2D et/ou random
+*/
+
+
 void MainController::newAutomatonNext() {
     connect(param->buttonBox, &QDialogButtonBox::accepted, this, [this]()
     {
@@ -484,6 +542,15 @@ void MainController::newAutomatonNext() {
 }
 
 
+
+/**
+ * \fn QString openFile()
+ * \brief Ouverture d'une boîte de dialogue permettant à l'utilisateur de selectionner un fichier en mémoire, et retourne son chemin sur le disque
+ *
+ * \return file chemin du fichier choisi
+*/
+
+
 QString MainController::openFile(){
     QString filename =  QFileDialog::getOpenFileName(
                 this,
@@ -496,6 +563,18 @@ QString MainController::openFile(){
     }
     return filename;
 }
+
+
+/**
+ * \fn AutomataParameters(QWidget *parent, char def, dim d)
+ * \brief Constructeur d'AutomataParmaters. Fenêtre de dialogue permettant à l'utilisateur de définir les informations basique lors de
+ *  la création d'un automate.
+ *  On transmet le dernier état par défaut de la cellule et la dimension de l'automate de la vue courante pour pouvoir les modifier.
+ *
+ * \param def état par défaut de la cellule
+ * \param d dimension de l'automate de la vue courante
+*/
+
 
 
 AutomataParameters::AutomataParameters(QWidget *parent, char def, dim d) : QDialog(parent)
