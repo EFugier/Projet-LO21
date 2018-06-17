@@ -195,6 +195,8 @@ void MainController::insertNewAction(QMenu* menu, int id, const QString& name, v
         connect(Clear, &QAction::triggered, this, [menu, this]()
         {
             menu->clear();
+            if(menu==subMenuAutomata) instance.deleteAutomata();
+            if(menu==subMenuGrid) instance.deleteStates();
         });
         menu->addSeparator();
         menu->addAction(Clear);
