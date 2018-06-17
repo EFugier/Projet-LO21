@@ -126,10 +126,10 @@ void State::loadStateFromString(char *str) {
 std::vector<std::string> State::stackOfNb(Uint n) const { 
     int s_nrow = static_cast<int>(nrow);
     int s_ncol = static_cast<int>(ncol);
-    // If n is the number of neighbours, deg is the degree (9 neighbours <=> 1 deg for instance)
     std::vector<std::string> s;
 
-    if (nrow == 1) {
+    // If n is the number of neighbours, deg is the degree (9 neighbours <=> 1 deg for a 2D automata for instance)
+    if (nrow == 1) { // 1D automaton
         int deg = static_cast<int>((n-1)/2);
         for (int ind(0); ind<s_ncol; ind++) {
             std::ostringstream flux;
@@ -149,8 +149,8 @@ std::vector<std::string> State::stackOfNb(Uint n) const {
     }
     return s;
     /* State is a 1D vector.
-     * [i%iMax][j%jMax] (for a 2D tab) is similar to [(i%nrow)*ncol+j%ncol] for a 1D vector
-     * deg is the considered degree of
+     * [mod(i, iMax)][mod(j, jMax)] (for a 2D tab) is similar to [mod(i,s_nrow)*s_ncol+mod(j,s_ncol)] for a 1D vector
+     * deg is the considered degree of neighbours
      * */
 }
 
@@ -162,6 +162,7 @@ QString State::toString() const {
     return QString().fromStdString(flux.str());
 }
 
+// We use this function to calculate de modulo (and not the standard % operator)
 int mod(int x, int m) {
     return (x%m + m)%m;
 }

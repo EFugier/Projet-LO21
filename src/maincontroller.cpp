@@ -203,7 +203,6 @@ void MainController::createActions(){
  *
 */
 
-
 void MainController::insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*selectedFunction)(unsigned int const) ){
     // !!!!!!! J'ai remplacé l'argument int de la fonction pointée par unsigned int const !!!!!!!
     QAction* newAction= new QAction(name);
