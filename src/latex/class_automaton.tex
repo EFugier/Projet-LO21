@@ -1,0 +1,306 @@
+\hypertarget{class_automaton}{}\section{Automaton Class Reference}
+\label{class_automaton}\index{Automaton@{Automaton}}
+
+
+{\ttfamily \#include $<$automaton.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_automaton_1_1_range}{Range}}
+\begin{DoxyCompactList}\small\item\em Permet de stocker un intervalle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_automaton_a6dee06d8b80717d8ac77e284871bb972}{Automaton}} (unsigned int nb, unsigned int \mbox{\hyperlink{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7}{dim}}, char dn)
+\begin{DoxyCompactList}\small\item\em Constructeur pour créer un nouvel automate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_automaton_a30696da386c2b0119f41569272200e2c}{Automaton}} (const unsigned int id, sqlite3 $\ast$db)
+\begin{DoxyCompactList}\small\item\em Constructeur à partir d\textquotesingle{}une base de donnees S\+QL. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_automaton_a1bd3904052977bba7901df924f1bef53}{Automaton}} (Q\+String const \&file\+Name)
+\begin{DoxyCompactList}\small\item\em Constructeur à partir d\textquotesingle{}une Qstring. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_automaton_a6caf31920730c11d5fccc5918c8a3585}{Automaton}} (const std\+::string \&s)
+\begin{DoxyCompactList}\small\item\em Constructeur à partir d\textquotesingle{}une std\+::string. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{class_automaton_a6ce870e9a73694b40da41132198e7c31}{next}} (std\+::string s)
+\begin{DoxyCompactList}\small\item\em Calcul l\textquotesingle{}état suivant à partir de la string des voisins. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_automaton_ae77214bcd75f24d2cb56506e300a7991}{insert\+Position\+Rule}} (std\+::vector$<$ bool $>$ v, char c)
+\begin{DoxyCompactList}\small\item\em Insere une règle de position dans l\textquotesingle{}arbre binaire. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_automaton_ad5365dca1251e866c57412b65f666ba6}{insert\+Rule\+Nb\+Into}} (unsigned int a, unsigned int b, char c)
+\begin{DoxyCompactList}\small\item\em Insere une règle sur le nombre de voisins de type donné \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_automaton_a622c489cd8cc82000c3256ca0c40f48d}{insert\+Range\+Into}} (std\+::vector$<$ \mbox{\hyperlink{struct_automaton_1_1_range}{Range}} $>$ \&coll, unsigned int a, unsigned int b)
+\begin{DoxyCompactList}\small\item\em Insère un intervalle dans la collection specifiée. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_automaton_a0870a8cd719c779a822780d455e33595}{serialize\+Nb\+Rules}} ()
+\begin{DoxyCompactList}\small\item\em Serialise les règles de voisins en une std\+::string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_automaton_a86e17f607815376791dbb2490141007d}{deserialize\+Nb\+Rules}} (const std\+::string \&s)
+\begin{DoxyCompactList}\small\item\em Deserialise les règles de voisins a partir d\textquotesingle{}une std\+::string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_automaton_ab2a707832bdd7daf40ddf7e99503c0f9}{deserialize}} (const std\+::string \&s)
+\begin{DoxyCompactList}\small\item\em Deserialise à partir d\textquotesingle{}une std\+::string. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{class_automaton_a1d4431d42cc2c71fef33c125d321b633}{save}} (const Q\+String \&name, sqlite3 $\ast$db)
+\item 
+void \mbox{\hyperlink{class_automaton_a054e743dde571a5fdf935ce431a468a7}{export\+To\+File}} (Q\+String const \&name)
+\item 
+unsigned int \mbox{\hyperlink{class_automaton_af61fbe8bf05c0b2223d7a67f3e429f3e}{getN}} ()
+\item 
+unsigned int \mbox{\hyperlink{class_automaton_a27b050dff4898c55c20e2950e54b2fc9}{get\+Dim}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{class_automaton_ac55590f74c2e26e198050887a62ec1cb}{n}}
+\begin{DoxyCompactList}\small\item\em Nombre de voisins qui comptent pour l\textquotesingle{}état suivant. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{class_automaton_a69ea9d67aba5ece34636fb95de1b487f}{dim}}
+\begin{DoxyCompactList}\small\item\em Dimension\+: 1D ou 2D. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{class_automaton_aa7894d8b17e4fe17553bca13e5b93cf5}{default\+Next}}
+\begin{DoxyCompactList}\small\item\em Etat suivant par défaut. \end{DoxyCompactList}\item 
+Rule\+Bst $\ast$ \mbox{\hyperlink{class_automaton_a3b344073044f20fcaba766e34ec24387}{rule\+Bst}}
+\begin{DoxyCompactList}\small\item\em Arbre des positions d\textquotesingle{}états. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_automaton_1_1_range}{Range}} $>$ \mbox{\hyperlink{class_automaton_afab3dec429a12d5c1e30c1691ec36c8c}{rule\+Nb\+Neighb\+Life}}
+\begin{DoxyCompactList}\small\item\em Vecteur d\textquotesingle{}intervalles donnant la vie. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_automaton_1_1_range}{Range}} $>$ \mbox{\hyperlink{class_automaton_a3c4b049f935fe17aa3fc7e40c7fa8f7f}{rule\+Nb\+Neighb\+Death}}
+\begin{DoxyCompactList}\small\item\em Vecteur d\textquotesingle{}intervalles donnant la mort. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_automaton_1_1_range}{Range}} $>$ \mbox{\hyperlink{class_automaton_a7a9a78c542bfdc9cb9c01ad268ae1485}{rule\+Nb\+Neighb\+Same}}
+\begin{DoxyCompactList}\small\item\em Vecteur d\textquotesingle{}intervalles donnant un état identique. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_automaton_a1f1af7879a469e3ad8c282d0a58a7da4}{serialize}} ()
+\begin{DoxyCompactList}\small\item\em Serialise l\textquotesingle{}automate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_automaton_a6400f21ac67170631963cbc29638ec8c}{Automaton}} ()=delete
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe qui peut se résumer à un ensemble de règles. Possède également une méthode calculer l\textquotesingle{}état suivant 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_automaton_a6400f21ac67170631963cbc29638ec8c}\label{class_automaton_a6400f21ac67170631963cbc29638ec8c}} 
+\index{Automaton@{Automaton}!Automaton@{Automaton}}
+\index{Automaton@{Automaton}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{Automaton()}{Automaton()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily Automaton\+::\+Automaton (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_automaton_a6dee06d8b80717d8ac77e284871bb972}\label{class_automaton_a6dee06d8b80717d8ac77e284871bb972}} 
+\index{Automaton@{Automaton}!Automaton@{Automaton}}
+\index{Automaton@{Automaton}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{Automaton()}{Automaton()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily Automaton\+::\+Automaton (\begin{DoxyParamCaption}\item[{unsigned int}]{nb,  }\item[{unsigned int}]{dim,  }\item[{char}]{dn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructeur pour créer un nouvel automate. 
+
+\mbox{\Hypertarget{class_automaton_a30696da386c2b0119f41569272200e2c}\label{class_automaton_a30696da386c2b0119f41569272200e2c}} 
+\index{Automaton@{Automaton}!Automaton@{Automaton}}
+\index{Automaton@{Automaton}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{Automaton()}{Automaton()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily Automaton\+::\+Automaton (\begin{DoxyParamCaption}\item[{const unsigned int}]{id,  }\item[{sqlite3 $\ast$}]{db }\end{DoxyParamCaption})}
+
+
+
+Constructeur à partir d\textquotesingle{}une base de donnees S\+QL. 
+
+\mbox{\Hypertarget{class_automaton_a1bd3904052977bba7901df924f1bef53}\label{class_automaton_a1bd3904052977bba7901df924f1bef53}} 
+\index{Automaton@{Automaton}!Automaton@{Automaton}}
+\index{Automaton@{Automaton}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{Automaton()}{Automaton()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily Automaton\+::\+Automaton (\begin{DoxyParamCaption}\item[{Q\+String const \&}]{file\+Name }\end{DoxyParamCaption})}
+
+
+
+Constructeur à partir d\textquotesingle{}une Qstring. 
+
+\mbox{\Hypertarget{class_automaton_a6caf31920730c11d5fccc5918c8a3585}\label{class_automaton_a6caf31920730c11d5fccc5918c8a3585}} 
+\index{Automaton@{Automaton}!Automaton@{Automaton}}
+\index{Automaton@{Automaton}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{Automaton()}{Automaton()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily Automaton\+::\+Automaton (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructeur à partir d\textquotesingle{}une std\+::string. 
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_automaton_ab2a707832bdd7daf40ddf7e99503c0f9}\label{class_automaton_ab2a707832bdd7daf40ddf7e99503c0f9}} 
+\index{Automaton@{Automaton}!deserialize@{deserialize}}
+\index{deserialize@{deserialize}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{deserialize()}{deserialize()}}
+{\footnotesize\ttfamily void Automaton\+::deserialize (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s }\end{DoxyParamCaption})}
+
+
+
+Deserialise à partir d\textquotesingle{}une std\+::string. 
+
+\mbox{\Hypertarget{class_automaton_a86e17f607815376791dbb2490141007d}\label{class_automaton_a86e17f607815376791dbb2490141007d}} 
+\index{Automaton@{Automaton}!deserialize\+Nb\+Rules@{deserialize\+Nb\+Rules}}
+\index{deserialize\+Nb\+Rules@{deserialize\+Nb\+Rules}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{deserialize\+Nb\+Rules()}{deserializeNbRules()}}
+{\footnotesize\ttfamily void Automaton\+::deserialize\+Nb\+Rules (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s }\end{DoxyParamCaption})}
+
+
+
+Deserialise les règles de voisins a partir d\textquotesingle{}une std\+::string. 
+
+\mbox{\Hypertarget{class_automaton_a054e743dde571a5fdf935ce431a468a7}\label{class_automaton_a054e743dde571a5fdf935ce431a468a7}} 
+\index{Automaton@{Automaton}!export\+To\+File@{export\+To\+File}}
+\index{export\+To\+File@{export\+To\+File}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{export\+To\+File()}{exportToFile()}}
+{\footnotesize\ttfamily void Automaton\+::export\+To\+File (\begin{DoxyParamCaption}\item[{Q\+String const \&}]{name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_automaton_a27b050dff4898c55c20e2950e54b2fc9}\label{class_automaton_a27b050dff4898c55c20e2950e54b2fc9}} 
+\index{Automaton@{Automaton}!get\+Dim@{get\+Dim}}
+\index{get\+Dim@{get\+Dim}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{get\+Dim()}{getDim()}}
+{\footnotesize\ttfamily unsigned int Automaton\+::get\+Dim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_automaton_af61fbe8bf05c0b2223d7a67f3e429f3e}\label{class_automaton_af61fbe8bf05c0b2223d7a67f3e429f3e}} 
+\index{Automaton@{Automaton}!getN@{getN}}
+\index{getN@{getN}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{get\+N()}{getN()}}
+{\footnotesize\ttfamily unsigned int Automaton\+::getN (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_automaton_ae77214bcd75f24d2cb56506e300a7991}\label{class_automaton_ae77214bcd75f24d2cb56506e300a7991}} 
+\index{Automaton@{Automaton}!insert\+Position\+Rule@{insert\+Position\+Rule}}
+\index{insert\+Position\+Rule@{insert\+Position\+Rule}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{insert\+Position\+Rule()}{insertPositionRule()}}
+{\footnotesize\ttfamily void Automaton\+::insert\+Position\+Rule (\begin{DoxyParamCaption}\item[{std\+::vector$<$ bool $>$}]{v,  }\item[{char}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Insere une règle de position dans l\textquotesingle{}arbre binaire. 
+
+\mbox{\Hypertarget{class_automaton_a622c489cd8cc82000c3256ca0c40f48d}\label{class_automaton_a622c489cd8cc82000c3256ca0c40f48d}} 
+\index{Automaton@{Automaton}!insert\+Range\+Into@{insert\+Range\+Into}}
+\index{insert\+Range\+Into@{insert\+Range\+Into}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{insert\+Range\+Into()}{insertRangeInto()}}
+{\footnotesize\ttfamily void Automaton\+::insert\+Range\+Into (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{struct_automaton_1_1_range}{Range}} $>$ \&}]{coll,  }\item[{unsigned int}]{a,  }\item[{unsigned int}]{b }\end{DoxyParamCaption})}
+
+
+
+Insère un intervalle dans la collection specifiée. 
+
+\mbox{\Hypertarget{class_automaton_ad5365dca1251e866c57412b65f666ba6}\label{class_automaton_ad5365dca1251e866c57412b65f666ba6}} 
+\index{Automaton@{Automaton}!insert\+Rule\+Nb\+Into@{insert\+Rule\+Nb\+Into}}
+\index{insert\+Rule\+Nb\+Into@{insert\+Rule\+Nb\+Into}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{insert\+Rule\+Nb\+Into()}{insertRuleNbInto()}}
+{\footnotesize\ttfamily void Automaton\+::insert\+Rule\+Nb\+Into (\begin{DoxyParamCaption}\item[{unsigned int}]{a,  }\item[{unsigned int}]{b,  }\item[{char}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Insere une règle sur le nombre de voisins de type donné 
+
+\mbox{\Hypertarget{class_automaton_a6ce870e9a73694b40da41132198e7c31}\label{class_automaton_a6ce870e9a73694b40da41132198e7c31}} 
+\index{Automaton@{Automaton}!next@{next}}
+\index{next@{next}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{next()}{next()}}
+{\footnotesize\ttfamily char Automaton\+::next (\begin{DoxyParamCaption}\item[{std\+::string}]{s }\end{DoxyParamCaption})}
+
+
+
+Calcul l\textquotesingle{}état suivant à partir de la string des voisins. 
+
+\mbox{\Hypertarget{class_automaton_a1d4431d42cc2c71fef33c125d321b633}\label{class_automaton_a1d4431d42cc2c71fef33c125d321b633}} 
+\index{Automaton@{Automaton}!save@{save}}
+\index{save@{save}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily unsigned int Automaton\+::save (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{name,  }\item[{sqlite3 $\ast$}]{db }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_automaton_a1f1af7879a469e3ad8c282d0a58a7da4}\label{class_automaton_a1f1af7879a469e3ad8c282d0a58a7da4}} 
+\index{Automaton@{Automaton}!serialize@{serialize}}
+\index{serialize@{serialize}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{serialize()}{serialize()}}
+{\footnotesize\ttfamily std\+::string Automaton\+::serialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Serialise l\textquotesingle{}automate. 
+
+\mbox{\Hypertarget{class_automaton_a0870a8cd719c779a822780d455e33595}\label{class_automaton_a0870a8cd719c779a822780d455e33595}} 
+\index{Automaton@{Automaton}!serialize\+Nb\+Rules@{serialize\+Nb\+Rules}}
+\index{serialize\+Nb\+Rules@{serialize\+Nb\+Rules}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{serialize\+Nb\+Rules()}{serializeNbRules()}}
+{\footnotesize\ttfamily std\+::string Automaton\+::serialize\+Nb\+Rules (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Serialise les règles de voisins en une std\+::string. 
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_automaton_aa7894d8b17e4fe17553bca13e5b93cf5}\label{class_automaton_aa7894d8b17e4fe17553bca13e5b93cf5}} 
+\index{Automaton@{Automaton}!default\+Next@{default\+Next}}
+\index{default\+Next@{default\+Next}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{default\+Next}{defaultNext}}
+{\footnotesize\ttfamily char Automaton\+::default\+Next}
+
+
+
+Etat suivant par défaut. 
+
+\mbox{\Hypertarget{class_automaton_a69ea9d67aba5ece34636fb95de1b487f}\label{class_automaton_a69ea9d67aba5ece34636fb95de1b487f}} 
+\index{Automaton@{Automaton}!dim@{dim}}
+\index{dim@{dim}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{dim}{dim}}
+{\footnotesize\ttfamily unsigned int Automaton\+::dim}
+
+
+
+Dimension\+: 1D ou 2D. 
+
+\mbox{\Hypertarget{class_automaton_ac55590f74c2e26e198050887a62ec1cb}\label{class_automaton_ac55590f74c2e26e198050887a62ec1cb}} 
+\index{Automaton@{Automaton}!n@{n}}
+\index{n@{n}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily unsigned int Automaton\+::n}
+
+
+
+Nombre de voisins qui comptent pour l\textquotesingle{}état suivant. 
+
+\mbox{\Hypertarget{class_automaton_a3b344073044f20fcaba766e34ec24387}\label{class_automaton_a3b344073044f20fcaba766e34ec24387}} 
+\index{Automaton@{Automaton}!rule\+Bst@{rule\+Bst}}
+\index{rule\+Bst@{rule\+Bst}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{rule\+Bst}{ruleBst}}
+{\footnotesize\ttfamily Rule\+Bst$\ast$ Automaton\+::rule\+Bst}
+
+
+
+Arbre des positions d\textquotesingle{}états. 
+
+\mbox{\Hypertarget{class_automaton_a3c4b049f935fe17aa3fc7e40c7fa8f7f}\label{class_automaton_a3c4b049f935fe17aa3fc7e40c7fa8f7f}} 
+\index{Automaton@{Automaton}!rule\+Nb\+Neighb\+Death@{rule\+Nb\+Neighb\+Death}}
+\index{rule\+Nb\+Neighb\+Death@{rule\+Nb\+Neighb\+Death}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{rule\+Nb\+Neighb\+Death}{ruleNbNeighbDeath}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{struct_automaton_1_1_range}{Range}}$>$ Automaton\+::rule\+Nb\+Neighb\+Death}
+
+
+
+Vecteur d\textquotesingle{}intervalles donnant la mort. 
+
+\mbox{\Hypertarget{class_automaton_afab3dec429a12d5c1e30c1691ec36c8c}\label{class_automaton_afab3dec429a12d5c1e30c1691ec36c8c}} 
+\index{Automaton@{Automaton}!rule\+Nb\+Neighb\+Life@{rule\+Nb\+Neighb\+Life}}
+\index{rule\+Nb\+Neighb\+Life@{rule\+Nb\+Neighb\+Life}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{rule\+Nb\+Neighb\+Life}{ruleNbNeighbLife}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{struct_automaton_1_1_range}{Range}}$>$ Automaton\+::rule\+Nb\+Neighb\+Life}
+
+
+
+Vecteur d\textquotesingle{}intervalles donnant la vie. 
+
+\mbox{\Hypertarget{class_automaton_a7a9a78c542bfdc9cb9c01ad268ae1485}\label{class_automaton_a7a9a78c542bfdc9cb9c01ad268ae1485}} 
+\index{Automaton@{Automaton}!rule\+Nb\+Neighb\+Same@{rule\+Nb\+Neighb\+Same}}
+\index{rule\+Nb\+Neighb\+Same@{rule\+Nb\+Neighb\+Same}!Automaton@{Automaton}}
+\subsubsection{\texorpdfstring{rule\+Nb\+Neighb\+Same}{ruleNbNeighbSame}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{struct_automaton_1_1_range}{Range}}$>$ Automaton\+::rule\+Nb\+Neighb\+Same}
+
+
+
+Vecteur d\textquotesingle{}intervalles donnant un état identique. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{automaton_8h}{automaton.\+h}}\item 
+\mbox{\hyperlink{automaton_8cpp}{automaton.\+cpp}}\end{DoxyCompactItemize}

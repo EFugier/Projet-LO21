@@ -1,0 +1,178 @@
+\hypertarget{class_matrix_controller}{}\section{Matrix\+Controller Class Reference}
+\label{class_matrix_controller}\index{Matrix\+Controller@{Matrix\+Controller}}
+
+
+{\ttfamily \#include $<$matrixcontroller.\+h$>$}
+
+Inheritance diagram for Matrix\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_matrix_controller}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_matrix_controller_a9b3730013aece0bd3f8cbb28342d091a}{Matrix\+Controller}} (int column, int rows=1, Q\+Widget $\ast$parent=nullptr)
+\item 
+std\+::vector$<$ bool $>$ \mbox{\hyperlink{class_matrix_controller_a2d83853b18c33b5e9c5d9cda58b69640}{serialize\+Grid}} ()
+\item 
+std\+::vector$<$ bool $>$ \mbox{\hyperlink{class_matrix_controller_ad746a208e6b2f5ddad05d9da559149d1}{serialize\+Grid}} (bool v)
+\item 
+void \mbox{\hyperlink{class_matrix_controller_aa2edebadd4baa22559dda6a44a334f7e}{switch\+Bool}} ()
+\item 
+bool \mbox{\hyperlink{class_matrix_controller_a3dddffef3dba0b1ec308c328c23c2133}{get\+Anim}} () const
+\item 
+void \mbox{\hyperlink{class_matrix_controller_a9cfa49cb2567dabbf7c333ec7384d15f}{on\+Change\+D1}} (std\+::vector$<$ bool $>$ \&v)
+\item 
+void \mbox{\hyperlink{class_matrix_controller_a1b0fa2f1568ac4149a27e2695bf55cab}{on\+Change\+D2}} (std\+::vector$<$ bool $>$ \&v)
+\item 
+void \mbox{\hyperlink{class_matrix_controller_a19a8d008de9323a306daac5aae96ce76}{set\+Dimension}} (\mbox{\hyperlink{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7}{dim}} d)
+\item 
+\mbox{\hyperlink{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7}{dim}} \mbox{\hyperlink{class_matrix_controller_a0c6581133615470c77b738737094d7e9}{get\+Dimension}} () const
+\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_matrix_controller_a0f75c93c52b1fb1b67af9f9220bfeb22}{on\+Change}} (std\+::vector$<$ bool $>$ \&v)
+\item 
+void \mbox{\hyperlink{class_matrix_controller_a5cd29184a9f7e7e02a5c3b2baa993aba}{cell\+Activation}} (Q\+Model\+Index)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Q\+Movie $\ast$ \mbox{\hyperlink{class_matrix_controller_a588c0ffadd7ef176e46d84aaceabd845}{movie}}
+\item 
+Q\+Movie $\ast$ \mbox{\hyperlink{class_matrix_controller_a61c645ae410eb248913174b116d4f6dd}{movie2}}
+\item 
+bool \mbox{\hyperlink{class_matrix_controller_a905e5a4996b575460f54f5310ff71c42}{anim}}
+\item 
+\mbox{\hyperlink{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7}{dim}} \mbox{\hyperlink{class_matrix_controller_af09a7f2162eb6086b2269e5d42f8cd5b}{dimension}}
+\item 
+int \mbox{\hyperlink{class_matrix_controller_a60e65c66b4d68572d47eb1d3b213260a}{index}}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_matrix_controller_a154f5ffe46dc74c6c94311b4cc3927ae}{Main\+Controller}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_matrix_controller_a9b3730013aece0bd3f8cbb28342d091a}\label{class_matrix_controller_a9b3730013aece0bd3f8cbb28342d091a}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!Matrix\+Controller@{Matrix\+Controller}}
+\index{Matrix\+Controller@{Matrix\+Controller}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{Matrix\+Controller()}{MatrixController()}}
+{\footnotesize\ttfamily Matrix\+Controller\+::\+Matrix\+Controller (\begin{DoxyParamCaption}\item[{int}]{column,  }\item[{int}]{rows = {\ttfamily 1},  }\item[{Q\+Widget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_matrix_controller_a5cd29184a9f7e7e02a5c3b2baa993aba}\label{class_matrix_controller_a5cd29184a9f7e7e02a5c3b2baa993aba}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!cell\+Activation@{cell\+Activation}}
+\index{cell\+Activation@{cell\+Activation}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{cell\+Activation}{cellActivation}}
+{\footnotesize\ttfamily void Matrix\+Controller\+::cell\+Activation (\begin{DoxyParamCaption}\item[{Q\+Model\+Index}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{class_matrix_controller_a3dddffef3dba0b1ec308c328c23c2133}\label{class_matrix_controller_a3dddffef3dba0b1ec308c328c23c2133}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!get\+Anim@{get\+Anim}}
+\index{get\+Anim@{get\+Anim}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{get\+Anim()}{getAnim()}}
+{\footnotesize\ttfamily bool Matrix\+Controller\+::get\+Anim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_matrix_controller_a0c6581133615470c77b738737094d7e9}\label{class_matrix_controller_a0c6581133615470c77b738737094d7e9}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!get\+Dimension@{get\+Dimension}}
+\index{get\+Dimension@{get\+Dimension}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{get\+Dimension()}{getDimension()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7}{dim}} Matrix\+Controller\+::get\+Dimension (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_matrix_controller_a0f75c93c52b1fb1b67af9f9220bfeb22}\label{class_matrix_controller_a0f75c93c52b1fb1b67af9f9220bfeb22}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!on\+Change@{on\+Change}}
+\index{on\+Change@{on\+Change}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{on\+Change}{onChange}}
+{\footnotesize\ttfamily void Matrix\+Controller\+::on\+Change (\begin{DoxyParamCaption}\item[{std\+::vector$<$ bool $>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{class_matrix_controller_a9cfa49cb2567dabbf7c333ec7384d15f}\label{class_matrix_controller_a9cfa49cb2567dabbf7c333ec7384d15f}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!on\+Change\+D1@{on\+Change\+D1}}
+\index{on\+Change\+D1@{on\+Change\+D1}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{on\+Change\+D1()}{onChangeD1()}}
+{\footnotesize\ttfamily void Matrix\+Controller\+::on\+Change\+D1 (\begin{DoxyParamCaption}\item[{std\+::vector$<$ bool $>$ \&}]{v }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_matrix_controller_a1b0fa2f1568ac4149a27e2695bf55cab}\label{class_matrix_controller_a1b0fa2f1568ac4149a27e2695bf55cab}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!on\+Change\+D2@{on\+Change\+D2}}
+\index{on\+Change\+D2@{on\+Change\+D2}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{on\+Change\+D2()}{onChangeD2()}}
+{\footnotesize\ttfamily void Matrix\+Controller\+::on\+Change\+D2 (\begin{DoxyParamCaption}\item[{std\+::vector$<$ bool $>$ \&}]{v }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_matrix_controller_a2d83853b18c33b5e9c5d9cda58b69640}\label{class_matrix_controller_a2d83853b18c33b5e9c5d9cda58b69640}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!serialize\+Grid@{serialize\+Grid}}
+\index{serialize\+Grid@{serialize\+Grid}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{serialize\+Grid()}{serializeGrid()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::vector$<$ bool $>$ Matrix\+Controller\+::serialize\+Grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_matrix_controller_ad746a208e6b2f5ddad05d9da559149d1}\label{class_matrix_controller_ad746a208e6b2f5ddad05d9da559149d1}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!serialize\+Grid@{serialize\+Grid}}
+\index{serialize\+Grid@{serialize\+Grid}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{serialize\+Grid()}{serializeGrid()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::vector$<$ bool $>$ Matrix\+Controller\+::serialize\+Grid (\begin{DoxyParamCaption}\item[{bool}]{v }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_matrix_controller_a19a8d008de9323a306daac5aae96ce76}\label{class_matrix_controller_a19a8d008de9323a306daac5aae96ce76}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!set\+Dimension@{set\+Dimension}}
+\index{set\+Dimension@{set\+Dimension}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{set\+Dimension()}{setDimension()}}
+{\footnotesize\ttfamily void Matrix\+Controller\+::set\+Dimension (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7}{dim}}}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_matrix_controller_aa2edebadd4baa22559dda6a44a334f7e}\label{class_matrix_controller_aa2edebadd4baa22559dda6a44a334f7e}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!switch\+Bool@{switch\+Bool}}
+\index{switch\+Bool@{switch\+Bool}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{switch\+Bool()}{switchBool()}}
+{\footnotesize\ttfamily void Matrix\+Controller\+::switch\+Bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_matrix_controller_a154f5ffe46dc74c6c94311b4cc3927ae}\label{class_matrix_controller_a154f5ffe46dc74c6c94311b4cc3927ae}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!Main\+Controller@{Main\+Controller}}
+\index{Main\+Controller@{Main\+Controller}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{Main\+Controller}{MainController}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{class_main_controller}{Main\+Controller}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_matrix_controller_a905e5a4996b575460f54f5310ff71c42}\label{class_matrix_controller_a905e5a4996b575460f54f5310ff71c42}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!anim@{anim}}
+\index{anim@{anim}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{anim}{anim}}
+{\footnotesize\ttfamily bool Matrix\+Controller\+::anim\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_matrix_controller_af09a7f2162eb6086b2269e5d42f8cd5b}\label{class_matrix_controller_af09a7f2162eb6086b2269e5d42f8cd5b}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!dimension@{dimension}}
+\index{dimension@{dimension}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{dimension}{dimension}}
+{\footnotesize\ttfamily \mbox{\hyperlink{automatamanager_8h_ae6fa959b9e8f9c638e0d82bf2c7dc5e7}{dim}} Matrix\+Controller\+::dimension\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_matrix_controller_a60e65c66b4d68572d47eb1d3b213260a}\label{class_matrix_controller_a60e65c66b4d68572d47eb1d3b213260a}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!index@{index}}
+\index{index@{index}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{index}{index}}
+{\footnotesize\ttfamily int Matrix\+Controller\+::index\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_matrix_controller_a588c0ffadd7ef176e46d84aaceabd845}\label{class_matrix_controller_a588c0ffadd7ef176e46d84aaceabd845}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!movie@{movie}}
+\index{movie@{movie}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{movie}{movie}}
+{\footnotesize\ttfamily Q\+Movie$\ast$ Matrix\+Controller\+::movie\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_matrix_controller_a61c645ae410eb248913174b116d4f6dd}\label{class_matrix_controller_a61c645ae410eb248913174b116d4f6dd}} 
+\index{Matrix\+Controller@{Matrix\+Controller}!movie2@{movie2}}
+\index{movie2@{movie2}!Matrix\+Controller@{Matrix\+Controller}}
+\subsubsection{\texorpdfstring{movie2}{movie2}}
+{\footnotesize\ttfamily Q\+Movie$\ast$ Matrix\+Controller\+::movie2\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{matrixcontroller_8h}{matrixcontroller.\+h}}\item 
+\mbox{\hyperlink{matrixcontroller_8cpp}{matrixcontroller.\+cpp}}\end{DoxyCompactItemize}

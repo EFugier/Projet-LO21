@@ -1,15 +1,5 @@
 #include "rulescontroller.h"
 
-/**
- * \fn RulesController(char def, int N, int column, int row, QWidget *parent)
- * \brief Constructeur du RulesController
- *
- * \param def état par défaut de la cellule
- * \param N nombre de voisins significatifs
- * \param column nombre de colonnes
- * \param row nombre de lignes
- *
-*/
 
 
 RulesController::RulesController(char def, int N, int column, int row, QWidget *parent) : QDialog(parent)
@@ -55,15 +45,6 @@ RulesController::RulesController(char def, int N, int column, int row, QWidget *
 }
 
 
-/**
- * \fn PositionRule(int column, int rows, QWidget* parent)
- * \brief Constructeur du PositionRule
- *
- * \param column nombre de colonnes
- * \param rows nombre de lignes
- *
-*/
-
 
 PositionRule::PositionRule(int column, int rows, QWidget* parent): QWidget(parent)
 {
@@ -100,13 +81,6 @@ return vect;
 }
  */
 
-/**
- * \fn RulesController(char def, int N, int column, int row, QWidget *parent)
- * \brief Constructeur du RulesController
- *
- * \param N nombre de voisins significatifs
- *
-*/
 
 
 
