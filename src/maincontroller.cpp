@@ -497,14 +497,6 @@ void MainController::newAutomatonNext() {
 
 
 
-/**
- * \fn QString openFile()
- * \brief Ouverture d'une boîte de dialogue permettant à l'utilisateur de selectionner un fichier en mémoire, et retourne son chemin sur le disque
- *
- * \return file chemin du fichier choisi
-*/
-
-
 QString MainController::openFile(){
     QString filename =  QFileDialog::getOpenFileName(
                 this,
@@ -517,17 +509,6 @@ QString MainController::openFile(){
     }
     return filename;
 }
-
-
-/**
- * \fn AutomataParameters(QWidget *parent, char def, dim d)
- * \brief Constructeur d'AutomataParmaters. Fenêtre de dialogue permettant à l'utilisateur de définir les informations basique lors de
- *  la création d'un automate.
- *  On transmet le dernier état par défaut de la cellule et la dimension de l'automate de la vue courante pour pouvoir les modifier.
- *
- * \param def état par défaut de la cellule
- * \param d dimension de l'automate de la vue courante
-*/
 
 
 

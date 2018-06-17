@@ -97,7 +97,12 @@ private:
     */
     void createToolBars();
 
-
+    /**
+     * \fn QString openFile()
+     * \brief Ouverture d'une boîte de dialogue permettant à l'utilisateur de selectionner un fichier en mémoire, et retourne son chemin sur le disque
+     *
+     * \return file chemin du fichier choisi
+    */
     QString openFile();
 
     /**
