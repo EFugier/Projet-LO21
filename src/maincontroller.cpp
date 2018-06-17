@@ -472,11 +472,11 @@ void MainController::newAutomatonNext() {
                 for(int i(0); i<view->rowCount(); i++)
                     for(int j(0); j<view->columnCount(); j++){
                         if (i<ptrMatrix->rowCount() && j<ptrMatrix->columnCount()) {
-                            view->setItem(i,j, new QTableWidgetItem);
+                            if (!view->item(i,j)) view->setItem(i,j, new QTableWidgetItem);
                             view->item(i,j)->setBackgroundColor(ptrMatrix->item(i,j)->backgroundColor());
                         }
                         else {
-                            view->setItem(i,j, new QTableWidgetItem);
+                            if(!view->item(i,j)) view->setItem(i,j, new QTableWidgetItem);
                             view->item(i,j)->setBackgroundColor("white");
                         }
                     }

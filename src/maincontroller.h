@@ -1,8 +1,6 @@
 #ifndef MAINCONTROLLER_H
 #define MAINCONTROLLER_H
 
-
-
 #include"qttools.h"
 #include "matrixcontroller.h"
 #include "rulescontroller.h"
@@ -31,15 +29,19 @@ private:
 
 
 
+/**
+ * @class MainController
+ * Supervise la vue
+ */
 class MainController : public QMainWindow{
      Q_OBJECT
 
 public:
-    MainController();
     /**
-     * \fn MainController()
-     * \brief Constructeur de la classe MainController
+     * @fn MainController()
+     * @brief Constructeur de la classe MainController
     */
+    MainController();
 
 private:
     AutomataManager& instance;
@@ -78,58 +80,59 @@ private:
     QHBoxLayout *mainLayout;
     QVBoxLayout * toolsLayout;
 
+    /**
+     * @fn void createActions()
+     * @brief Initialisation des différentes QActions permettant de déclencher les différentes fonctionnalités de l'application depuis les menu
+    */
     void createActions();
-    /**
-     * \fn void createActions()
-     * \brief Initialisation des différentes QActions permettant de déclencher les différentes fonctionnalités de l'application depuis les menu
-    */
 
+    /**
+     * @fn void createMenus()
+     * @brief Initialisation des menus File et Edit
+    */
     void createMenus();
-    /**
-     * \fn void createMenus()
-     * \brief Initialisation des menus File et Edit
-    */
 
-    void createToolBars();
     /**
-     * \fn void createToolBars
-     * \brief Initialisation des toolbars fileToolBar et editToolBar
+     * @fn void createToolBars
+     * @brief Initialisation des toolbars fileToolBar et editToolBar
     */
+    void createToolBars();
 
     QString openFile();
-    void insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*)(unsigned int const) );
+
     /**
-     * \fn void insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*selectedFunction)(unsigned int const) )
-     * \brief Fonction générique permettant d'ajouter des QActions à un sous-menu, en mettant en tête de liste le dernier item selectionné
+     * @fn void insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*selectedFunction)(unsigned int const) )
+     * @brief Fonction générique permettant d'ajouter des QActions à un sous-menu, en mettant en tête de liste le dernier item selectionné
      *
-     * \param menu QMenu * permettant d'avoir accès au sous menu dans lequel l'élément doit être ajouté (subMenuAutomata ou subMenuGrid)
-     * \param name const QString& permet de transmettre l'id de l'item dans le sous menu
-     * \param  selectedFunction pointeur de fonction void (AutomataManager::*selectedFunction)(unsigned int const) permettant lors de selection
+     * @param menu QMenu * permettant d'avoir accès au sous menu dans lequel l'élément doit être ajouté (subMenuAutomata ou subMenuGrid)
+     * @param name const QString& permet de transmettre l'id de l'item dans le sous menu
+     * @param  selectedFunction pointeur de fonction void (AutomataManager::*selectedFunction)(unsigned int const) permettant lors de selection
      * d'un automate ou d'une grille d'appeler la fonction correspondante (selectedAutomaton ou selectedState)
      *
     */
+    void insertNewAction(QMenu* menu, int id, const QString& name, void (AutomataManager::*)(unsigned int const) );
 
-    void newAutomaton();
     /**
-     * \fn void newAutomaton()
-     * \brief Instanction de la classe AutomataParameters depuis le MainController. On vérifie s'il existe déjà un automate créé.
+     * @fn void newAutomaton()
+     * @brief Instanction de la classe AutomataParameters depuis le MainController. On vérifie s'il existe déjà un automate créé.
      *  Si oui, on demande validation à l'utilisateur avant d'écraser l'automate courant. Sinon, on crée un nouvel automate.
     */
+    void newAutomaton();
 
-    void newAutomatonNext();
     /**
-     * \fn void newAutomatonNext()
-     * \brief Permet de transmettre les différents paramètres entrés par l'utilisateur dans AutomataParameters,
+     * @fn void newAutomatonNext()
+     * @brief Permet de transmettre les différents paramètres entrés par l'utilisateur dans AutomataParameters,
      *  et de définir l'état initial du modèle relié à la vue.
      *  La fenêtre principale de l'application est actualisée en conséquence selon si 1D, 2D et/ou random
     */
+    void newAutomatonNext();
 
-    void newRule();
     /**
-     * \fn void newRule()
-     * \brief Instanciation de la classe RulesController par le MainController. On vérifie qu'il existe bien un automate avant d'ajouter une règle,
+     * @fn void newRule()
+     * @brief Instanciation de la classe RulesController par le MainController. On vérifie qu'il existe bien un automate avant d'ajouter une règle,
      * et on transmet la dimension de l'automate au constructeur de règles
     */
+    void newRule();
 
 };
 
