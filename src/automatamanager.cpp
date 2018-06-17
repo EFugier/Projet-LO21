@@ -108,7 +108,7 @@ static int callback_get_id_automaton(void *ptr, int count, char **data, char **c
 // Delete from database TODO
 
 void AutomataManager::deleteAutomata() const {
-    sqlite3_exec(db, "DELETE FROM automota", nullptr,nullptr,nullptr);
+    sqlite3_exec(db, "DELETE FROM automata", nullptr,nullptr,nullptr);
 }
 
 void AutomataManager::deleteStates() const {
